@@ -1,0 +1,25 @@
+{
+  "name": "beaver-server",
+  "version": "1.0.0",
+  "description": "Task control application",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./src"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fausantosdev/beaver-server.git"
+  },
+  "keywords": [
+    "api"
+  ],
+  "author": "Flávio Santos <fausantosdev@hotmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/fausantosdev/beaver-server/issues"
+  },
+  "homepage": "https://github.com/fausantosdev/beaver-server#readme",
+  "devDependencies": {
+    "git-commit-msg-linter": "^5.0.7"
+  }
+}
