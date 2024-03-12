@@ -2,9 +2,10 @@
   "name": "beaver-server",
   "version": "1.0.0",
   "description": "Task control application",
-  "main": "index.js",
+  "main": "./src",
   "scripts": {
-    "start": "node ./src"
+    "start": "node build/",
+    "dev": "tsx watch src/"
   },
   "repository": {
     "type": "git",
@@ -20,6 +21,12 @@
   },
   "homepage": "https://github.com/fausantosdev/beaver-server#readme",
   "devDependencies": {
-    "git-commit-msg-linter": "^5.0.7"
+    "git-commit-msg-linter": "^5.0.7",
+    "tsx": "^4.7.1",
+    "typescript": "^5.4.2"
+  },
+  "dependencies": {
+    "fastify": "^4.26.2",
+    "@fastify/cors": "^9.0.1"
   }
 }
