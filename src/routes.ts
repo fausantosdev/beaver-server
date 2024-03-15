@@ -1,9 +1,7 @@
 import { FastifyInstance } from 'fastify'
 
+import { UserController } from './app/controllers/user.controller'
+
 export async function appRoutes (app: FastifyInstance) {
-  app.get('/', async (request, reply) => {
-    return reply.send({
-      teste: 'teste'
-    })
-  })
+  app.get('/', UserController.list)
 }
