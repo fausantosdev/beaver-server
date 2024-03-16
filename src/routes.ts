@@ -2,6 +2,8 @@ import { FastifyInstance } from 'fastify'
 
 import { UserController } from './app/controllers/user.controller'
 
+const userController = new UserController()
+
 export async function appRoutes (app: FastifyInstance) {
-  app.post('/', UserController.store)
+  app.post('/', userController.store)
 }
