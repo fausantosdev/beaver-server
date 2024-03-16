@@ -16,7 +16,7 @@ type User = {
 }
 
 class UserRepository {
-  public static async create ({ name, email, password }: CreateUser): Promise<User> {
+  public create = async ({ name, email, password }: CreateUser): Promise<User> => {
     return await prisma.user.create({
       data: {
         name,
