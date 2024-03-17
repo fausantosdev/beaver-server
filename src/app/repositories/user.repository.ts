@@ -1,3 +1,4 @@
+import { Prisma } from '@prisma/client'
 import { prisma } from '../../lib/prisma'
 
 type CreateUser = {
@@ -24,6 +25,14 @@ class UserRepository {
         password_hash: password
       }
     })
+  }
+
+  public read = async (where: Prisma.UserWhereInput) => {
+    return await prisma.user.findMany({ where })
+  }
+
+  public findOne = async (where: Prisma.UserWhereUniqueInput) => {
+    return await prisma.user.findUnique({ where })
   }
 }
 
