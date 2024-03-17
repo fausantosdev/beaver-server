@@ -24,6 +24,11 @@ class UserService {
   }
 
   public createUser = async ({ name, email, password }: CreateUser): Promise<User> => {
+    
+    const emailExists = await this.repository.findOne({ email })
+
+    if (emailExists) throw new Error('This email is already registered in our system')
+
     const newUser = await this.repository.create({ name, email, password })
 
     return newUser
