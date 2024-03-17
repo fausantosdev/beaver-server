@@ -7,5 +7,5 @@ const userController = new UserController()
 export async function userRoutes (app: FastifyInstance) {
   app.post('/', userController.store)
 
-  app.get('/', userController.read)
+  app.get('/:id?', userController.read)
 }

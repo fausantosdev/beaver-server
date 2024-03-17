@@ -37,8 +37,18 @@ class UserController {
   }
 
   public read = async (request: FastifyRequest, reply: FastifyReply): Promise<FastifyReply> => {
+
+    const schema = z.object({
+      id: z.string().uuid({ message: 'Incorrect ID format' }).optional()
+    })
+      
     try {
-      const users = await this.userService.getMany()
+      const { id } = schema.parse(request.params)
+
+      let users
+      users = id ? 
+        await this.userService.getById(id) :
+        await this.userService.getMany()
       
       return reply.send({
         status: true,
