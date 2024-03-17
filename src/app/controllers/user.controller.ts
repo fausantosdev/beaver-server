@@ -35,6 +35,24 @@ class UserController {
       })
     }
   }
+
+  public read = async (request: FastifyRequest, reply: FastifyReply): Promise<FastifyReply> => {
+    try {
+      const users = await this.userService.getMany()
+      
+      return reply.send({
+        status: true,
+        data: users,
+        message: null
+      })
+    } catch (error: any) {
+      return reply.send({
+        status: false,
+        data: null,
+        message: error.message
+      })
+    }
+  }
 }
 
 export { UserController }

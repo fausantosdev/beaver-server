@@ -33,6 +33,20 @@ class UserService {
 
     return newUser
   }
+
+  public getById = async (id: string) => {
+    return await this.repository.findOne({ id })
+  }
+
+  public getByEmail = async (email: string) => {
+    return await this.repository.findOne({ email })
+  }
+
+  public getMany = async (where = {}) => {
+    const result = await this.repository.read(where)
+
+    return result
+  }
 }
 
 export { UserService }

@@ -6,4 +6,6 @@ const userController = new UserController()
 
 export async function appRoutes (app: FastifyInstance) {
   app.post('/', userController.store)
+
+  app.get('/', userController.read)
 }
