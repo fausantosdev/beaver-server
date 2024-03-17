@@ -34,6 +34,12 @@ class UserRepository {
   public findOne = async (where: Prisma.UserWhereUniqueInput) => {
     return await prisma.user.findUnique({ where })
   }
+
+  public update = async (where: Prisma.UserWhereUniqueInput, data: object) => {
+    return prisma.user.update({
+      where, data
+    })
+  }
 }
 
 export { UserRepository }

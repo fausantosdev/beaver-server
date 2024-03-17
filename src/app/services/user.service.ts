@@ -47,6 +47,18 @@ class UserService {
 
     return result
   }
+
+  public edit = async (id: string, data: object) => {
+    if (Object.keys(data).length === 0)  throw new Error('No data sent')
+
+    const userExists = await this.repository.findOne({ id })
+
+    if (!userExists) throw new Error('User not found')
+
+    const result = await this.repository.update({ id }, data)
+
+    return result
+  }
 }
 
 export { UserService }

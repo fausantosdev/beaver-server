@@ -8,4 +8,6 @@ export async function userRoutes (app: FastifyInstance) {
   app.post('/', userController.store)
 
   app.get('/:id?', userController.read)
+
+  app.put('/:id?', userController.update)
 }

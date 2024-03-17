@@ -37,7 +37,6 @@ class UserController {
   }
 
   public read = async (request: FastifyRequest, reply: FastifyReply): Promise<FastifyReply> => {
-
     const schema = z.object({
       id: z.string().uuid({ message: 'Incorrect ID format' }).optional()
     })
@@ -53,6 +52,37 @@ class UserController {
       return reply.send({
         status: true,
         data: users,
+        message: null
+      })
+    } catch (error: any) {
+      return reply.send({
+        status: false,
+        data: null,
+        message: error.message
+      })
+    }
+  }
+
+  public update = async (request: FastifyRequest, reply: FastifyReply): Promise<FastifyReply> => {
+    const schemaId = z.object({
+      id: z.string().uuid({ message: 'Incorrect ID format' })
+    })
+    
+    const schema = z.object({
+      name: z.string().min(2, { message: 'Must be 2 or more characters long' }).optional(),
+      email: z.string().email({ message: 'Invalid email address' }).optional(),
+      password: z.string().min(8, { message: 'Your password must be at least 8 characters long' }).optional()
+    })
+
+    try {
+      const { id } = schemaId.parse(request.params)
+      const data = schema.parse(request.body)
+
+      const user = await this.userService.edit(id, data)
+  
+      return reply.send({
+        status: true,
+        data: user,
         message: null
       })
     } catch (error: any) {
