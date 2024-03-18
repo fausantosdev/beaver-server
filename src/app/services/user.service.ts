@@ -69,6 +69,16 @@ class UserService {
 
     return result
   }
+
+  public deleteUser = async (id: string) => {
+    const userExists = await this.repository.findOne({ id })
+
+    if (!userExists) throw new Error('User not found')
+
+    const result = await this.repository.delete({ id })
+
+    return result
+  }
 }
 
 export { UserService }

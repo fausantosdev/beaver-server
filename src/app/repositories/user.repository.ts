@@ -40,6 +40,10 @@ class UserRepository {
       where, data
     })
   }
+
+  public delete = async (where: Prisma.UserWhereUniqueInput) => {
+    return await prisma.user.delete({ where })
+  }
 }
 
 export { UserRepository }
