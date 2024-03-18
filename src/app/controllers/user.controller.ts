@@ -20,7 +20,11 @@ class UserController {
     try {
       const { name, email, password } = schema.parse(request.body)
 
-      const user = await this.userService.createUser({ name, email, password })
+      const user = await this.userService.createUser({ 
+        name,
+        email, 
+        password_hash: password
+      })
   
       return reply.send({
         status: true,

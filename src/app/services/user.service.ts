@@ -1,10 +1,11 @@
+import { hash } from '../../lib/bcrypt'
 
 import { UserRepository } from '../repositories/user.repository'
 
 type CreateUser = {
   name: string
   email: string
-  password: string
+  password_hash: string
 }
 
 type User = {
@@ -23,13 +24,17 @@ class UserService {
     this.repository = new UserRepository()
   }
 
-  public createUser = async ({ name, email, password }: CreateUser): Promise<User> => {
+  public createUser = async ({ name, email, password_hash }: CreateUser): Promise<User> => {
     
     const emailExists = await this.repository.findOne({ email })
 
     if (emailExists) throw new Error('This email is already registered in our system')
 
-    const newUser = await this.repository.create({ name, email, password })
+    const newUser = await this.repository.create({ 
+      name, 
+      email, 
+      password_hash: await hash(password_hash, 8)
+    })
 
     return newUser
   }
@@ -52,6 +57,11 @@ class UserService {
     if (Object.keys(data).length === 0)  throw new Error('No data sent')
 
     const userExists = await this.repository.findOne({ id })
+
+    if ( 'password' in data ) {
+      delete data.password
+      data.password_hash = await hash(String(data.password), 8)
+    }
 
     if (!userExists) throw new Error('User not found')
 
