@@ -27,21 +27,21 @@ class UserRepository {
     })
   }
 
-  public read = async (where: Prisma.UserWhereInput) => {
+  public read = async (where: Prisma.UserWhereInput): Promise<User[]> => {
     return await prisma.user.findMany({ where })
   }
 
-  public findOne = async (where: Prisma.UserWhereUniqueInput) => {
+  public findOne = async (where: Prisma.UserWhereUniqueInput): Promise<User> => {
     return await prisma.user.findUnique({ where })
   }
 
-  public update = async (where: Prisma.UserWhereUniqueInput, data: object) => {
+  public update = async (where: Prisma.UserWhereUniqueInput, data: object): Promise<User> => {
     return prisma.user.update({
       where, data
     })
   }
 
-  public delete = async (where: Prisma.UserWhereUniqueInput) => {
+  public delete = async (where: Prisma.UserWhereUniqueInput): Promise<User> => {
     return await prisma.user.delete({ where })
   }
 }
