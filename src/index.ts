@@ -10,8 +10,16 @@ app.register(cors)
 
 Routes(app)
 
+app.setErrorHandler((error, request, reply) => {
+  reply.status(500).send({
+    status: false,
+    data: null,
+    message: error.message
+  })
+})
+
 app.listen({
-    port: Number(process.env.PORT)
+  port: Number(process.env.PORT)
 }).then(() => {
-    console.log('~ server running on port 3333')
+  console.log('~ server running on port 3333')
 })
