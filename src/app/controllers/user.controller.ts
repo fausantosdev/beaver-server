@@ -75,6 +75,7 @@ class UserController {
     const schema = z.object({
       name: z.string().min(2, { message: 'Must be 2 or more characters long' }).optional(),
       email: z.string().email({ message: 'Invalid email address' }).optional(),
+      role: z.enum(['user', 'admin']).optional(),
       password: z.string().min(8, { message: 'Your password must be at least 8 characters long' }).optional()
     })
 
