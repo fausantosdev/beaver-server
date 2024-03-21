@@ -2,6 +2,7 @@ type UserDto = {
   id: string
   name: string
   email: string
+  role: string
   password_hash: string
   created_at: Date
   updated_at: Date
