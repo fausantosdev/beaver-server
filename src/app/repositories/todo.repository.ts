@@ -1,22 +1,10 @@
 import { Prisma } from '@prisma/client'
 import { prisma } from '../../lib/prisma'
 
-type CreateTodo = {
-  userId: string
-  title: string
-}
-
-type Todo = {
-  id: string
-  userId: string
-  title: string
-  progress: number
-  created_at: Date
-  updated_at: Date
-}
+import { TodoDto, CreateTodoDto } from '../dtos/todo.dtos'
 
 class TodoRepository {
-  public create = async ({ userId, title }: CreateTodo): Promise<Todo> => {
+  public create = async ({ userId, title }: CreateTodoDto): Promise<TodoDto> => {
     return await prisma.todo.create({
       data: {
         userId,
@@ -25,21 +13,21 @@ class TodoRepository {
     })
   }
 
-  public read = async (where: Prisma.TodoWhereInput): Promise<Todo[]> => {
+  public read = async (where: Prisma.TodoWhereInput): Promise<TodoDto[]> => {
     return await prisma.todo.findMany({ where })
   }
 
-  public findOne = async (where: Prisma.TodoWhereUniqueInput): Promise<Todo | null> => {
+  public findOne = async (where: Prisma.TodoWhereUniqueInput): Promise<TodoDto | null> => {
     return await prisma.todo.findUnique({ where })
   }
 
-  public update = async (where: Prisma.TodoWhereUniqueInput, data: object): Promise<Todo> => {
+  public update = async (where: Prisma.TodoWhereUniqueInput, data: object): Promise<TodoDto> => {
     return prisma.todo.update({
       where, data
     })
   }
 
-  public delete = async (where: Prisma.TodoWhereUniqueInput): Promise<Todo> => {
+  public delete = async (where: Prisma.TodoWhereUniqueInput): Promise<TodoDto> => {
     return await prisma.todo.delete({ where })
   }
 }

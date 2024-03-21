@@ -3,10 +3,7 @@ import { generateToken } from 'src/lib/jwt'
 
 import { UserRepository } from '../repositories/user.repository'
 
-type Auth = {
-  email: string
-  password: string
-}
+import { LoginDto } from '../dtos/auth.types'
 
 class AuthService {
   private repository: UserRepository
@@ -15,7 +12,7 @@ class AuthService {
     this.repository = new UserRepository()
   }
 
-  public signIn = async ({ email, password }: Auth) => {
+  public signIn = async ({ email, password }: LoginDto) => {
     const user = await this.repository.findOne({ email })
 
     if ( !user || (!(user && (await compare(password, user.password_hash)))) ) throw new Error('Authentication failed, check your credentials')

@@ -1,18 +1,6 @@
 import { TodoRepository } from '../repositories/todo.repository'
 
-type CreateTodo = {
-  userId: string
-  title: string
-}
-
-type Todo = {
-  id: string
-  userId: string
-  title: string
-  progress: number
-  created_at: Date
-  updated_at: Date
-}
+import { TodoDto, CreateTodoDto } from '../dtos/todo.dtos'
 
 class TodoService {
   private repository: TodoRepository
@@ -21,7 +9,7 @@ class TodoService {
     this.repository = new TodoRepository()
   }
 
-  public createTodo = async ({ userId, title }: CreateTodo): Promise<Todo> => {  
+  public createTodo = async ({ userId, title }: CreateTodoDto): Promise<TodoDto> => {  
     const titleExists = await this.repository.read({ title })
 
     if (titleExists.length > 0) throw new Error('You already have a to-do list with this title')

@@ -2,20 +2,7 @@ import { hash } from '../../lib/bcrypt'
 
 import { UserRepository } from '../repositories/user.repository'
 
-type CreateUser = {
-  name: string
-  email: string
-  password_hash: string
-}
-
-type User = {
-  id: string
-  name: string
-  email: string
-  password_hash: string
-  created_at: Date
-  updated_at: Date
-}
+import { CreateUserDto, UserDto } from '../dtos/user.dtos'
 
 class UserService {
   private repository: UserRepository
@@ -24,7 +11,7 @@ class UserService {
     this.repository = new UserRepository()
   }
 
-  public createUser = async ({ name, email, password_hash }: CreateUser): Promise<User> => {
+  public createUser = async ({ name, email, password_hash }: CreateUserDto): Promise<UserDto> => {
     
     const emailExists = await this.repository.findOne({ email })
 

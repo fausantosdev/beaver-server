@@ -1,23 +1,10 @@
 import { Prisma } from '@prisma/client'
 import { prisma } from '../../lib/prisma'
 
-type CreateUser = {
-  name: string
-  email: string
-  password_hash: string
-}
-
-type User = {
-  id: string
-  name: string
-  email: string
-  password_hash: string
-  created_at: Date
-  updated_at: Date
-}
+import { UserDto, CreateUserDto } from '../dtos/user.dtos'
 
 class UserRepository {
-  public create = async ({ name, email, password_hash }: CreateUser): Promise<User> => {
+  public create = async ({ name, email, password_hash }: CreateUserDto): Promise<UserDto> => {
     return await prisma.user.create({
       data: {
         name,
@@ -27,21 +14,21 @@ class UserRepository {
     })
   }
 
-  public read = async (where: Prisma.UserWhereInput): Promise<User[]> => {
+  public read = async (where: Prisma.UserWhereInput): Promise<UserDto[]> => {
     return await prisma.user.findMany({ where })
   }
 
-  public findOne = async (where: Prisma.UserWhereUniqueInput): Promise<User> => {
+  public findOne = async (where: Prisma.UserWhereUniqueInput): Promise<UserDto> => {
     return await prisma.user.findUnique({ where })
   }
 
-  public update = async (where: Prisma.UserWhereUniqueInput, data: object): Promise<User> => {
+  public update = async (where: Prisma.UserWhereUniqueInput, data: object): Promise<UserDto> => {
     return prisma.user.update({
       where, data
     })
   }
 
-  public delete = async (where: Prisma.UserWhereUniqueInput): Promise<User> => {
+  public delete = async (where: Prisma.UserWhereUniqueInput): Promise<UserDto> => {
     return await prisma.user.delete({ where })
   }
 }
