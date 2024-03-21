@@ -2,7 +2,7 @@ import { FastifyInstance } from 'fastify'
 
 import { UserController } from '../controllers/user.controller'
 
-import { verifyToken } from '../plugins/auth.plugin'
+import { verifyToken } from '../../plugins/auth.plugin'
 
 const userController = new UserController()
 
