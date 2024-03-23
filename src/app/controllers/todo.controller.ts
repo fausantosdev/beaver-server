@@ -12,15 +12,15 @@ class TodoController {
 
   public store = async (request: FastifyRequest, reply: FastifyReply): Promise<FastifyReply> => {
     const schema = z.object({
-      userId: z.string().uuid({ message: 'Incorrect ID format' }),
       title: z.string().min(2, { message: 'Must be 2 or more characters long' })
     })
 
     try {
-      const { userId, title } = schema.parse(request.body)
+      const { id } = request.user
+      const { title } = schema.parse(request.body)
 
       const todo = await this.todoService.createTodo({ 
-        userId,
+        userId: id,
         title
       })
   
@@ -40,14 +40,13 @@ class TodoController {
 
   public readByUser = async (request: FastifyRequest, reply: FastifyReply): Promise<FastifyReply> => {
     const schema = z.object({
-      userId: z.string().uuid({ message: 'Incorrect ID format' }),
-      id: z.string().uuid({ message: 'Incorrect ID format' }).optional()
+      id: z.string().uuid({ message: 'Incorrect ID format' }),
     })
       
     try {
-      const { userId, id } = schema.parse(request.params)
+      const { id } = schema.parse(request.params)
 
-      const todos = await this.todoService.getAllByUser(userId)
+      const todos = await this.todoService.getAllByUser(id)
       
       return reply.send({
         status: true,
