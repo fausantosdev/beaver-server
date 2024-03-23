@@ -1,9 +1,12 @@
 import { FastifyRequest, FastifyReply, HookHandlerDoneFunction } from 'fastify'
+import { z } from 'zod'
+
 import { decodeToken } from 'src/lib/jwt'
 
 type Token = {
   id: string,
-  username: string
+  email: string
+  role: string
   iat: number
   exp: number
   sub: string
@@ -16,13 +19,41 @@ const verifyToken = (request: FastifyRequest, reply: FastifyReply, done: HookHan
 
   const token = authHeader.split(' ')[1]
   
-  const { id, username } = decodeToken(token) as Token
+  const { id, email, role } = decodeToken(token) as Token
 
-  request.user = { id, username }
+  request.user = { id, email, role }
 
   return done()
 }
 
+const isAdmin = (request: FastifyRequest, response: FastifyReply, done: HookHandlerDoneFunction) => {
+  verifyToken(request, response, () => {
+    if (request.user.role === 'admin') {
+      return done()
+    }else{
+      throw new Error('Restricted')
+    }
+  })
+}
+
+const checkUserOrIsAdmin = (request: FastifyRequest, response: FastifyReply, done: HookHandlerDoneFunction) => {
+  const paramsSchema = z.object({
+    id: z.string().uuid({ message: 'Incorrect ID format' })
+  })
+
+  const { id: userId } = paramsSchema.parse(request.params)
+  
+  verifyToken(request, response, () => {
+      if(request.user.id == userId || request.user.role === 'admin'){
+        return done()
+      }else{
+        throw new Error('Restricted')
+      }
+  })
+}
+
 export {
-  verifyToken
+  verifyToken,
+  isAdmin,
+  checkUserOrIsAdmin
 }

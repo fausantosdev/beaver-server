@@ -2,16 +2,18 @@ import { FastifyInstance } from 'fastify'
 
 import { UserController } from '../controllers/user.controller'
 
-import { verifyToken } from '../../plugins/auth.plugin'
+import { isAdmin, checkUserOrIsAdmin } from '../../plugins/auth.plugin'
 
 const userController = new UserController()
 
 export async function userRoutes (app: FastifyInstance) {
   app.post('/', userController.store)
 
-  app.get('/:id?', { preHandler: [verifyToken] }, userController.read)
+  app.get('/', { preHandler: [isAdmin] }, userController.read)
 
-  app.put('/:id?', { preHandler: [verifyToken] }, userController.update)
+  app.get('/:id', { preHandler: [checkUserOrIsAdmin] }, userController.show)
 
-  app.delete('/:id?', { preHandler: [verifyToken] }, userController.delete)
+  app.put('/:id?', { preHandler: [checkUserOrIsAdmin] }, userController.update)
+
+  app.delete('/:id?', { preHandler: [checkUserOrIsAdmin] }, userController.delete)
 }
