@@ -3,7 +3,7 @@ import { generateToken } from 'src/lib/jwt'
 
 import { UserRepository } from '../repositories/user.repository'
 
-import { LoginDto } from '../dtos/auth.types'
+import { LoginDto } from '../dtos/auth.dtos'
 
 class AuthService {
   private repository: UserRepository
@@ -19,7 +19,8 @@ class AuthService {
 
     const jwt = generateToken({
       id: user.id,
-      email: user.email
+      email: user.email,
+      role: user.role
     })
 
     return jwt
