@@ -12,7 +12,22 @@ type CreateTodoDto = {
   title: string
 }
 
+type ItemDto = {
+  todoId: string
+  description: string
+  done: boolean
+  created_at: Date
+  updated_at: Date
+}
+
+type CreateItemDto = {
+  todoId: string
+  description: string 
+}
+
 export {
   TodoDto,
-  CreateTodoDto
+  CreateTodoDto,
+  ItemDto,
+  CreateItemDto
 }
