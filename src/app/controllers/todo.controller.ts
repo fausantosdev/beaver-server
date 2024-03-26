@@ -38,13 +38,9 @@ class TodoController {
     }
   }
 
-  public readByUser = async (request: FastifyRequest, reply: FastifyReply): Promise<FastifyReply> => {
-    const schema = z.object({
-      id: z.string().uuid({ message: 'Incorrect ID format' }),
-    })
-      
+  public readByUser = async (request: FastifyRequest, reply: FastifyReply): Promise<FastifyReply> => {  
     try {
-      const { id } = schema.parse(request.params)
+      const { id } = request.user
 
       const todos = await this.todoService.getAllByUser(id)
       
@@ -63,14 +59,18 @@ class TodoController {
   }
 
   public update = async (request: FastifyRequest, reply: FastifyReply): Promise<FastifyReply> => {
-    const schema = z.object({
-      userId: z.string().uuid({ message: 'Incorrect ID format' }),
-      id: z.string().uuid({ message: 'Incorrect ID format' }),
+    const paramsSchema = z.object({
+     id: z.string().min(2, { message: 'Must be 2 or more characters long' })
+    })
+
+    const bodySchema = z.object({
       title: z.string().min(2, { message: 'Must be 2 or more characters long' })
     })
-    
+ 
     try {
-      const { userId, id, title } = schema.parse(request.body)
+      const { id: userId } = request.user
+      const { id } = paramsSchema.parse(request.params)
+      const { title } = bodySchema.parse(request.body)
 
       const user = await this.todoService.edit(userId, id, { title })
   
@@ -90,12 +90,12 @@ class TodoController {
 
   public delete = async (request: FastifyRequest, reply: FastifyReply): Promise<FastifyReply> => {
     const schema = z.object({
-      userId: z.string().uuid({ message: 'Incorrect ID format' }),
       id: z.string().uuid({ message: 'Incorrect ID format' })
     })
     
     try {
-      const { userId, id } = schema.parse(request.body)
+      const { id: userId } = request.user
+      const { id } = schema.parse(request.body)
 
       const result = await this.todoService.deleteOne(userId, id)
   

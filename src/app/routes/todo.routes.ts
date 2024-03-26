@@ -10,8 +10,8 @@ const itemController = new ItemController()
 
 export async function todoRoutes (app: FastifyInstance) {
   app.post('/', { preHandler: [verifyToken] }, todoController.store) 
-  app.get('/:userId/:id?', { preHandler: [verifyToken] }, todoController.readByUser)
-  app.patch('/', { preHandler: [verifyToken] }, todoController.update)
+  app.get('/:id?', { preHandler: [verifyToken] }, todoController.readByUser)
+  app.patch('/:id/edit', { preHandler: [verifyToken] }, todoController.update)
   app.delete('/', { preHandler: [verifyToken] }, todoController.delete)
 
   app.post('/item', { preHandler: [verifyToken] }, itemController.store)
