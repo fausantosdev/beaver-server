@@ -14,7 +14,18 @@ type CreateUserDto = {
   password_hash: string
 }
 
+type UpdateUserDto = {
+  name?: string
+  email?: string
+  role?: string
+  password?: string
+  password_hash?: string
+  stripe_customer_id?: string
+  stripe_subscription_id?: string
+}
+
 export {
   UserDto,
-  CreateUserDto
+  CreateUserDto,
+  UpdateUserDto
 }

@@ -2,7 +2,7 @@ import { hash } from '../../lib/bcrypt'
 
 import { UserRepository } from '../repositories/user.repository'
 
-import { CreateUserDto, UserDto } from '../dtos/user.dtos'
+import { UserDto, CreateUserDto, UpdateUserDto } from '../dtos/user.dtos'
 
 class UserService {
   private repository: UserRepository
@@ -40,14 +40,14 @@ class UserService {
     return result
   }
 
-  public edit = async (id: string, data: object) => {
+  public edit = async (id: string, data: UpdateUserDto) => {
     if (Object.keys(data).length === 0)  throw new Error('No data sent')
 
     const userExists = await this.repository.findOne({ id })
 
     if ( 'password' in data ) {
-      delete data.password
       data.password_hash = await hash(String(data.password), 8)
+      delete data.password
     }
 
     if (!userExists) throw new Error('User not found')
