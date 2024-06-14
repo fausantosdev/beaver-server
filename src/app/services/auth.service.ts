@@ -1,5 +1,5 @@
 import { compare } from '../../lib/bcrypt'
-import { generateToken } from 'src/lib/jwt'
+import { generateToken, decodeToken } from 'src/lib/jwt'
 
 import { UserRepository } from '../repositories/user.repository'
 
@@ -24,6 +24,26 @@ class AuthService {
     })
 
     return jwt
+  }
+
+
+
+  refreshToken = async (token: string) => {
+    const { id } = decodeToken(token)
+    
+    const userExists = await this.repository.findOne({ id })
+
+    if (!userExists) throw new Error('Invalid token, please log in again')
+
+    const { email, role } = userExists
+
+    const newToken = generateToken({
+      id,
+      email,
+      role
+    })
+
+    return newToken
   }
 }
 

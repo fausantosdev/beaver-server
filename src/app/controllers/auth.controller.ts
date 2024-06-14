@@ -37,6 +37,26 @@ class AuthController {
       })
     }
   }
+
+  tokenRefresh = async (request: FastifyRequest, reply: FastifyReply) => {
+    const token = request.headers.authorization!.split(' ')[1]
+  
+    try {
+      const result = await this.authService.refreshToken(token)
+
+      return reply.status(200).send({
+        status: true,
+        data: result,
+        message: null
+      })
+    } catch (error: any) {
+      return reply.status(error.code || 500).send({
+        status: false,
+        data: null,
+        message: error.message
+      })
+    }
+}
 }
 
 export { AuthController }
