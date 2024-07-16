@@ -3,6 +3,13 @@ type LoginDto = {
   password: string
 }
 
+type ResetPasswordDto = {
+  token: string
+  email: string
+  newPassword: string
+}
+
 export {
-  LoginDto
+  LoginDto,
+  ResetPasswordDto
 }
