@@ -5,7 +5,7 @@ import { generateToken, decodeToken } from '../../lib/jwt'
 
 import { UserRepository } from '../repositories/user.repository'
 
-import { LoginDto, ResetPasswordDto } from '../dtos/auth.dtos'
+import { JwtPayloadDto, LoginDto, ResetPasswordDto } from '../dtos/auth.dtos'
 
 import { Nodemailer } from '../../lib/nodemailer'
 
@@ -33,7 +33,7 @@ class AuthService {
   }
 
   public refreshToken = async (token: string): Promise<string> => {
-    const { id } = decodeToken(token)
+    const { id } = decodeToken(token) as JwtPayloadDto
     
     const userExists = await this.userRepository.findOne({ id })
 
