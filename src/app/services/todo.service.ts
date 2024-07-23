@@ -1,6 +1,6 @@
 import { TodoRepository } from '../repositories/todo.repository'
 
-import { TodoDto, CreateTodoDto } from '../dtos/todo.dtos'
+import { TodoDto, CreateTodoDto, EditTodoDto } from '../dtos/todo.dtos'
 
 class TodoService {
   private repository: TodoRepository
@@ -36,7 +36,7 @@ class TodoService {
     return result
   }
 
-  public edit = async (userId: string, id: string, data: object) => {
+  public edit = async (userId: string, id: string, data: EditTodoDto) => {
     if (Object.keys(data).length === 0)  throw new Error('No data sent')
 
     const todoExists = await this.repository.read({ userId, id })

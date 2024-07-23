@@ -25,9 +25,15 @@ type CreateItemDto = {
   description: string 
 }
 
+type EditTodoDto = {
+  title?: string
+  progress?: number
+}
+
 export {
   TodoDto,
   CreateTodoDto,
   ItemDto,
-  CreateItemDto
+  CreateItemDto,
+  EditTodoDto
 }
