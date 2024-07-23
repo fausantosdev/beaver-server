@@ -4,8 +4,9 @@
   "description": "Task control application",
   "main": "./src",
   "scripts": {
-    "start": "node build/",
-    "dev": "tsx watch src/index.ts"
+    "start": "node build/src/",
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
