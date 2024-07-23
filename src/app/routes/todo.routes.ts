@@ -3,7 +3,7 @@ import { FastifyInstance } from 'fastify'
 import { TodoController } from '../controllers/todo.controller'
 import { ItemController } from '../controllers/item.controller'
 
-import { verifyToken, checkUserOrIsAdmin } from 'src/plugins/auth.plugin'
+import { verifyToken, checkUserOrIsAdmin } from '../../plugins/auth.plugin'
 
 const todoController = new TodoController()
 const itemController = new ItemController()

@@ -7,7 +7,8 @@ import { UserRepository } from '../repositories/user.repository'
 
 import { LoginDto, ResetPasswordDto } from '../dtos/auth.dtos'
 
-import { Nodemailer } from 'src/lib/nodemailer'
+import { Nodemailer } from '../../lib/nodemailer'
+
 class AuthService {
   private userRepository: UserRepository
   private mail: Nodemailer
