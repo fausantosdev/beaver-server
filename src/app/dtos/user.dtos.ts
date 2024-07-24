@@ -4,6 +4,8 @@ type UserDto = {
   email: string
   role: string
   password_hash: string
+  password_reset_token: string
+  password_reset_expires: Date
   created_at: Date
   updated_at: Date
 }
@@ -22,6 +24,7 @@ type UpdateUserDto = {
   password_hash?: string
   stripe_customer_id?: string
   stripe_subscription_id?: string
+  stripe_subscription_status?: string
 }
 
 export {
