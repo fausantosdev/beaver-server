@@ -18,8 +18,10 @@ app.setErrorHandler((error, request, reply) => {
   })
 })
 
+const port = Number(process.env.PORT) || 4004
+
 app.listen({
-  port: Number(process.env.PORT)
+  port
 }).then(() => {
-  console.log('~ server running on port 3333')
+  console.log(`~ server running on port ${port}`)
 })
