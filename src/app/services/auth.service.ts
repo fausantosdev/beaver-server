@@ -3,9 +3,9 @@ import cripto from 'node:crypto'
 import { compare, hash } from '../../lib/bcrypt'
 import { generateToken, decodeToken } from '../../lib/jwt'
 
-import { UserRepository } from '../repositories/user.repository'
+import { UserRepository } from '../data/repositories/user.repository'
 
-import { JwtPayloadDto, LoginDto, ResetPasswordDto } from '../dtos/auth.dtos'
+import { JwtPayloadDto, LoginDto, ResetPasswordDto } from '../../dtos/auth.dtos'
 
 import { Nodemailer } from '../../lib/nodemailer'
 

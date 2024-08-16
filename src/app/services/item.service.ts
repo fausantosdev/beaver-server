@@ -1,6 +1,6 @@
-import { ItemRepository } from '../repositories/item.repository' 
+import { ItemRepository } from '../data/repositories/item.repository' 
 
-import { ItemDto, CreateItemDto } from '../dtos/todo.dtos'
+import { ItemDto, CreateItemDto } from '../../dtos/todo.dtos'
 
 class ItemService {
   private repository: ItemRepository

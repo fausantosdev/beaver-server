@@ -2,7 +2,7 @@ import Fastify from 'fastify'
 import cors from '@fastify/cors'
 import 'dotenv/config'
 
-import { Routes } from './app/routes'
+import { Routes } from './routes'
 
 const app = Fastify()
 
