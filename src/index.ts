@@ -2,13 +2,13 @@ import Fastify from 'fastify'
 import cors from '@fastify/cors'
 import 'dotenv/config'
 
-import { Routes } from './routes'
+import { routes } from './routes'
 
 const app = Fastify()
 
 app.register(cors)
 
-Routes(app)
+routes(app)
 
 app.setErrorHandler((error, request, reply) => {
   reply.status(500).send({
