@@ -1,7 +1,7 @@
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
 
-import { UserService } from '../../services/user.service'
+import { UserService } from '@services/user.service'
 
 class UserController {
   private userService: UserService

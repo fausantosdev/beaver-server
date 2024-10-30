@@ -1,7 +1,7 @@
 import { FastifyRequest, FastifyReply, HookHandlerDoneFunction } from 'fastify'
 import { z } from 'zod'
 
-import { decodeToken } from '../../../lib/jwt'
+import { decodeToken } from '@lib/jwt'
 
 type Token = {
   id: string,

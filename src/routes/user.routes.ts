@@ -1,8 +1,8 @@
 import { FastifyInstance } from 'fastify'
 
-import { UserController } from '../app/http/controllers/user.controller'
+import { UserController } from '@controllers/user.controller'
 
-import { isAdmin, checkUserOrIsAdmin } from '../app/http/middlewares/auth.middleware'
+import { isAdmin, checkUserOrIsAdmin } from '@middlewares/auth.middleware'
 
 const userController = new UserController()
 

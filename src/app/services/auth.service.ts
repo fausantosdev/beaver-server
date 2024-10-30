@@ -1,13 +1,12 @@
 import cripto from 'node:crypto'
 
-import { compare, hash } from '../../lib/bcrypt'
-import { generateToken, decodeToken } from '../../lib/jwt'
+import { compare, hash } from '@lib/bcrypt'
+import { generateToken, decodeToken } from '@lib/jwt'
+import { Nodemailer } from '@lib/nodemailer'
 
-import { UserRepository } from '../data/repositories/user.repository'
+import { UserRepository } from '@repositories/user.repository'
 
-import { JwtPayloadDto, LoginDto, ResetPasswordDto } from '../../dtos/auth.dtos'
-
-import { Nodemailer } from '../../lib/nodemailer'
+import { JwtPayloadDto, LoginDto, ResetPasswordDto } from '@dtos/auth.dtos'
 
 class AuthService {
   private userRepository: UserRepository

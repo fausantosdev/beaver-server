@@ -1,4 +1,4 @@
-import { TodoRepository } from '../data/repositories/todo.repository'
+import { TodoRepository } from '@repositories/todo.repository'
 
 import { TodoDto, CreateTodoDto, EditTodoDto } from '../../dtos/todo.dtos'
 

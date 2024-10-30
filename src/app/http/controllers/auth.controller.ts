@@ -1,7 +1,7 @@
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
 
-import { AuthService } from '../../services/auth.service' 
+import { AuthService } from '@services/auth.service'
 
 class AuthController {
   private authService: AuthService

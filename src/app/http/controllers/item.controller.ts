@@ -1,7 +1,7 @@
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
 
-import { ItemService } from '../../services/item.service' 
+import { ItemService } from '@services/item.service' 
 
 class ItemController {
   private itemService: ItemService

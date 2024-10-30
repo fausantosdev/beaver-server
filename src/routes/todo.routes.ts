@@ -1,9 +1,9 @@
 import { FastifyInstance } from 'fastify'
 
-import { TodoController } from '../app/http/controllers/todo.controller'
-import { ItemController } from '../app/http/controllers/item.controller'
+import { TodoController } from '@controllers/todo.controller'
+import { ItemController } from '@controllers/item.controller'
 
-import { verifyToken, checkUserOrIsAdmin } from '../app/http/middlewares/auth.middleware'
+import { verifyToken, checkUserOrIsAdmin } from '@middlewares/auth.middleware'
 
 const todoController = new TodoController()
 const itemController = new ItemController()

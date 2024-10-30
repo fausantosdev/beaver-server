@@ -1,10 +1,10 @@
 import { User } from '@prisma/client'
 
-import { hash } from '../../lib/bcrypt'
+import { hash } from '@lib/bcrypt'
 
-import { UserRepository } from '../data/repositories/user.repository'
+import { UserRepository } from '@repositories/user.repository'
 
-import { CreateUserDto, UpdateUserDto } from '../../dtos/user.dtos'
+import { CreateUserDto, UpdateUserDto } from '@dtos/user.dtos'
 
 class UserService {
   private repository: UserRepository
