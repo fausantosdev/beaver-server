@@ -1,7 +1,6 @@
-import { Prisma, User } from '@prisma/client'
-import { prisma } from '@lib/prisma'
-
 import { CreateUserDto } from '@dtos/user.dtos'
+import { prisma } from '@lib/prisma'
+import { Prisma, User } from '@prisma/client'
 
 class UserRepository {
   public create = async ({ name, email, password_hash }: CreateUserDto): Promise<User> => {

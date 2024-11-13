@@ -22,14 +22,19 @@
   },
   "homepage": "https://github.com/fausantosdev/beaver-server#readme",
   "devDependencies": {
+    "@eslint/js": "^9.14.0",
     "@types/bcrypt": "^5.0.2",
     "@types/jsonwebtoken": "^9.0.6",
     "@types/node": "^20.11.26",
     "@types/nodemailer": "^6.4.15",
+    "eslint": "^9.14.0",
+    "eslint-plugin-simple-import-sort": "^12.1.1",
     "git-commit-msg-linter": "^5.0.7",
+    "globals": "^15.12.0",
     "prisma": "^5.11.0",
     "tsx": "^4.7.1",
-    "typescript": "^5.4.2"
+    "typescript": "^5.4.2",
+    "typescript-eslint": "^8.14.0"
   },
   "dependencies": {
     "@fastify/cors": "^9.0.1",

@@ -1,12 +1,10 @@
 import cripto from 'node:crypto'
 
-import { compare, hash } from '@lib/bcrypt'
-import { generateToken, decodeToken } from '@lib/jwt'
-import { Nodemailer } from '@lib/nodemailer'
-
-import { UserRepository } from '@repositories/user.repository'
-
 import { JwtPayloadDto, LoginDto, ResetPasswordDto } from '@dtos/auth.dtos'
+import { compare, hash } from '@lib/bcrypt'
+import { decodeToken,generateToken } from '@lib/jwt'
+import { Nodemailer } from '@lib/nodemailer'
+import { UserRepository } from '@repositories/user.repository'
 
 class AuthService {
   private userRepository: UserRepository
@@ -33,7 +31,7 @@ class AuthService {
 
   public refreshToken = async (token: string): Promise<string> => {
     const { id } = decodeToken(token) as JwtPayloadDto
-    
+
     const userExists = await this.userRepository.findOne({ id })
 
     if (!userExists) throw new Error('Invalid token, please log in again')
@@ -63,17 +61,17 @@ class AuthService {
       { id: userExists?.id },
       { password_reset_token: token, password_reset_expires: now }
     )
-    
+
     if (updated.id) {
       const emailSent = await this.mail.sendMail({
         to: updated.email,
         subject: '[Beaver SaaS] - Password recovery',
         text: `Use this token to recover your password: ${token}\nIf you didn't request this recovery, just disregard this email, your data is safe.`
       })
-  
+
       if (!emailSent) throw new Error('An error occurred, please try later [2]')
-      
-      return true  
+
+      return true
     } else {
       throw new Error('An error occurred, please try later [1]')
     }
@@ -87,9 +85,9 @@ class AuthService {
     if(token !== userExists.password_reset_token) throw new Error('Invalid password recovery token')
 
     if (userExists.password_reset_expires && (new Date() > userExists.password_reset_expires)) throw new Error('Token expired, request a new one')
-      
-    const updated = await this.userRepository.update({ 
-      id: userExists.id 
+
+    const updated = await this.userRepository.update({
+      id: userExists.id
     }, {
       password_hash: await hash(newPassword, 8),
       password_reset_token: null,
@@ -97,7 +95,7 @@ class AuthService {
     })
 
     if (!updated) throw new Error('An error occurred while updating your password, please try again')
-      
+
     return true
   }
 }

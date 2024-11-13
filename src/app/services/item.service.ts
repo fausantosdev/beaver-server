@@ -1,6 +1,5 @@
+import { CreateItemDto,ItemDto } from '@dtos/todo.dtos'
 import { ItemRepository } from '@repositories/item.repository'
-
-import { ItemDto, CreateItemDto } from '@dtos/todo.dtos'
 
 class ItemService {
   private repository: ItemRepository
@@ -10,7 +9,7 @@ class ItemService {
   }
 
   public createTodo = async ({ todoId, description }: CreateItemDto): Promise<ItemDto> => {
-    const newItem = await this.repository.create({ 
+    const newItem = await this.repository.create({
       todoId,
       description
     })
@@ -38,9 +37,9 @@ class ItemService {
     if (!itemExists) throw new Error('Task list item not found')
 
     const data = !itemExists.done ? { done: true } : { done: false }
-    
+
     const updatedItem = this.repository.update({ todoId, id }, data)
-    
+
     return updatedItem
   }
 

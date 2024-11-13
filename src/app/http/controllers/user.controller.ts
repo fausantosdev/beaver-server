@@ -1,7 +1,6 @@
+import { UserService } from '@services/user.service'
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
-
-import { UserService } from '@services/user.service'
 
 class UserController {
   private userService: UserService
@@ -20,12 +19,12 @@ class UserController {
     try {
       const { name, email, password } = schema.parse(request.body)
 
-      const user = await this.userService.createUser({ 
+      const user = await this.userService.createUser({
         name,
-        email, 
+        email,
         password_hash: password
       })
-  
+
       return reply.send({
         status: true,
         data: user,
@@ -40,10 +39,10 @@ class UserController {
     }
   }
 
-  public read = async (request: FastifyRequest, reply: FastifyReply): Promise<FastifyReply> => {  
+  public read = async (request: FastifyRequest, reply: FastifyReply): Promise<FastifyReply> => {
     try {
       const users = await this.userService.getMany()
-      
+
       return reply.send({
         status: true,
         data: users,
@@ -62,12 +61,12 @@ class UserController {
     const schema = z.object({
       id: z.string().uuid({ message: 'Incorrect ID format' })
     })
-      
+
     try {
       const { id } = schema.parse(request.params)
 
       const users = await this.userService.getById(id)
-      
+
       return reply.send({
         status: true,
         data: users,
@@ -86,7 +85,7 @@ class UserController {
     const schemaId = z.object({
       id: z.string().uuid({ message: 'Incorrect ID format' })
     })
-    
+
     const schema = z.object({
       name: z.string().min(2, { message: 'Must be 2 or more characters long' }).optional(),
       email: z.string().email({ message: 'Invalid email address' }).optional(),
@@ -99,7 +98,7 @@ class UserController {
       const data = schema.parse(request.body)
 
       const user = await this.userService.edit(id, data)
-  
+
       return reply.send({
         status: true,
         data: user,
@@ -118,12 +117,12 @@ class UserController {
     const schema = z.object({
       id: z.string().uuid({ message: 'Incorrect ID format' })
     })
-    
+
     try {
       const { id } = schema.parse(request.params)
 
       const result = await this.userService.deleteUser(id)
-  
+
       return reply.send({
         status: true,
         data: result,

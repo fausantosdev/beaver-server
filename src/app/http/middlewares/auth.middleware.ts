@@ -1,7 +1,6 @@
-import { FastifyRequest, FastifyReply, HookHandlerDoneFunction } from 'fastify'
-import { z } from 'zod'
-
 import { decodeToken } from '@lib/jwt'
+import { FastifyReply, FastifyRequest, HookHandlerDoneFunction } from 'fastify'
+import { z } from 'zod'
 
 type Token = {
   id: string,
@@ -18,7 +17,7 @@ const verifyToken = (request: FastifyRequest, reply: FastifyReply, done: HookHan
   if (!authHeader) throw new Error('Token not provided')
 
   const token = authHeader.split(' ')[1]
-  
+
   const { id, email, role } = decodeToken(token) as Token
 
   request.user = { id, email, role }
@@ -42,7 +41,7 @@ const checkUserOrIsAdmin = (request: FastifyRequest, response: FastifyReply, don
   })
 
   const { id: userId } = paramsSchema.parse(request.params)
-  
+
   verifyToken(request, response, () => {
       if(request.user.id == userId || request.user.role === 'admin'){
         return done()

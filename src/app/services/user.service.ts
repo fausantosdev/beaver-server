@@ -1,10 +1,7 @@
-import { User } from '@prisma/client'
-
-import { hash } from '@lib/bcrypt'
-
-import { UserRepository } from '@repositories/user.repository'
-
 import { CreateUserDto, UpdateUserDto } from '@dtos/user.dtos'
+import { hash } from '@lib/bcrypt'
+import { User } from '@prisma/client'
+import { UserRepository } from '@repositories/user.repository'
 
 class UserService {
   private repository: UserRepository
@@ -14,14 +11,14 @@ class UserService {
   }
 
   public createUser = async ({ name, email, password_hash }: CreateUserDto): Promise<User> => {
-    
+
     const emailExists = await this.repository.findOne({ email })
 
     if (emailExists) throw new Error('This email is already registered in our system')
 
-    const newUser = await this.repository.create({ 
-      name, 
-      email, 
+    const newUser = await this.repository.create({
+      name,
+      email,
       password_hash: await hash(password_hash, 8)
     })
 
@@ -50,7 +47,7 @@ class UserService {
     const userExists = await this.repository.findOne({ id })
 
     if (!userExists) throw new Error('User not found')
-      
+
     if ( 'password' in data ) {
       data.password_hash = await hash(String(data.password), 8)
       delete data.password

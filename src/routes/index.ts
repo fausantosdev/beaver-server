@@ -1,8 +1,8 @@
 import { FastifyInstance } from 'fastify'
 
-import { userRoutes } from './user.routes'
+import { authRoutes } from './auth.routes'
 import { todoRoutes } from './todo.routes'
-import { authRoutes } from './auth.routes' 
+import { userRoutes } from './user.routes'
 
 const routes = (app: FastifyInstance) => {
   app.register(authRoutes, { prefix: '/auth' })

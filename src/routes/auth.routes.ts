@@ -1,9 +1,7 @@
-import { FastifyInstance } from 'fastify'
-
 import { AuthController } from '@controllers/auth.controller'
 import { UserController } from '@controllers/user.controller'
-
 import { verifyToken } from '@middlewares/auth.middleware'
+import { FastifyInstance } from 'fastify'
 
 const authController = new AuthController()
 const userController = new UserController()

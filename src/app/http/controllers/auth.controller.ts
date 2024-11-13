@@ -1,7 +1,6 @@
+import { AuthService } from '@services/auth.service'
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
-
-import { AuthService } from '@services/auth.service'
 
 class AuthController {
   private authService: AuthService
@@ -19,11 +18,11 @@ class AuthController {
     try {
       const { email, password } = schema.parse(request.body)
 
-      const result = await this.authService.signIn({ 
-        email, 
+      const result = await this.authService.signIn({
+        email,
         password
       })
-  
+
       return reply.send({
         status: true,
         data: result,
@@ -40,7 +39,7 @@ class AuthController {
 
   public tokenRefresh = async (request: FastifyRequest, reply: FastifyReply): Promise<FastifyReply> => {
     const token = request.headers.authorization!.split(' ')[1]
-  
+
     try {
       const result = await this.authService.refreshToken(token)
 
@@ -68,7 +67,7 @@ class AuthController {
       const { email } = schema.parse(request.body)
 
       const result = await this.authService.forgotPassword(email)
-  
+
       return reply.send({
         status: true,
         data: result,
@@ -93,12 +92,12 @@ class AuthController {
     try {
       const { email, password, token } = schema.parse(request.body)
 
-      const result = await this.authService.resetPassword({ 
-        email, 
+      const result = await this.authService.resetPassword({
+        email,
         newPassword: password,
         token
       })
-  
+
       return reply.send({
         status: true,
         data: result,

@@ -1,7 +1,6 @@
-import { Prisma } from '@prisma/client'
+import { CreateItemDto,ItemDto } from '@dtos/todo.dtos'
 import { prisma } from '@lib/prisma'
-
-import { ItemDto, CreateItemDto } from '@dtos/todo.dtos'
+import { Prisma } from '@prisma/client'
 
 class ItemRepository {
   public create = async ({ todoId, description }: CreateItemDto): Promise<ItemDto> => {

@@ -1,4 +1,4 @@
-import { Transporter ,createTransport } from 'nodemailer'
+import { createTransport,Transporter  } from 'nodemailer'
 
 type SendMailTypes = {
   to: string
@@ -18,7 +18,7 @@ export class Nodemailer {
         user: process.env.MAIL_USER,
         pass: process.env.MAIL_PASS,
       },
-    }) 
+    })
   }
 
   async sendMail({to, subject, text}: SendMailTypes): Promise<boolean> {
