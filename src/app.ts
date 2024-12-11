@@ -1,20 +1,41 @@
 import cors from '@fastify/cors'
-import Fastify from 'fastify'
+import Fastify, { FastifyInstance } from 'fastify'
 
 import { routes } from './routes'
 
-const app = Fastify()
+class App {
+  private readonly app: FastifyInstance
 
-app.register(cors)
+  constructor() {
+    this.app = Fastify()
 
-routes(app)
+    this.config()
+    this.routes()
+  }
 
-app.setErrorHandler((error, request, reply) => {
-  reply.status(500).send({
-    status: false,
-    data: null,
-    message: error.message
-  })
-})
+  private config() {
+    this.app.setErrorHandler((error, request, reply) => {
+      reply.status(500).send({
+        status: false,
+        data: null,
+        message: error.message
+      })
+    })
 
-export { app }
+    this.app.register(cors)
+  }
+
+  private routes() {
+    routes(this.app)
+  }
+
+  public init(port: number) {
+    this.app.listen({
+      port
+    }).then(() => {
+      console.log('~ server running')
+    })
+  }
+}
+
+export const app = new App()
