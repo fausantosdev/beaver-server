@@ -1,5 +1,4 @@
-import 'dotenv/config'
-
 import { app } from './app'
+import { env } from './env'
 
-app.init(Number(process.env.PORT) || 4004)
+app.init(env.PORT)
