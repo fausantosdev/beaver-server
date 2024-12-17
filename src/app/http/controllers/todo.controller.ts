@@ -1,12 +1,16 @@
+import { Repository } from '@protocols/repository'
+import { TodoRepository } from '@repositories/todo.repository'
 import { TodoService } from '@services/todo.service'
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
 
 class TodoController {
   private todoService: TodoService
+  private todoRepository: Repository
 
   constructor() {
-    this.todoService = new TodoService()
+    this.todoRepository = new TodoRepository()
+    this.todoService = new TodoService(this.todoRepository)
   }
 
   public store = async (request: FastifyRequest, reply: FastifyReply): Promise<FastifyReply> => {

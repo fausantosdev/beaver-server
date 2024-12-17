@@ -1,16 +1,15 @@
 import { CreateUserDto, UpdateUserDto } from '@dtos/user.dtos'
 import { hash } from '@lib/bcrypt'
-import { User } from '@prisma/client'
-import { UserRepository } from '@repositories/user.repository'
+import { Repository } from '@protocols/repository'
 
 class UserService {
-  private repository: UserRepository
-
-  constructor() {
-    this.repository = new UserRepository()
+  constructor(
+    private repository: Repository
+  ) {
+    this.repository = repository
   }
 
-  public createUser = async ({ name, email, password_hash }: CreateUserDto): Promise<User> => {
+  public createUser = async ({ name, email, password_hash }: CreateUserDto): Promise<object> => {
 
     const emailExists = await this.repository.findOne({ email })
 
@@ -27,21 +26,21 @@ class UserService {
     return newUser
   }
 
-  public getById = async (id: string): Promise<User | null> => {
+  public getById = async (id: string): Promise<object | null> => {
     return await this.repository.findOne({ id })
   }
 
-  public getByEmail = async (email: string): Promise<User | null> => {
+  public getByEmail = async (email: string): Promise<object | null> => {
     return await this.repository.findOne({ email })
   }
 
-  public getMany = async (where = {}): Promise<User[]> => {
+  public getMany = async (where = {}): Promise<object[]> => {
     const result = await this.repository.read(where)
 
     return result
   }
 
-  public edit = async (id: string, data: UpdateUserDto): Promise<User> => {
+  public edit = async (id: string, data: UpdateUserDto): Promise<object> => {
     if (Object.keys(data).length === 0)  throw new Error('No data sent')
 
     const userExists = await this.repository.findOne({ id })

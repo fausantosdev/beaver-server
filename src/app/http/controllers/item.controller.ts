@@ -1,12 +1,15 @@
+import { ItemRepository } from '@repositories/item.repository'
 import { ItemService } from '@services/item.service'
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
 
 class ItemController {
   private itemService: ItemService
+  private itemRepository: ItemRepository
 
   constructor() {
-    this.itemService = new ItemService()
+    this.itemRepository = new ItemRepository()
+    this.itemService = new ItemService(this.itemRepository)
   }
 
   public store = async (request: FastifyRequest, reply: FastifyReply): Promise<FastifyReply> => {

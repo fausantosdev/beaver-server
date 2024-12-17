@@ -1,14 +1,14 @@
-import { CreateItemDto,ItemDto } from '@dtos/todo.dtos'
-import { ItemRepository } from '@repositories/item.repository'
+import { CreateItemDto } from '@dtos/todo.dtos'
+import { Repository } from '@protocols/repository'
 
 class ItemService {
-  private repository: ItemRepository
-
-  constructor() {
-    this.repository = new ItemRepository()
+  constructor(
+    private repository: Repository
+  ) {
+    this.repository = repository
   }
 
-  public createTodo = async ({ todoId, description }: CreateItemDto): Promise<ItemDto> => {
+  public createTodo = async ({ todoId, description }: CreateItemDto): Promise<object> => {
     const newItem = await this.repository.create({
       todoId,
       description
@@ -17,21 +17,21 @@ class ItemService {
     return newItem
   }
 
-  public getById = async (id: string) => {
+  public getById = async (id: string): Promise<object | null> => {
     return await this.repository.findOne({ id })
   }
 
-  public getAllByTodo = async (todoId: string) => {
+  public getAllByTodo = async (todoId: string): Promise<object[]> => {
     return await this.repository.read({ todoId })
   }
 
-  public getMany = async (where = {}) => {
+  public getMany = async (where = {}): Promise<object[]> => {
     const result = await this.repository.read(where)
 
     return result
   }
 
-  public done = async (todoId: string, id: string) => {
+  public done = async (todoId: string, id: string): Promise<object> => {
     const itemExists = await this.repository.findOne({ todoId, id })
 
     if (!itemExists) throw new Error('Task list item not found')
@@ -43,7 +43,7 @@ class ItemService {
     return updatedItem
   }
 
-  public edit = async (todoId: string, id: string, data: object) => {
+  public edit = async (todoId: string, id: string, data: object): Promise<object> => {
     if (Object.keys(data).length === 0)  throw new Error('No data sent')
 
     const todoItemExists = await this.repository.read({ todoId, id })
@@ -55,7 +55,7 @@ class ItemService {
     return result
   }
 
-  public deleteOne = async (todoId: string, id: string) => {
+  public deleteOne = async (todoId: string, id: string): Promise<object | null> => {
     const itemExists = await this.repository.read({ todoId, id })
 
     if (itemExists.length == 0) throw new Error('Task list item not found')

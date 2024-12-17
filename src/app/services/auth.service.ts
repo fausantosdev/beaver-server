@@ -4,13 +4,14 @@ import { JwtPayloadDto, LoginDto, ResetPasswordDto } from '@dtos/auth.dtos'
 import { compare, hash } from '@lib/bcrypt'
 import { decodeToken,generateToken } from '@lib/jwt'
 import { Nodemailer } from '@lib/nodemailer'
+import { Repository } from '@protocols/repository'
 import { UserRepository } from '@repositories/user.repository'
-
 class AuthService {
-  private userRepository: UserRepository
   private mail: Nodemailer
 
-  constructor() {
+  constructor(
+    private userRepository: Repository
+  ) {
     this.userRepository = new UserRepository()
     this.mail = new Nodemailer()
   }
@@ -77,7 +78,7 @@ class AuthService {
     }
   }
 
-  public resetPassword = async ({ token, email, newPassword }: ResetPasswordDto) => {
+  public resetPassword = async ({ token, email, newPassword }: ResetPasswordDto): Promise<boolean> => {
     const userExists = await this.userRepository.findOne({ email })
 
     if (!userExists) throw new Error('E-mail not found')

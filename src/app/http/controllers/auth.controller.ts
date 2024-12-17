@@ -1,12 +1,16 @@
+import { Repository } from '@protocols/repository'
+import { UserRepository } from '@repositories/user.repository'
 import { AuthService } from '@services/auth.service'
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
 
 class AuthController {
   private authService: AuthService
+  private userRepository: Repository
 
   constructor() {
-    this.authService = new AuthService()
+    this.userRepository = new UserRepository()
+    this.authService = new AuthService(this.userRepository)
   }
 
   public signIn = async (request: FastifyRequest, reply: FastifyReply): Promise<FastifyReply> => {

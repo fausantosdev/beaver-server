@@ -1,14 +1,14 @@
-import { CreateTodoDto, EditTodoDto,TodoDto } from '@dtos/todo.dtos'
-import { TodoRepository } from '@repositories/todo.repository'
+import { CreateTodoDto, EditTodoDto } from '@dtos/todo.dtos'
+import { Repository } from '@protocols/repository'
 
 class TodoService {
-  private repository: TodoRepository
-
-  constructor() {
-    this.repository = new TodoRepository()
+  constructor(
+    private repository: Repository
+  ) {
+    this.repository = repository
   }
 
-  public createTodo = async ({ userId, title }: CreateTodoDto): Promise<TodoDto> => {
+  public createTodo = async ({ userId, title }: CreateTodoDto): Promise<object> => {
     const titleExists = await this.repository.read({ title })
 
     if (titleExists.length > 0) throw new Error('You already have a to-do list with this title')
@@ -21,21 +21,21 @@ class TodoService {
     return newTodo
   }
 
-  public getById = async (id: string) => {
+  public getById = async (id: string): Promise<object | null> => {
     return await this.repository.findOne({ id })
   }
 
-  public getAllByUser = async (userId: string) => {
+  public getAllByUser = async (userId: string): Promise<object[]> => {
     return await this.repository.read({ userId })
   }
 
-  public getMany = async (where = {}) => {
+  public getMany = async (where = {}): Promise<object[]> => {
     const result = await this.repository.read(where)
 
     return result
   }
 
-  public edit = async (userId: string, id: string, data: EditTodoDto) => {
+  public edit = async (userId: string, id: string, data: EditTodoDto): Promise<object> => {
     if (Object.keys(data).length === 0)  throw new Error('No data sent')
 
     const todoExists = await this.repository.read({ userId, id })
@@ -53,7 +53,7 @@ class TodoService {
     return result
   }
 
-  public deleteOne = async (userId: string, id: string) => {
+  public deleteOne = async (userId: string, id: string): Promise<object | null> => {
     const todoExists = await this.repository.read({ userId, id })
 
     if (todoExists.length == 0) throw new Error('Task list not found')
