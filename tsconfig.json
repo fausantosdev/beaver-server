@@ -32,7 +32,7 @@
     "paths": {
       "@controllers/*": ["./src/app/http/controllers/*"],
       "@middlewares/*": ["./src/app/http/middlewares/*"],
-      "@repositories/*": ["./src/app/data/repositories/*"],
+      "@repositories/*": ["./src/data/repositories/*"],
       "@services/*": ["./src/app/services/*"],
       "@lib/*": ["./src/lib/*"],
       "@dtos/*": ["./src/dtos/*"]
