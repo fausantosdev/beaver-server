@@ -1,4 +1,4 @@
-export interface IRepository {
+export interface Repository {
   create(data: object): Promise<object>
   read(where: object): Promise<object[]>
   findOne(where: object): Promise<object | null>

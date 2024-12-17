@@ -1,10 +1,9 @@
 import { CreateItemDto,ItemDto } from '@dtos/todo.dtos'
 import { prisma } from '@lib/prisma'
 import { Prisma } from '@prisma/client'
+import { Repository } from '@protocols/repository'
 
-import { IRepository } from './i-repository'
-
-class ItemRepository implements IRepository {
+class ItemRepository implements Repository {
   public create = async ({ todoId, description }: CreateItemDto): Promise<ItemDto> => {
     return await prisma.item.create({
       data: {
