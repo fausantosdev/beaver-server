@@ -2,7 +2,9 @@ import { CreateTodoDto,TodoDto } from '@dtos/todo.dtos'
 import { prisma } from '@lib/prisma'
 import { Prisma } from '@prisma/client'
 
-class TodoRepository {
+import { IRepository } from './i-repository'
+
+class TodoRepository implements IRepository {
   public create = async ({ userId, title }: CreateTodoDto): Promise<TodoDto> => {
     return await prisma.todo.create({
       data: {

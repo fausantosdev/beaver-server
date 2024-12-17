@@ -2,7 +2,9 @@ import { CreateUserDto } from '@dtos/user.dtos'
 import { prisma } from '@lib/prisma'
 import { Prisma, User } from '@prisma/client'
 
-class UserRepository {
+import { IRepository } from './i-repository'
+
+class UserRepository implements IRepository {
   public create = async ({ name, email, password_hash }: CreateUserDto): Promise<User> => {
     return await prisma.user.create({
       data: {
