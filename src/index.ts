@@ -1,4 +1,10 @@
+import { prisma } from '@lib/prisma'
+
 import { app } from './app'
 import { env } from './env'
 
-app.init(env.PORT)
+prisma.instance.$connect()
+  .then(() => {
+    app.init(env.PORT)
+  })
+  .catch((error) => console.error(`Oops! An error occurred:\n${error}`))

@@ -5,7 +5,7 @@ import { Repository } from '@protocols/repository'
 
 class TodoRepository implements Repository {
   public create = async ({ userId, title }: CreateTodoDto): Promise<TodoDto> => {
-    return await prisma.todo.create({
+    return await prisma.instance.todo.create({
       data: {
         userId,
         title
@@ -14,21 +14,21 @@ class TodoRepository implements Repository {
   }
 
   public read = async (where: Prisma.TodoWhereInput): Promise<TodoDto[]> => {
-    return await prisma.todo.findMany({ where })
+    return await prisma.instance.todo.findMany({ where })
   }
 
   public findOne = async (where: Prisma.TodoWhereUniqueInput): Promise<TodoDto | null> => {
-    return await prisma.todo.findUnique({ where })
+    return await prisma.instance.todo.findUnique({ where })
   }
 
   public update = async (where: Prisma.TodoWhereUniqueInput, data: object): Promise<TodoDto> => {
-    return prisma.todo.update({
+    return prisma.instance.todo.update({
       where, data
     })
   }
 
   public delete = async (where: Prisma.TodoWhereUniqueInput): Promise<TodoDto> => {
-    return await prisma.todo.delete({ where })
+    return await prisma.instance.todo.delete({ where })
   }
 }
 
