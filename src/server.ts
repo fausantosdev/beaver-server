@@ -3,7 +3,7 @@ import Fastify, { FastifyInstance } from 'fastify'
 
 import { routes } from './routes'
 
-class App {
+class Server {
   private readonly app: FastifyInstance
 
   constructor() {
@@ -38,4 +38,4 @@ class App {
   }
 }
 
-export const app = new App()
+export const server = new Server()
