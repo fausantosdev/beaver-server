@@ -7,4 +7,5 @@ export interface HttpResponse {
 export interface HttpRequest {
   body?: any
   params?: any
+  headers?: { [key: string]: any }
 }
