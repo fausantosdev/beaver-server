@@ -1,6 +1,6 @@
 import { Repository } from '@protocols/repository'
 import { UserRepository } from '@repositories/user.repository'
-import { AuthService } from '@services/auth.service'
+import { AuthService } from 'src/app/use-cases/auth.service'
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
 

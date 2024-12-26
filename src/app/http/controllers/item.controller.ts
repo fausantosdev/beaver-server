@@ -1,5 +1,5 @@
 import { ItemRepository } from '@repositories/item.repository'
-import { ItemService } from '@services/item.service'
+import { ItemService } from 'src/app/use-cases/item.service'
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
 

@@ -1,6 +1,6 @@
 import { Repository } from '@protocols/repository'
 import { TodoRepository } from '@repositories/todo.repository'
-import { TodoService } from '@services/todo.service'
+import { TodoService } from 'src/app/use-cases/todo.service'
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
 
