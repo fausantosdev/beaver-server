@@ -14,7 +14,7 @@ export default [
       semi: ["error", "never"],
       quotes: ["error", "single"],
       "simple-import-sort/imports": "error",
-      // "simple-import-sort/exports": "error"
+      "@typescript-eslint/no-explicit-any": false
     }
   },
   {languageOptions: { globals: globals.node }},
