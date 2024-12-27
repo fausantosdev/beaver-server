@@ -34,7 +34,7 @@
       "@controllers/*": ["./src/app/http/controllers/*"],
       "@middlewares/*": ["./src/app/http/middlewares/*"],
       "@repositories/*": ["./src/data/repositories/*"],
-      "@services/*": ["./src/app/services/*"],
+      "@usecases/*": ["./src/app/use-cases/*"],
       "@lib/*": ["./src/lib/*"],
       "@dtos/*": ["./src/dtos/*"]
     },                                      /* Specify a set of entries that re-map imports to additional lookup locations. */

@@ -1,4 +1,4 @@
-type LoginDto = {
+type SignInDto = {
   email: string
   password: string
 }
@@ -18,7 +18,7 @@ type JwtPayloadDto = {
 }
 
 export {
-  LoginDto,
+  SignInDto,
   ResetPasswordDto,
   JwtPayloadDto
 }
