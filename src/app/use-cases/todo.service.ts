@@ -1,4 +1,4 @@
-import { CreateTodoDto, EditTodoDto } from '@dtos/todo.dtos'
+import { CreateTodoDto, EditTodoDto } from '@dtos/task-dtos'
 import { Repository } from '@protocols/repository'
 
 class TodoService {
@@ -6,19 +6,6 @@ class TodoService {
     private repository: Repository
   ) {
     this.repository = repository
-  }
-
-  public createTodo = async ({ userId, title }: CreateTodoDto): Promise<object> => {
-    const titleExists = await this.repository.read({ title })
-
-    if (titleExists.length > 0) throw new Error('You already have a to-do list with this title')
-
-    const newTodo = await this.repository.create({
-      userId,
-      title
-    })
-
-    return newTodo
   }
 
   public getById = async (id: string): Promise<object | null> => {
