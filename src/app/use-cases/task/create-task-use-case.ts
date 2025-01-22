@@ -12,9 +12,10 @@ class CreateTaskUseCase implements CreateTask {
     this.taskRepository = taskRepository
   }
   async execute({ user_id, description, parent_id = null }: CreateTaskDto) {
+    console.log(await this.taskRepository.read({ user_id, parent_id }))
     if (
       parent_id &&
-      (await this.taskRepository.read({ user_id, parent_id })).length === 0
+      (await this.taskRepository.read({ user_id, id: parent_id })).length === 0
     ) throw Error('Parent task not found')
 
     const newTask = await this.taskRepository.create({
