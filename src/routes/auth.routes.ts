@@ -2,55 +2,31 @@ import { FastifyInstance } from 'fastify'
 
 import { verifyToken } from '@middlewares/auth.middleware'
 
-import { UserRepository } from '@repositories/user-repository'
+import { createAuthControllers } from '@controllers/auth'
 
-import { SignInUseCase } from '@usecases/auth/sign-in-use-case'
-import { SignInController } from '@controllers/auth/sign-in-controller'
+const authControllers = createAuthControllers()
 
-import { RefreshTokenUseCase } from '@usecases/auth/refresh-token-use-case'
-import { RefreshTokenController } from '@controllers/auth/refresh-token-controller'
-
-import { ForgotPasswordUseCase } from '@usecases/auth/forgot-password-use-case'
-import { ForgotPasswordController } from '@controllers/auth/forgot-password-controller'
-
-import { ResetPasswordUseCase } from '@usecases/auth/reset-password-use-case'
-import { ResetPasswordController } from '@controllers/auth/reset-password-controller'
-
-const userRepository = new UserRepository()
-
-const signInUseCase = new SignInUseCase(userRepository)
-const signInController = new SignInController(signInUseCase)
-
-const refreshTokenUseCase = new RefreshTokenUseCase(userRepository)
-const refreshTokenController = new RefreshTokenController(refreshTokenUseCase)
-
-const forgotPasswordUseCase = new ForgotPasswordUseCase(userRepository)
-const forgotPasswordController = new ForgotPasswordController(forgotPasswordUseCase)
-
-const resetPasswordUseCase = new ResetPasswordUseCase(userRepository)
-const resetPasswordController = new ResetPasswordController(resetPasswordUseCase)
-
-export async function authRoutes (app: FastifyInstance) {
+export async function authRoutes(app: FastifyInstance) {
   app.post('/sign-in', async (request, reply) => {
-    const result = await signInController.handle(request)
+    const result = await authControllers.signIn.handle(request)
 
     return reply.send(result)
   })
 
   app.post('/token-refresh', { preHandler: [verifyToken] }, async (request, reply) => {
-    const result = await refreshTokenController.handle(request)
+    const result = await authControllers.refreshToken.handle(request)
 
     return reply.send(result)
   })
 
   app.post('/forgot-password', async (request, reply) => {
-    const result = await forgotPasswordController.handle(request)
+    const result = await authControllers.forgotPassword.handle(request)
 
     return reply.send(result)
   })
 
   app.post('/reset-password', async (request, reply) => {
-    const result = await resetPasswordController.handle(request)
+    const result = await authControllers.resetPassword.handle(request)
 
     return reply.send(result)
   })
