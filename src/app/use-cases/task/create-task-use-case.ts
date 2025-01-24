@@ -7,12 +7,15 @@ import { CreateTaskDto, TaskDto } from '@dtos/task-dtos'
 
 class CreateTaskUseCase implements CreateTask {
   constructor(
-    private taskRepository: Repository
+    private taskRepository: Repository,
+    private userRepository: Repository
   ) {
     this.taskRepository = taskRepository
+    this.userRepository = userRepository
   }
   async execute({ user_id, description, parent_id = null }: CreateTaskDto) {
-    console.log(await this.taskRepository.read({ user_id, parent_id }))
+    if (!(await this.userRepository.findOne({ id: user_id }))) throw Error('User not found')
+
     if (
       parent_id &&
       (await this.taskRepository.read({ user_id, id: parent_id })).length === 0
