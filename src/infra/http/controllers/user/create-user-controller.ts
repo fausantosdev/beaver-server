@@ -1,15 +1,14 @@
+import { FastifyRequest, FastifyReply } from 'fastify'
 import { z } from 'zod'
 
-import { Controller } from '@protocols/controller'
-import { HttpRequest, HttpResponse } from '@protocols/http'
 import { CreateUser } from '@protocols/use-cases/user/create-user'
 
-class CreateUserController implements Controller {
+class CreateUserController {
   constructor(
     private createUserUseCase: CreateUser
   ) {}
 
-  async handle(request: HttpRequest): Promise<HttpResponse> {
+  async handle(request: FastifyRequest, reply: FastifyReply): Promise<FastifyReply> {
     const schema = z.object({
       name: z.string().min(2, { message: 'Must be 2 or more characters long' }),
       email: z.string().email({ message: 'Invalid email address' }),
@@ -24,18 +23,17 @@ class CreateUserController implements Controller {
         email,
         password_hash: password
       })
-
-      return {
+      return reply.send({
         status: true,
         data: user,
         message: null
-      }
+      })
     } catch (error: any) {
-      return {
+      return reply.send({
         status: false,
         data: null,
         message: error.message
-      }
+      })
     }
   }
 }

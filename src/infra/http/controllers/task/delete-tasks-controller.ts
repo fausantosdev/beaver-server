@@ -1,16 +1,15 @@
+import { FastifyRequest, FastifyReply } from 'fastify'
 import { z } from 'zod'
 
-import { Controller } from '@protocols/controller'
-import { HttpRequest, HttpResponse } from '@protocols/http'
 import { DeleteTasks } from '@protocols/use-cases/task/delete-tasks'
 
 
-class DeleteTasksController implements Controller {
+class DeleteTasksController {
   constructor(
     private deleteTasksUseCase: DeleteTasks
   ) {}
 
-  async handle(request: HttpRequest): Promise<HttpResponse> {
+  async handle(request: FastifyRequest, reply: FastifyReply): Promise<FastifyReply> {
     const schema = z.object({
       tasks_ids: z.array(z.string().uuid()).min(1, 'You have not selected any tasks')
     })
@@ -24,18 +23,17 @@ class DeleteTasksController implements Controller {
         },
         user_id: request.user.id
       })
-
-      return {
+      return reply.send({
         status: true,
         data: result,
         message: null
-      }
+      })
     } catch (error: any) {
-      return {
+      return reply.send({
         status: false,
         data: null,
         message: error.message
-      }
+      })
     }
   }
 }

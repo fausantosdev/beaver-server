@@ -1,16 +1,15 @@
+import { FastifyRequest, FastifyReply } from 'fastify'
 import { z } from 'zod'
 
-import { Controller } from '@protocols/controller'
-import { HttpRequest, HttpResponse } from '@protocols/http'
 import { GetTasks } from '@protocols/use-cases/task/get-tasks'
 
 
-class GetTasksController implements Controller {
+class GetTasksController {
   constructor(
     private getTasksUseCase: GetTasks
   ) {}
 
-  async handle(request: HttpRequest): Promise<HttpResponse> {
+  async handle(request: FastifyRequest, reply: FastifyReply): Promise<FastifyReply> {
 
     try {
       const { id } = request.params
@@ -26,17 +25,17 @@ class GetTasksController implements Controller {
 
       const result = await this.getTasksUseCase.execute(query)
 
-      return {
+      return reply.send({
         status: true,
         data: result,
         message: null
-      }
+      })
     } catch (error: any) {
-      return {
+      return reply.send({
         status: false,
         data: null,
         message: error.message
-      }
+      })
     }
   }
 }

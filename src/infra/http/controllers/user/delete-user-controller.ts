@@ -1,15 +1,14 @@
+import { FastifyRequest, FastifyReply } from 'fastify'
 import { z } from 'zod'
 
-import { Controller } from '@protocols/controller'
-import { HttpRequest, HttpResponse } from '@protocols/http'
 import { DeleteUser } from '@protocols/use-cases/user/delete-user'
 
-class DeleteUserController implements Controller {
+class DeleteUserController {
   constructor(
     private deleteUserUseCase: DeleteUser
   ) {}
 
-  async handle(request: HttpRequest): Promise<HttpResponse> {
+  async handle(request: FastifyRequest, reply: FastifyReply): Promise<FastifyReply> {
     const schema = z.object({
       id: z.string().uuid({ message: 'Incorrect ID format' })
     })
@@ -19,17 +18,17 @@ class DeleteUserController implements Controller {
 
       const result = await this.deleteUserUseCase.execute(id)
 
-      return {
+      return reply.send({
         status: true,
         data: result,
         message: null
-      }
+      })
     } catch (error: any) {
-      return {
+      return reply.send({
         status: false,
         data: null,
         message: error.message
-      }
+      })
     }
   }
 }

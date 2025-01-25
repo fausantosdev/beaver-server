@@ -1,29 +1,30 @@
-import { Controller } from '@protocols/controller'
-import { HttpRequest, HttpResponse } from '@protocols/http'
+import { FastifyRequest, FastifyReply } from 'fastify'
+
 import { ForgotPassword } from '@protocols/use-cases/auth/forgot-password'
 
-class ForgotPasswordController implements Controller {
+class ForgotPasswordController {
   constructor(
     private forgotPasswordUseCase: ForgotPassword
   ) {}
 
-  async handle(request: HttpRequest): Promise<HttpResponse> {
+  async handle(request: FastifyRequest, reply: FastifyReply): Promise<FastifyReply> {
     const { email } = request.body
 
     try {
       const result = await this.forgotPasswordUseCase.execute(email)
 
-      return {
+      return reply.send({
         status: true,
         data: result,
         message: null
-      }
+      })
     } catch (error: any) {
-      return {
+      return reply.send({
         status: false,
         data: null,
         message: error.message
-      }
+      })
+
     }
   }
 }

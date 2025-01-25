@@ -1,15 +1,14 @@
+import { FastifyRequest, FastifyReply } from 'fastify'
 import { z } from 'zod'
 
-import { Controller } from '@protocols/controller'
-import { HttpRequest, HttpResponse } from '@protocols/http'
 import { EditTask } from '@protocols/use-cases/task/edit-task'
 
-class EditTaskController implements Controller {
+class EditTaskController {
   constructor(
     private editTaskUseCase: EditTask
   ) {}
 
-  async handle(request: HttpRequest): Promise<HttpResponse> {
+  async handle(request: FastifyRequest, reply: FastifyReply): Promise<FastifyReply> {
     const schemaId = z.object({
       id: z.string().uuid({ message: 'Incorrect ID format' })
     })
@@ -24,17 +23,17 @@ class EditTaskController implements Controller {
 
       const user = await this.editTaskUseCase.execute(id, data)
 
-      return {
+      return reply.send({
         status: true,
         data: user,
         message: null
-      }
+      })
     } catch (error: any) {
-      return {
+      return reply.send({
         status: false,
         data: null,
         message: error.message
-      }
+      })
     }
   }
 }

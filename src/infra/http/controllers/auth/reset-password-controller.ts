@@ -1,29 +1,30 @@
-import { Controller } from '@protocols/controller'
-import { HttpRequest, HttpResponse } from '@protocols/http'
+import { FastifyRequest, FastifyReply } from 'fastify'
+
 import { ResetPassword } from '@protocols/use-cases/auth/reset-password'
 
-class ResetPasswordController implements Controller {
+class ResetPasswordController {
   constructor(
     private resetPasswordUseCase: ResetPassword
   ) {}
 
-  async handle(request: HttpRequest): Promise<HttpResponse> {
+  async handle(request: FastifyRequest, reply: FastifyReply): Promise<FastifyReply> {
     const { token, email, newPassword } = request.body
 
     try {
       const result = await this.resetPasswordUseCase.execute({ token, email, newPassword })
 
-      return {
+      return reply.send({
         status: true,
         data: result,
         message: null
-      }
+      })
+
     } catch (error: any) {
-      return {
+      return reply.send({
         status: false,
         data: null,
         message: error.message
-      }
+      })
     }
   }
 }

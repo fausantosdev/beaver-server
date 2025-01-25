@@ -1,15 +1,14 @@
+import { FastifyRequest, FastifyReply } from 'fastify'
 import { z } from 'zod'
 
-import { Controller } from '@protocols/controller'
-import { HttpRequest, HttpResponse } from '@protocols/http'
 import { GetUsers } from '@protocols/use-cases/user/get-users'
 
-class GetUsersController implements Controller {
+class GetUsersController {
   constructor(
     private getUsersUseCase: GetUsers
   ) {}
 
-  async handle(request: HttpRequest): Promise<HttpResponse> {
+  async handle(request: FastifyRequest, reply: FastifyReply): Promise<FastifyReply> {
 
     try {
       const { id } = request.params
@@ -18,17 +17,17 @@ class GetUsersController implements Controller {
         await this.getUsersUseCase.execute({ id }) :
         await this.getUsersUseCase.execute()
 
-      return {
+      return reply.send({
         status: true,
         data: result,
         message: null
-      }
+      })
     } catch (error: any) {
-      return {
+      return reply.send({
         status: false,
         data: null,
         message: error.message
-      }
+      })
     }
   }
 }

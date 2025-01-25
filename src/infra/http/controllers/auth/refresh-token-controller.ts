@@ -1,29 +1,30 @@
-import { Controller } from '@protocols/controller'
-import { HttpRequest, HttpResponse } from '@protocols/http'
+import { FastifyRequest, FastifyReply } from 'fastify'
+
 import { RefreshToken } from '@protocols/use-cases/auth/refresh-token'
 
-class RefreshTokenController implements Controller {
+class RefreshTokenController {
   constructor(
     private refreshTokenUseCase: RefreshToken
   ) {}
 
-  async handle(request: HttpRequest): Promise<HttpResponse> {
+  async handle(request: FastifyRequest, reply: FastifyReply): Promise<FastifyReply> {
     const token = request.headers?.authorization!.split(' ')[1]
 
     try {
       const { jwt } = await this.refreshTokenUseCase.execute(token)
 
-      return {
+      return reply.send({
         status: true,
         data: jwt,
         message: null
-      }
+      })
+
     } catch (error: any) {
-      return {
+      return reply.send({
         status: false,
         data: null,
         message: error.message
-      }
+      })
     }
   }
 }
