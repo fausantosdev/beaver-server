@@ -5,6 +5,6 @@ import { server } from './server'
 
 prisma.instance.$connect()
   .then(() => {
-    server.init(env.PORT)
+    server.init(env.PORT | 3337)
   })
   .catch((error) => console.error(`Oops! An error occurred:\n${error}`))
