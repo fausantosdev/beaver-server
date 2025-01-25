@@ -31,12 +31,14 @@
     "baseUrl": "./",                                  /* Specify the base directory to resolve non-relative module names. */
     "paths": {
       "@protocols/*": ["./src/protocols/*"],
-      "@controllers/*": ["./src/app/http/controllers/*"],
-      "@middlewares/*": ["./src/app/http/middlewares/*"],
-      "@repositories/*": ["./src/data/repositories/*"],
+      "@routes/*": ["./src/infra/http/routes/"],
+      "@middlewares/*": ["./src/infra/http/middlewares/*"],
+      "@controllers/*": ["./src/infra/http/controllers/*"],
+      "@repositories/*": ["src/infra/data/prisma/repositories/*"],
       "@usecases/*": ["./src/app/use-cases/*"],
       "@lib/*": ["./src/lib/*"],
-      "@dtos/*": ["./src/dtos/*"]
+      "@dtos/*": ["./src/dtos/*"],
+      "@data/*": ["./src/infra/data/*"],
     },                                      /* Specify a set of entries that re-map imports to additional lookup locations. */
     // "rootDirs": [],                                   /* Allow multiple folders to be treated as one when resolving modules. */
     "typeRoots": [

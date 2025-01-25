@@ -1,4 +1,4 @@
-import { UserRepository } from '@repositories/user-repository'
+import { UserRepository } from '@data/prisma/repositories/user-repository'
 
 import { SignInUseCase } from './sign-in-use-case'
 import { RefreshTokenUseCase } from './refresh-token-use-case'

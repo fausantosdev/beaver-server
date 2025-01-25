@@ -1,4 +1,4 @@
-import { prisma } from '@lib/prisma'
+import { prisma } from '@data/prisma/prisma-client'
 
 import { env } from './env'
 import { server } from './server'

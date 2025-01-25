@@ -1,5 +1,5 @@
 import { CreateUserDto } from '@dtos/user.dtos'
-import { prisma } from '@lib/prisma'
+import { prisma } from '@data/prisma/prisma-client'
 import { Prisma, User } from '@prisma/client'
 import { Repository } from '@protocols/repository'
 

@@ -1,5 +1,5 @@
 import { CreateTaskDto, TaskDto } from '@dtos/task-dtos'
-import { prisma } from '@lib/prisma'
+import { prisma } from '@data/prisma/prisma-client'
 import { Prisma } from '@prisma/client'
 import { Repository } from '@protocols/repository'
 

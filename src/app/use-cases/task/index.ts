@@ -1,5 +1,5 @@
-import { TaskRepository } from '@repositories/task-repository'
-import { UserRepository } from '@repositories/user-repository'
+import { TaskRepository } from '@data/prisma/repositories/task-repository'
+import { UserRepository } from '@data/prisma/repositories/user-repository'
 
 import { CreateTaskUseCase } from './create-task-use-case'
 import { GetTasksUseCase } from './get-tasks-use-case'
