@@ -11,9 +11,12 @@ class GetUsersController {
   }
 
   async handle(request: FastifyRequest, reply: FastifyReply): Promise<FastifyReply> {
+    const schema = z.object({
+      id: z.string().uuid({ message: 'Invalid UUID' }),
+    })
 
     try {
-      const { id } = request.params
+      const { id } = schema.parse(request.params)
 
       const result = id ?
         await this.getUsersUseCase.execute({ id }) :

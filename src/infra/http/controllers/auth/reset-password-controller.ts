@@ -1,4 +1,5 @@
 import { FastifyRequest, FastifyReply } from 'fastify'
+import { z } from 'zod'
 
 import { ResetPassword } from '@protocols/use-cases/auth/reset-password'
 
@@ -10,9 +11,15 @@ class ResetPasswordController {
   }
 
   async handle(request: FastifyRequest, reply: FastifyReply): Promise<FastifyReply> {
-    const { token, email, newPassword } = request.body
+    const schema = z.object({
+      token: z.string().jwt({ message: 'Invalid JWT' }),
+      email: z.string().email({ message: 'Invalid email address' }),
+      newPassword: z.string().min(8, { message: 'Your password must be at least 8 characters long' })
+    })
 
     try {
+      const { token, email, newPassword } = schema.parse(request.body)
+
       const result = await this.resetPasswordUseCase.execute({ token, email, newPassword })
 
       return reply.send({

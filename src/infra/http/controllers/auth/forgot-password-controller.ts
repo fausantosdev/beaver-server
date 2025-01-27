@@ -32,7 +32,6 @@ class ForgotPasswordController {
         data: null,
         message: error.message
       })
-
     }
   }
 }
