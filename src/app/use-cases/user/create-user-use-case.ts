@@ -8,9 +8,8 @@ import { CreateUserDto, UserDto } from '@dtos/user.dtos'
 class CreateUserUseCase implements CreateUser {
   constructor(
     private userRepository: Repository
-  ) {
-    this.userRepository = userRepository
-  }
+  ) {}
+
   async execute({ name, email, password_hash }: CreateUserDto) {
     const emailExists = await this.userRepository.findOne({ email })
 

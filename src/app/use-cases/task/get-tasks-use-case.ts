@@ -6,9 +6,8 @@ import { GetTasks } from '@protocols/use-cases/task/get-tasks'
 class GetTasksUseCase implements GetTasks {
   constructor(
     private taskRepository: Repository
-  ) {
-    this.taskRepository = taskRepository
-  }
+  ) {}
+
   async execute(where?: object): Promise<TaskDto[] | TaskDto> {
     let result
 

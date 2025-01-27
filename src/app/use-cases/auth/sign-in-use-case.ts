@@ -10,9 +10,8 @@ import { SignInDto } from '@dtos/auth-dtos'
 class SignInUseCase implements SignIn {
   constructor(
     private userRepository: Repository
-  ) {
-    this.userRepository = userRepository
-  }
+  ) {}
+
   async execute({ email, password }: SignInDto) {
     const user = await this.userRepository.findOne({ email }) as UserDto
 

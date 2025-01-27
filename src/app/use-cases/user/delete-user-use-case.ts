@@ -7,9 +7,8 @@ import { DeleteUser } from '@protocols/use-cases/user/delete-user'
 class DeleteUserUseCase implements DeleteUser {
   constructor(
     private userRepository: Repository
-  ) {
-    this.userRepository = userRepository
-  }
+  ) {}
+
   async execute(id: string) {
     const userExists = await this.userRepository.findOne({ id })
 

@@ -9,9 +9,7 @@ import { ResetPasswordDto } from '@dtos/auth-dtos'
 class ResetPasswordUseCase implements ResetPassword {
   constructor(
     private userRepository: Repository
-  ) {
-    this.userRepository = userRepository
-  }
+  ) {}
 
   async execute({ token, email, newPassword }: ResetPasswordDto): Promise<boolean> {
     const userExists = await this.userRepository.findOne({ email }) as UserDto

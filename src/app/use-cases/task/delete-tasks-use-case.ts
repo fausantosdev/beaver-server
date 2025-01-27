@@ -5,9 +5,7 @@ import { DeleteTasks } from '@protocols/use-cases/task/delete-tasks'
 class DeleteTasksUseCase implements DeleteTasks {
   constructor(
     private taskRepository: Repository
-  ) {
-    this.taskRepository = taskRepository
-  }
+  ) {}
 
   async execute(where: object): Promise<{ count: number } | null> {
     const tasks = await this.taskRepository.read(where)
