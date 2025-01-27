@@ -1,6 +1,8 @@
-import { decodeToken } from '@lib/jwt'
 import { FastifyReply, FastifyRequest, HookHandlerDoneFunction } from 'fastify'
 import { z } from 'zod'
+
+import { decodeToken } from '@lib/jwt'
+import { NotAuthorized } from 'src/app/errors/not-authorized'
 
 type Token = {
   id: string,
@@ -14,7 +16,7 @@ type Token = {
 const verifyToken = (request: FastifyRequest, reply: FastifyReply, done: HookHandlerDoneFunction) => {
   const authHeader = request.headers.authorization
 
-  if (!authHeader) throw new Error('Token not provided')
+  if (!authHeader) throw new NotAuthorized('Token not provided')
 
   const token = authHeader.split(' ')[1]
 
@@ -30,7 +32,7 @@ const isAdmin = (request: FastifyRequest, response: FastifyReply, done: HookHand
     if (request.user.role === 'admin') {
       return done()
     }else{
-      throw new Error('Restricted')
+      throw new NotAuthorized('Restricted')
     }
   })
 }
@@ -46,7 +48,7 @@ const checkUserOrIsAdmin = (request: FastifyRequest, response: FastifyReply, don
       if(request.user.id == userId || request.user.role === 'admin'){
         return done()
       }else{
-        throw new Error('Restricted')
+        throw new NotAuthorized('Restricted')
       }
   })
 }
