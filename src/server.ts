@@ -15,7 +15,7 @@ class Server {
 
   private config() {
     this.app.setErrorHandler((error, request, reply) => {
-      reply.status(error.statusCode || 500).send({
+      reply.status(500).send({
         status: false,
         data: null,
         message: error.message
