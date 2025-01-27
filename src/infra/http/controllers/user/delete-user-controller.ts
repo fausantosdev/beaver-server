@@ -6,7 +6,9 @@ import { DeleteUser } from '@protocols/use-cases/user/delete-user'
 class DeleteUserController {
   constructor(
     private deleteUserUseCase: DeleteUser
-  ) {}
+  ) {
+    this.handle = this.handle.bind(this)
+  }
 
   async handle(request: FastifyRequest, reply: FastifyReply): Promise<FastifyReply> {
     const schema = z.object({

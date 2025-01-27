@@ -6,7 +6,9 @@ import { CreateUser } from '@protocols/use-cases/user/create-user'
 class CreateUserController {
   constructor(
     private createUserUseCase: CreateUser
-  ) {}
+  ) {
+    this.handle = this.handle.bind(this)
+  }
 
   async handle(request: FastifyRequest, reply: FastifyReply): Promise<FastifyReply> {
     const schema = z.object({

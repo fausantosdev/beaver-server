@@ -6,7 +6,9 @@ import { GetUsers } from '@protocols/use-cases/user/get-users'
 class GetUsersController {
   constructor(
     private getUsersUseCase: GetUsers
-  ) {}
+  ) {
+    this.handle = this.handle.bind(this)
+  }
 
   async handle(request: FastifyRequest, reply: FastifyReply): Promise<FastifyReply> {
 

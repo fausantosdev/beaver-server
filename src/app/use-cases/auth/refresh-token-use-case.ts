@@ -9,7 +9,9 @@ import { JwtPayloadDto } from '@dtos/auth-dtos'
 class RefreshTokenUseCase implements RefreshToken {
   constructor(
     private userRepository: Repository
-  ) {}
+  ) {
+    this.execute = this.execute.bind(this)
+  }
 
   async execute(token: string) {
     const { id } = decodeToken(token) as JwtPayloadDto

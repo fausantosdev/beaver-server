@@ -5,7 +5,9 @@ import { ForgotPassword } from '@protocols/use-cases/auth/forgot-password'
 class ForgotPasswordController {
   constructor(
     private forgotPasswordUseCase: ForgotPassword
-  ) {}
+  ) {
+    this.handle = this.handle.bind(this)
+  }
 
   async handle(request: FastifyRequest, reply: FastifyReply): Promise<FastifyReply> {
     const { email } = request.body

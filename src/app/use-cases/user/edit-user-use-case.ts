@@ -9,7 +9,9 @@ import { EditUser } from '@protocols/use-cases/user/edit-user'
 class EditUserUseCase implements EditUser {
   constructor(
     private userRepository: Repository
-  ) {}
+  ) {
+    this.execute = this.execute.bind(this)
+  }
 
   async execute(id: string, data: UpdateUserDto) {
     if (Object.keys(data).length === 0)  throw new Error('No data sent')

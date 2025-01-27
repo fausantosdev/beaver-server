@@ -5,7 +5,9 @@ import { ResetPassword } from '@protocols/use-cases/auth/reset-password'
 class ResetPasswordController {
   constructor(
     private resetPasswordUseCase: ResetPassword
-  ) {}
+  ) {
+    this.handle = this.handle.bind(this)
+  }
 
   async handle(request: FastifyRequest, reply: FastifyReply): Promise<FastifyReply> {
     const { token, email, newPassword } = request.body

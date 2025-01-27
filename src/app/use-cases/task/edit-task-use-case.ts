@@ -8,7 +8,9 @@ import { EditTaskDto, TaskDto } from '@dtos/task-dtos'
 class EditTaskUseCase implements EditTask{
   constructor(
     private taskRepository: Repository
-  ) {}
+  ) {
+    this.execute = this.execute.bind(this)
+  }
 
   async execute(id: string, data: EditTaskDto) {
     const taskExists = await this.taskRepository.findOne({ id })

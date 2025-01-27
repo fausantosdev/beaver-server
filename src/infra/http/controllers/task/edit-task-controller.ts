@@ -6,7 +6,9 @@ import { EditTask } from '@protocols/use-cases/task/edit-task'
 class EditTaskController {
   constructor(
     private editTaskUseCase: EditTask
-  ) {}
+  ) {
+    this.handle = this.handle.bind(this)
+  }
 
   async handle(request: FastifyRequest, reply: FastifyReply): Promise<FastifyReply> {
     const schemaId = z.object({

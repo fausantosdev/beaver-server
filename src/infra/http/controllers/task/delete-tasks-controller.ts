@@ -7,7 +7,9 @@ import { DeleteTasks } from '@protocols/use-cases/task/delete-tasks'
 class DeleteTasksController {
   constructor(
     private deleteTasksUseCase: DeleteTasks
-  ) {}
+  ) {
+    this.handle = this.handle.bind(this)
+  }
 
   async handle(request: FastifyRequest, reply: FastifyReply): Promise<FastifyReply> {
     const schema = z.object({

@@ -13,6 +13,7 @@ class ForgotPasswordUseCase implements ForgotPassword {
   constructor(
     private userRepository: Repository
   ) {
+    this.execute = this.execute.bind(this)
     this.mail = new Nodemailer()
   }
 

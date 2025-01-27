@@ -9,7 +9,9 @@ class CreateTaskUseCase implements CreateTask {
   constructor(
     private taskRepository: Repository,
     private userRepository: Repository
-  ) {}
+  ) {
+    this.execute = this.execute.bind(this)
+  }
 
   async execute({ user_id, description, parent_id = null }: CreateTaskDto) {
     if (!(await this.userRepository.findOne({ id: user_id }))) throw Error('User not found')

@@ -7,7 +7,9 @@ import { GetTasks } from '@protocols/use-cases/task/get-tasks'
 class GetTasksController {
   constructor(
     private getTasksUseCase: GetTasks
-  ) {}
+  ) {
+    this.handle = this.handle.bind(this)
+  }
 
   async handle(request: FastifyRequest, reply: FastifyReply): Promise<FastifyReply> {
 

@@ -6,7 +6,9 @@ import { EditUser } from '@protocols/use-cases/user/edit-user'
 class EditUserController {
   constructor(
     private editUserUseCase: EditUser
-  ) {}
+  ) {
+    this.handle = this.handle.bind(this)
+  }
 
   async handle(request: FastifyRequest, reply: FastifyReply): Promise<FastifyReply> {
     const schemaId = z.object({

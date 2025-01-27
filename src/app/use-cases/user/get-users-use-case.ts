@@ -8,7 +8,9 @@ import { UserDto } from '@dtos/user.dtos'
 class GetUsersUseCase implements GetUsers {
   constructor(
     private userRepository: Repository
-  ) {}
+  ) {
+    this.execute = this.execute.bind(this)
+  }
 
   async execute(where?: object): Promise<UserDto[] | UserDto> {
     let result

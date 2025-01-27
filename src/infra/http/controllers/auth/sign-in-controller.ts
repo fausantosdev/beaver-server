@@ -6,7 +6,9 @@ import { SignIn } from '@protocols/use-cases/auth/sign-in'
 class SignInController {
   constructor(
     private signInUseCase: SignIn
-  ) {}
+  ) {
+    this.handle = this.handle.bind(this)
+  }
 
   async handle(request: FastifyRequest, reply: FastifyReply): Promise<FastifyReply> {
     const schema = z.object({

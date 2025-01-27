@@ -6,7 +6,9 @@ import { CreateTask } from '@protocols/use-cases/task/create-task'
 class CreateTaskController {
   constructor(
     private createTaskUseCase: CreateTask
-  ) {}
+  ) {
+    this.handle = this.handle.bind(this)
+  }
 
   async handle(request: FastifyRequest, reply: FastifyReply): Promise<FastifyReply> {
     const schema = z.object({
