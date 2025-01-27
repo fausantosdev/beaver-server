@@ -1,6 +1,8 @@
 import { FastifyRequest, FastifyReply } from 'fastify'
+import { z } from 'zod'
 
 import { ForgotPassword } from '@protocols/use-cases/auth/forgot-password'
+
 
 class ForgotPasswordController {
   constructor(
@@ -10,9 +12,13 @@ class ForgotPasswordController {
   }
 
   async handle(request: FastifyRequest, reply: FastifyReply): Promise<FastifyReply> {
-    const { email } = request.body
+    const schema = z.object({
+      email: z.string().email({ message: 'Invalid email address' })
+    })
 
     try {
+      const { email } = schema.parse(request.body)
+
       const result = await this.forgotPasswordUseCase.execute(email)
 
       return reply.send({
