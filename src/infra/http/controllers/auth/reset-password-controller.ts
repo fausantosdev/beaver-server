@@ -12,7 +12,7 @@ class ResetPasswordController {
 
   async handle(request: FastifyRequest, reply: FastifyReply): Promise<FastifyReply> {
     const schema = z.object({
-      token: z.string().jwt({ message: 'Invalid JWT' }),
+      token: z.string({ message: 'You need to send the token' }),
       email: z.string().email({ message: 'Invalid email address' }),
       newPassword: z.string().min(8, { message: 'Your password must be at least 8 characters long' })
     })
