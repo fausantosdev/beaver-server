@@ -12,9 +12,12 @@ class GetTasksController {
   }
 
   async handle(request: FastifyRequest, reply: FastifyReply): Promise<FastifyReply> {
+    const schema = z.object({
+      id: z.string().uuid().optional()
+    })
 
     try {
-      const { id } = request.params
+      const { id } = schema.parse(request.params)
       const { user } = request
 
       let query
