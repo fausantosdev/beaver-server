@@ -1,7 +1,7 @@
 import cors from '@fastify/cors'
 import Fastify, { FastifyInstance } from 'fastify'
 
-import { routes } from '@routes/'
+import { routes } from '@routes/index'
 
 class Server {
   private readonly app: FastifyInstance
