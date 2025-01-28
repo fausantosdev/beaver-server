@@ -1,6 +1,7 @@
 import cors from '@fastify/cors'
 import Fastify, { FastifyInstance } from 'fastify'
 
+import { env } from './env'
 import { routes } from '@routes/index'
 
 class Server {
@@ -33,7 +34,7 @@ class Server {
     this.app.listen({
       port
     }).then(() => {
-      console.log('~ server running')
+      console.log(`~ server running${env.NODE_ENV === 'development' ? ` on port ${port}` : ''}`)
     })
   }
 }
