@@ -1,8 +1,10 @@
 import cors from '@fastify/cors'
-import Fastify, { FastifyInstance } from 'fastify'
+import Fastify, { FastifyInstance, FastifyListenOptions } from 'fastify'
 
 import { env } from './env'
 import { routes } from '@routes/index'
+
+import { AppError } from './app/errors/app-error'
 
 class Server {
   private readonly app: FastifyInstance
@@ -16,7 +18,10 @@ class Server {
 
   private config() {
     this.app.setErrorHandler((error, request, reply) => {
-      reply.status(500).send({
+
+      const statusCode = error instanceof AppError ? error.statusCode : 500
+
+      return reply.status(statusCode).send({
         status: false,
         data: null,
         message: error.message
@@ -30,11 +35,9 @@ class Server {
     routes(this.app)
   }
 
-  public init(port: number) {
-    this.app.listen({
-      port
-    }).then(() => {
-      console.log(`~ server running${env.NODE_ENV === 'development' ? ` on port ${port}` : ''}`)
+  public init(options: FastifyListenOptions) {
+    this.app.listen(options).then(() => {
+      console.log(`~ server running${env.NODE_ENV === 'development' ? ` on port ${options.port}` : ''}`)
     })
   }
 }
