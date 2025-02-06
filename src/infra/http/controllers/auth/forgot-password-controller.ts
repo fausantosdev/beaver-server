@@ -16,23 +16,15 @@ class ForgotPasswordController {
       email: z.string().email({ message: 'Invalid email address' })
     })
 
-    try {
-      const { email } = schema.parse(request.body)
+    const { email } = schema.parse(request.body)
 
-      const result = await this.forgotPasswordUseCase.execute(email)
+    const result = await this.forgotPasswordUseCase.execute(email)
 
-      return reply.send({
-        status: true,
-        data: result,
-        message: null
-      })
-    } catch (error: any) {
-      return reply.send({
-        status: false,
-        data: null,
-        message: error.message
-      })
-    }
+    return reply.send({
+      status: true,
+      data: result,
+      message: null
+    })
   }
 }
 

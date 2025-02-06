@@ -15,23 +15,15 @@ class DeleteUserController {
       id: z.string().uuid({ message: 'Incorrect ID format' })
     })
 
-    try {
-      const { id } = schema.parse(request.params)
+    const { id } = schema.parse(request.params)
 
-      const result = await this.deleteUserUseCase.execute(id)
+    const result = await this.deleteUserUseCase.execute(id)
 
-      return reply.send({
-        status: true,
-        data: result,
-        message: null
-      })
-    } catch (error: any) {
-      return reply.send({
-        status: false,
-        data: null,
-        message: error.message
-      })
-    }
+    return reply.send({
+      status: true,
+      data: result,
+      message: null
+    })
   }
 }
 

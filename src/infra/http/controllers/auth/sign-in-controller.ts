@@ -16,24 +16,15 @@ class SignInController {
       password: z.string().min(8, { message: 'Your password must be at least 8 characters long' })
     })
 
-    try {
-      const { email, password } = schema.parse(request.body)
+    const { email, password } = schema.parse(request.body)
 
-      const { jwt } = await this.signInUseCase.execute({ email, password })
+    const { jwt } = await this.signInUseCase.execute({ email, password })
 
-      return reply.send({
-        status: true,
-        data: jwt,
-        message: null
-      })
-
-    } catch (error: any) {
-      return reply.send({
-        status: false,
-        data: null,
-        message: error.message
-      })
-    }
+    return reply.send({
+      status: true,
+      data: jwt,
+      message: null
+    })
   }
 }
 

@@ -16,27 +16,19 @@ class DeleteTasksController {
       tasks_ids: z.array(z.string().uuid()).min(1, 'You have not selected any tasks')
     })
 
-    try {
-      const { tasks_ids } = schema.parse(request.body)
+    const { tasks_ids } = schema.parse(request.body)
 
-      const result = await this.deleteTasksUseCase.execute({
-        id: {
-          in: tasks_ids
-        },
-        user_id: request.user.id
-      })
-      return reply.send({
-        status: true,
-        data: result,
-        message: null
-      })
-    } catch (error: any) {
-      return reply.send({
-        status: false,
-        data: null,
-        message: error.message
-      })
-    }
+    const result = await this.deleteTasksUseCase.execute({
+      id: {
+        in: tasks_ids
+      },
+      user_id: request.user.id
+    })
+    return reply.send({
+      status: true,
+      data: result,
+      message: null
+    })
   }
 }
 

@@ -16,32 +16,24 @@ class GetTasksController {
       id: z.string().uuid().optional()
     })
 
-    try {
-      const { id } = schema.parse(request.params)
-      const { user } = request
+    const { id } = schema.parse(request.params)
+    const { user } = request
 
-      let query
+    let query
 
-      if(id) {
-        query = { id, user_id: user.id, parent_id: null }
-      }else {
-        query = { user_id: user.id, parent_id: null }
-      }
-
-      const result = await this.getTasksUseCase.execute(query)
-
-      return reply.send({
-        status: true,
-        data: result,
-        message: null
-      })
-    } catch (error: any) {
-      return reply.send({
-        status: false,
-        data: null,
-        message: error.message
-      })
+    if(id) {
+      query = { id, user_id: user.id, parent_id: null }
+    }else {
+      query = { user_id: user.id, parent_id: null }
     }
+
+    const result = await this.getTasksUseCase.execute(query)
+
+    return reply.send({
+      status: true,
+      data: result,
+      message: null
+    })
   }
 }
 

@@ -12,28 +12,20 @@ class GetUsersController {
 
   async handle(request: FastifyRequest, reply: FastifyReply): Promise<FastifyReply> {
     const schema = z.object({
-      id: z.string().uuid({ message: 'Invalid UUID' }).optional()
+      id: z.string().uuid({ message: 'Id is required' })
     })
 
-    try {
-      const { id } = schema.parse(request.params)
+    const { id } = schema.parse(request.params)
 
-      const result = id ?
-        await this.getUsersUseCase.execute({ id }) :
-        await this.getUsersUseCase.execute()
+    const result = id ?
+      await this.getUsersUseCase.execute({ id }) :
+      await this.getUsersUseCase.execute()
 
-      return reply.send({
-        status: true,
-        data: result,
-        message: null
-      })
-    } catch (error: any) {
-      return reply.send({
-        status: false,
-        data: null,
-        message: error.message
-      })
-    }
+    return reply.send({
+      status: true,
+      data: result,
+      message: null
+    })
   }
 }
 

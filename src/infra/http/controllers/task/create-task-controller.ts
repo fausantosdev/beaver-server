@@ -16,27 +16,19 @@ class CreateTaskController {
       description: z.string().min(2, { message: 'The text must have at least two characters' })
     })
 
-    try {
-      const { description, parent_id } = schema.parse(request.body)
+    const { description, parent_id } = schema.parse(request.body)
 
-      const { user } = request
+    const { user } = request
 
-      const task = await this.createTaskUseCase.execute({
-        user_id: user.id, description, parent_id
-      })
+    const task = await this.createTaskUseCase.execute({
+      user_id: user.id, description, parent_id
+    })
 
-      return reply.send({
-        status: true,
-        data: task,
-        message: null
-      })
-    } catch (error: any) {
-      return reply.send({
-        status: false,
-        data: null,
-        message: error.message
-      })
-    }
+    return reply.send({
+      status: true,
+      data: task,
+      message: null
+    })
   }
 }
 

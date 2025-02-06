@@ -12,22 +12,13 @@ class RefreshTokenController {
   async handle(request: FastifyRequest, reply: FastifyReply): Promise<FastifyReply> {
     const token = request.headers?.authorization!.split(' ')[1]
 
-    try {
-      const { jwt } = await this.refreshTokenUseCase.execute(token)
+    const { jwt } = await this.refreshTokenUseCase.execute(token)
 
-      return reply.send({
-        status: true,
-        data: jwt,
-        message: null
-      })
-
-    } catch (error: any) {
-      return reply.send({
-        status: false,
-        data: null,
-        message: error.message
-      })
-    }
+    return reply.send({
+      status: true,
+      data: jwt,
+      message: null
+    })
   }
 }
 

@@ -19,24 +19,16 @@ class EditTaskController {
       description: z.string().min(2, { message: 'The text must have at least two characters' })
     })
 
-    try {
-      const { id } = schemaId.parse(request.params)
-      const data = schema.parse(request.body)
+    const { id } = schemaId.parse(request.params)
+    const data = schema.parse(request.body)
 
-      const user = await this.editTaskUseCase.execute(id, data)
+    const user = await this.editTaskUseCase.execute(id, data)
 
-      return reply.send({
-        status: true,
-        data: user,
-        message: null
-      })
-    } catch (error: any) {
-      return reply.send({
-        status: false,
-        data: null,
-        message: error.message
-      })
-    }
+    return reply.send({
+      status: true,
+      data: user,
+      message: null
+    })
   }
 }
 
