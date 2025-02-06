@@ -7,6 +7,8 @@ import { Repository } from '@protocols/repository'
 import { UserDto } from '@dtos/user.dtos'
 import { SignInDto } from '@dtos/auth-dtos'
 
+import { AppError } from 'src/app/errors/app-error'
+
 class SignInUseCase implements SignIn {
   constructor(
     private userRepository: Repository
@@ -17,7 +19,7 @@ class SignInUseCase implements SignIn {
   async execute({ email, password }: SignInDto) {
     const user = await this.userRepository.findOne({ email }) as UserDto
 
-    if ( !user || (!(user && (await compare(password, user.password_hash)))) ) throw new Error('Authentication failed, check your credentials')
+    if ( !user || (!(user && (await compare(password, user.password_hash)))) ) throw new AppError('Authentication failed, check your credentials', 401)
 
     const jwt = generateToken({
       id: user.id,
