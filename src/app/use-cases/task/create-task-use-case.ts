@@ -1,9 +1,6 @@
-import { hash } from '@lib/bcrypt'
-
-import { CreateTask } from '@protocols/use-cases/task/create-task'
-import { Repository } from '@protocols/repository'
-
 import { CreateTaskDto, TaskDto } from '@dtos/task-dtos'
+import { Repository } from '@protocols/repository'
+import { CreateTask } from '@protocols/use-cases/task/create-task'
 
 class CreateTaskUseCase implements CreateTask {
   constructor(

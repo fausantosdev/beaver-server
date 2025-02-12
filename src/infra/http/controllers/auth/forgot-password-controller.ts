@@ -1,7 +1,6 @@
-import { FastifyRequest, FastifyReply } from 'fastify'
-import { z } from 'zod'
-
 import { ForgotPassword } from '@protocols/use-cases/auth/forgot-password'
+import { FastifyReply,FastifyRequest } from 'fastify'
+import { z } from 'zod'
 
 
 class ForgotPasswordController {

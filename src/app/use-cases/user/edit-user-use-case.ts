@@ -1,9 +1,6 @@
-import { hash } from '@lib/bcrypt'
-
-import { CreateUser } from '@protocols/use-cases/user/create-user'
-import { Repository } from '@protocols/repository'
-
 import { UpdateUserDto, UserDto } from '@dtos/user.dtos'
+import { hash } from '@lib/bcrypt'
+import { Repository } from '@protocols/repository'
 import { EditUser } from '@protocols/use-cases/user/edit-user'
 
 class EditUserUseCase implements EditUser {

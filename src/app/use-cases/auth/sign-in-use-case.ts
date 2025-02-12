@@ -1,12 +1,9 @@
-import { generateToken } from '@lib/jwt'
-import { compare } from '@lib/bcrypt'
-
-import { SignIn } from '@protocols/use-cases/auth/sign-in'
-import { Repository } from '@protocols/repository'
-
-import { UserDto } from '@dtos/user.dtos'
 import { SignInDto } from '@dtos/auth-dtos'
-
+import { UserDto } from '@dtos/user.dtos'
+import { compare } from '@lib/bcrypt'
+import { generateToken } from '@lib/jwt'
+import { Repository } from '@protocols/repository'
+import { SignIn } from '@protocols/use-cases/auth/sign-in'
 import { AppError } from 'src/app/errors/app-error'
 
 class SignInUseCase implements SignIn {

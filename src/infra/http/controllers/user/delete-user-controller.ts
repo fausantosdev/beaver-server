@@ -1,7 +1,6 @@
-import { FastifyRequest, FastifyReply } from 'fastify'
-import { z } from 'zod'
-
 import { DeleteUser } from '@protocols/use-cases/user/delete-user'
+import { FastifyReply,FastifyRequest } from 'fastify'
+import { z } from 'zod'
 
 class DeleteUserController {
   constructor(

@@ -1,6 +1,5 @@
-import { FastifyRequest, FastifyReply } from 'fastify'
-
 import { RefreshToken } from '@protocols/use-cases/auth/refresh-token'
+import { FastifyReply,FastifyRequest } from 'fastify'
 
 class RefreshTokenController {
   constructor(

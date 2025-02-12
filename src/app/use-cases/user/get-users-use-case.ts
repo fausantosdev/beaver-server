@@ -1,9 +1,6 @@
-import { hash } from '@lib/bcrypt'
-
-import { GetUsers } from '@protocols/use-cases/user/get-users'
-import { Repository } from '@protocols/repository'
-
 import { UserDto } from '@dtos/user.dtos'
+import { Repository } from '@protocols/repository'
+import { GetUsers } from '@protocols/use-cases/user/get-users'
 
 class GetUsersUseCase implements GetUsers {
   constructor(

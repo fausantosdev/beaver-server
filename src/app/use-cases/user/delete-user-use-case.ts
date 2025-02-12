@@ -1,7 +1,4 @@
-import { hash } from '@lib/bcrypt'
-
 import { Repository } from '@protocols/repository'
-import { CreateUserDto, UserDto } from '@dtos/user.dtos'
 import { DeleteUser } from '@protocols/use-cases/user/delete-user'
 
 class DeleteUserUseCase implements DeleteUser {

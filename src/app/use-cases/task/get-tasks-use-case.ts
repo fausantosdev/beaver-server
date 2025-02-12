@@ -1,6 +1,5 @@
-import { Repository } from '@protocols/repository'
-
 import { TaskDto } from '@dtos/task-dtos'
+import { Repository } from '@protocols/repository'
 import { GetTasks } from '@protocols/use-cases/task/get-tasks'
 
 class GetTasksUseCase implements GetTasks {

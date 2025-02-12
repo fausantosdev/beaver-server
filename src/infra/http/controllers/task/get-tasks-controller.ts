@@ -1,7 +1,6 @@
-import { FastifyRequest, FastifyReply } from 'fastify'
-import { z } from 'zod'
-
 import { GetTasks } from '@protocols/use-cases/task/get-tasks'
+import { FastifyReply,FastifyRequest } from 'fastify'
+import { z } from 'zod'
 
 
 class GetTasksController {

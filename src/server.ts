@@ -1,10 +1,9 @@
 import cors from '@fastify/cors'
+import { routes } from '@routes/index'
 import Fastify, { FastifyInstance, FastifyListenOptions } from 'fastify'
 
-import { env } from './env'
-import { routes } from '@routes/index'
-
 import { AppError } from './app/errors/app-error'
+import { env } from './env'
 
 class Server {
   private readonly app: FastifyInstance

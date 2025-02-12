@@ -1,7 +1,6 @@
-import { FastifyRequest, FastifyReply } from 'fastify'
-import { z } from 'zod'
-
 import { DeleteTasks } from '@protocols/use-cases/task/delete-tasks'
+import { FastifyReply,FastifyRequest } from 'fastify'
+import { z } from 'zod'
 
 
 class DeleteTasksController {

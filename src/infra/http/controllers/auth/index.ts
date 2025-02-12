@@ -1,9 +1,9 @@
-import { SignInController } from './sign-in-controller'
-import { RefreshTokenController } from './refresh-token-controller'
-import { ForgotPasswordController } from './forgot-password-controller'
-import { ResetPasswordController } from './reset-password-controller'
-
 import { createAuthUseCases } from '@usecases/auth'
+
+import { ForgotPasswordController } from './forgot-password-controller'
+import { RefreshTokenController } from './refresh-token-controller'
+import { ResetPasswordController } from './reset-password-controller'
+import { SignInController } from './sign-in-controller'
 
 export function createAuthControllers() {
   const authUseCases = createAuthUseCases()

@@ -1,10 +1,8 @@
+import { JwtPayloadDto } from '@dtos/auth-dtos'
+import { UserDto } from '@dtos/user.dtos'
 import { decodeToken, generateToken } from '@lib/jwt'
-
 import { Repository } from '@protocols/repository'
 import { RefreshToken } from '@protocols/use-cases/auth/refresh-token'
-
-import { UserDto } from '@dtos/user.dtos'
-import { JwtPayloadDto } from '@dtos/auth-dtos'
 
 class RefreshTokenUseCase implements RefreshToken {
   constructor(

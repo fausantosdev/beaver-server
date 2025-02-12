@@ -1,9 +1,6 @@
-import { hash } from '@lib/bcrypt'
-
-import { EditTask } from '@protocols/use-cases/task/edit-task'
-import { Repository } from '@protocols/repository'
-
 import { EditTaskDto, TaskDto } from '@dtos/task-dtos'
+import { Repository } from '@protocols/repository'
+import { EditTask } from '@protocols/use-cases/task/edit-task'
 
 class EditTaskUseCase implements EditTask{
   constructor(

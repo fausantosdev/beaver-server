@@ -1,8 +1,6 @@
-import { FastifyInstance } from 'fastify'
-
-import { verifyToken } from '@middlewares/auth.middleware'
-
 import { createAuthControllers } from '@controllers/auth'
+import { verifyToken } from '@middlewares/auth.middleware'
+import { FastifyInstance } from 'fastify'
 
 const authControllers = createAuthControllers()
 

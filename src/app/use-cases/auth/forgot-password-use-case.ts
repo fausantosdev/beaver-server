@@ -1,11 +1,9 @@
 import cripto from 'node:crypto'
 
+import { UserDto } from '@dtos/user.dtos'
+import { Nodemailer } from '@lib/nodemailer'
 import { Repository } from '@protocols/repository'
 import { ForgotPassword } from '@protocols/use-cases/auth/forgot-password'
-
-import { UserDto } from '@dtos/user.dtos'
-
-import { Nodemailer } from '@lib/nodemailer'
 
 class ForgotPasswordUseCase implements ForgotPassword {
   private mail: Nodemailer

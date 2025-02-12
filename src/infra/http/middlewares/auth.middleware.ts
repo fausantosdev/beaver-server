@@ -1,8 +1,7 @@
-import { FastifyReply, FastifyRequest, HookHandlerDoneFunction } from 'fastify'
-import { z } from 'zod'
-
 import { decodeToken } from '@lib/jwt'
+import { FastifyReply, FastifyRequest, HookHandlerDoneFunction } from 'fastify'
 import { NotAuthorized } from 'src/app/errors/not-authorized'
+import { z } from 'zod'
 
 type Token = {
   id: string,

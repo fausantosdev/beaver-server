@@ -1,7 +1,6 @@
-import { FastifyRequest, FastifyReply } from 'fastify'
-import { z } from 'zod'
-
 import { ResetPassword } from '@protocols/use-cases/auth/reset-password'
+import { FastifyReply,FastifyRequest } from 'fastify'
+import { z } from 'zod'
 
 class ResetPasswordController {
   constructor(

@@ -1,10 +1,8 @@
+import { ResetPasswordDto } from '@dtos/auth-dtos'
+import { UserDto } from '@dtos/user.dtos'
 import { hash } from '@lib/bcrypt'
-
 import { Repository } from '@protocols/repository'
 import { ResetPassword } from '@protocols/use-cases/auth/reset-password'
-
-import { UserDto } from '@dtos/user.dtos'
-import { ResetPasswordDto } from '@dtos/auth-dtos'
 
 class ResetPasswordUseCase implements ResetPassword {
   constructor(

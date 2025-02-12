@@ -1,7 +1,6 @@
-import { FastifyRequest, FastifyReply } from 'fastify'
-import { z } from 'zod'
-
 import { GetUsers } from '@protocols/use-cases/user/get-users'
+import { FastifyReply,FastifyRequest } from 'fastify'
+import { z } from 'zod'
 
 class GetUsersController {
   constructor(

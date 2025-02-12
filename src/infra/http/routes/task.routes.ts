@@ -1,7 +1,6 @@
-import { FastifyInstance } from 'fastify'
-import { checkUserOrIsAdmin,verifyToken } from '@middlewares/auth.middleware'
-
 import { createTaskControllers } from '@controllers/task'
+import { verifyToken } from '@middlewares/auth.middleware'
+import { FastifyInstance } from 'fastify'
 
 const tasksControllers = createTaskControllers()
 

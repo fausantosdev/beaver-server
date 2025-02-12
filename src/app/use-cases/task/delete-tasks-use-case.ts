@@ -1,5 +1,4 @@
 import { Repository } from '@protocols/repository'
-
 import { DeleteTasks } from '@protocols/use-cases/task/delete-tasks'
 
 class DeleteTasksUseCase implements DeleteTasks {

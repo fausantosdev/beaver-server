@@ -1,7 +1,6 @@
-import { FastifyRequest, FastifyReply } from 'fastify'
-import { z } from 'zod'
-
 import { EditTask } from '@protocols/use-cases/task/edit-task'
+import { FastifyReply,FastifyRequest } from 'fastify'
+import { z } from 'zod'
 
 class EditTaskController {
   constructor(

@@ -1,7 +1,6 @@
-import { FastifyRequest, FastifyReply } from 'fastify'
-import { z } from 'zod'
-
 import { CreateUser } from '@protocols/use-cases/user/create-user'
+import { FastifyReply,FastifyRequest } from 'fastify'
+import { z } from 'zod'
 
 class CreateUserController {
   constructor(
