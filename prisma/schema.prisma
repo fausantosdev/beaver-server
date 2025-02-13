@@ -19,13 +19,13 @@ enum Role {
 }
 
 model User {
-  id String @id @default(uuid())
-  name String
-  email String @unique
+  id            String @id @default(uuid())
+  name          String
+  email         String @unique
   password_hash String
-  role Role @default(user)
+  role          Role   @default(user)
 
-  password_reset_token String?
+  password_reset_token   String?
   password_reset_expires DateTime?
 
   created_at DateTime @default(now())
@@ -37,9 +37,9 @@ model User {
 }
 
 model Task {
-  id String @id @default(uuid())
-  parent_id String?
-  user_id String
+  id          String  @id @default(uuid())
+  parent_id   String?
+  user_id     String
   description String
 
   progress Int? @default(0)
@@ -47,8 +47,8 @@ model Task {
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 
-  parent Task? @relation("subtasks", fields: [parent_id], references: [id], onUpdate: Cascade, onDelete: Cascade)
-  user User @relation(fields: [user_id], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  parent   Task?  @relation("subtasks", fields: [parent_id], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  user     User   @relation(fields: [user_id], references: [id], onUpdate: Cascade, onDelete: Cascade)
   subtasks Task[] @relation("subtasks")
 
   @@map("tasks")
