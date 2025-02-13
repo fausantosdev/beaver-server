@@ -9,7 +9,7 @@
     "build": "tsc && tsc-alias",
     "prepare": "husky",
     "test": "jest",
-    "test-staged": "jest --passWithNoTests"
+    "test:staged": "jest --passWithNoTests"
   },
   "repository": {
     "type": "git",
@@ -58,3 +58,4 @@
     "zod": "^3.22.4"
   }
 }
+
