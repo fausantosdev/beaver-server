@@ -1,10 +1,10 @@
 import { SignInDto } from '@dtos/auth-dtos'
 import { UserDto } from '@dtos/user.dtos'
+import { AppError } from '@errors/app-error'
 import { compare } from '@lib/bcrypt'
 import { generateToken } from '@lib/jwt'
 import { Repository } from '@protocols/repository'
 import { SignIn } from '@protocols/use-cases/auth/sign-in'
-import { AppError } from 'src/app/errors/app-error'
 
 class SignInUseCase implements SignIn {
   constructor(
