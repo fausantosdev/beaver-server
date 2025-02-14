@@ -1,11 +1,12 @@
 import { UpdateUserDto, UserDto } from '@dtos/user.dtos'
-import { hash } from '@lib/bcrypt'
+import { Encryption } from '@protocols/encryption'
 import { Repository } from '@protocols/repository'
 import { EditUser } from '@protocols/use-cases/user/edit-user'
 
 class EditUserUseCase implements EditUser {
   constructor(
-    private userRepository: Repository
+    private userRepository: Repository,
+    private encryptionHelper: Encryption
   ) {
     this.execute = this.execute.bind(this)
   }
@@ -18,7 +19,7 @@ class EditUserUseCase implements EditUser {
       if (!userExists) throw new Error('User not found')
 
       if ( 'password' in data ) {
-        data.password_hash = await hash(String(data.password), 8)
+        data.password_hash = await this.encryptionHelper.hash(String(data.password), 8)
         delete data.password
       }
 

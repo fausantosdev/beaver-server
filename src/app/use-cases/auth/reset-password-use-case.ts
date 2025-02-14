@@ -1,12 +1,13 @@
 import { ResetPasswordDto } from '@dtos/auth-dtos'
 import { UserDto } from '@dtos/user.dtos'
-import { hash } from '@lib/bcrypt'
+import { Encryption } from '@protocols/encryption'
 import { Repository } from '@protocols/repository'
 import { ResetPassword } from '@protocols/use-cases/auth/reset-password'
 
 class ResetPasswordUseCase implements ResetPassword {
   constructor(
-    private userRepository: Repository
+    private userRepository: Repository,
+    private encryptionHelper: Encryption
   ) {
     this.execute = this.execute.bind(this)
   }
@@ -23,7 +24,7 @@ class ResetPasswordUseCase implements ResetPassword {
     const updated = await this.userRepository.update({
       id: userExists.id
     }, {
-      password_hash: await hash(newPassword, 8),
+      password_hash: await this.encryptionHelper.hash(newPassword, 8),
       password_reset_token: null,
       password_reset_expires: null
     })

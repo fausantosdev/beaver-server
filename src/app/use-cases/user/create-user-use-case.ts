@@ -1,11 +1,12 @@
 import { CreateUserDto, UserDto } from '@dtos/user.dtos'
-import { hash } from '@lib/bcrypt'
+import { Encryption } from '@protocols/encryption'
 import { Repository } from '@protocols/repository'
 import { CreateUser } from '@protocols/use-cases/user/create-user'
 
 class CreateUserUseCase implements CreateUser {
   constructor(
-    private userRepository: Repository
+    private userRepository: Repository,
+    private encryptionHelper: Encryption
   ) {
     this.execute = this.execute.bind(this)
   }
@@ -18,7 +19,7 @@ class CreateUserUseCase implements CreateUser {
     const newUser = await this.userRepository.create({
       name,
       email,
-      password_hash: await hash(password_hash, 8)
+      password_hash: await this.encryptionHelper.hash(password_hash, 8)
     }) as UserDto
 
     return newUser
