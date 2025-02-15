@@ -1,24 +1,23 @@
 import cripto from 'node:crypto'
 
 import { UserDto } from '@dtos/user.dtos'
-import { Nodemailer } from '@lib/nodemailer'
+import { AppError } from '@errors/app-error'
+import { Email } from '@protocols/email'
 import { Repository } from '@protocols/repository'
 import { ForgotPassword } from '@protocols/use-cases/auth/forgot-password'
 
 class ForgotPasswordUseCase implements ForgotPassword {
-  private mail: Nodemailer
-
   constructor(
-    private userRepository: Repository
+    private userRepository: Repository,
+    private emailHelper: Email
   ) {
     this.execute = this.execute.bind(this)
-    this.mail = new Nodemailer()
   }
 
   async execute(email: string) {
     const userExists = await this.userRepository.findOne({ email }) as UserDto
 
-    if(!userExists) throw new Error('E-mail not found')
+    if(!userExists) throw new AppError('E-mail not found', 401)
 
     const token = cripto.randomBytes(20).toString('hex')
 
@@ -31,17 +30,17 @@ class ForgotPasswordUseCase implements ForgotPassword {
     ) as UserDto
 
     if (updated.id) {
-      const emailSent = await this.mail.sendMail({
+      const emailSent = await this.emailHelper.sendMail({
         to: updated.email,
         subject: '[Beaver SaaS] - Password recovery',
         text: `Use this token to recover your password: ${token}\nIf you didn't request this recovery, just disregard this email, your data is safe.`
       })
 
-      if (!emailSent) throw new Error('An error occurred, please try later [2]')
+      if (!emailSent) throw new AppError('An error occurred, please try later [2]')
 
       return true
     } else {
-      throw new Error('An error occurred, please try later [1]')
+      throw new AppError('An error occurred, please try later [1]')
     }
   }
 }

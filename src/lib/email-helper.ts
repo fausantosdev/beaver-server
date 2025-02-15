@@ -1,12 +1,7 @@
-import { createTransport,Transporter  } from 'nodemailer'
+import { Email, SendEmailTypes } from '@protocols/email'
+import { createTransport, Transporter  } from 'nodemailer'
 
-type SendMailTypes = {
-  to: string
-  subject: string
-  text: string
-}
-
-export class Nodemailer {
+class EmailHelper implements Email {
   private transporter: Transporter
 
   constructor() {
@@ -21,7 +16,7 @@ export class Nodemailer {
     })
   }
 
-  async sendMail({to, subject, text}: SendMailTypes): Promise<boolean> {
+  async sendMail({to, subject, text}: SendEmailTypes): Promise<boolean> {
     const result = await this.transporter.sendMail({
       from: 'flavio-_santos@hotmail.com',
       to,
@@ -36,3 +31,5 @@ export class Nodemailer {
     }
   }
 }
+
+export { EmailHelper }
