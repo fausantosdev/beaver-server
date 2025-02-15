@@ -29,15 +29,11 @@ class ForgotPasswordUseCase implements ForgotPassword {
       { password_reset_token: token, password_reset_expires: now }
     ) as UserDto
 
-    if (updated.id) {
-      const emailSent = await this.emailHelper.sendMail({
-        to: updated.email,
-        subject: '[Beaver SaaS] - Password recovery',
-        text: `Use this token to recover your password: ${token}\nIf you didn't request this recovery, just disregard this email, your data is safe.`
-      })
-
-      if (!emailSent) throw new AppError('An error occurred, please try later [2]')
-
+    if (await this.emailHelper.sendMail({
+      to: updated.email,
+      subject: '[Beaver SaaS] - Password recovery',
+      text: `Use this token to recover your password: ${token}\nIf you didn't request this recovery, just disregard this email, your data is safe.`
+    })) {
       return true
     } else {
       throw new AppError('An error occurred, please try later [1]')
