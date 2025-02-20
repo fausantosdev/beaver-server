@@ -20,19 +20,19 @@ class ResetPasswordUseCase implements ResetPassword {
 
     if(token !== userExists.password_reset_token) throw new AppError('Invalid password recovery token', 401)
 
-    if (userExists.password_reset_expires && (new Date() > userExists.password_reset_expires)) throw new AppError('Token expired, request a new one', 401)
+    if (userExists.password_reset_expires && (new Date() > userExists.password_reset_expires)) {
+      throw new AppError('Token expired, request a new one', 401)
+    } else {
+      await this.userRepository.update({
+        id: userExists.id
+      }, {
+        password_hash: await this.encryptionHelper.hash(newPassword, 8),
+        password_reset_token: null,
+        password_reset_expires: null
+      })
 
-    const updated = await this.userRepository.update({
-      id: userExists.id
-    }, {
-      password_hash: await this.encryptionHelper.hash(newPassword, 8),
-      password_reset_token: null,
-      password_reset_expires: null
-    })
-
-    if (!updated) throw new AppError('An error occurred while updating your password, please try again', 401)
-
-    return true
+      return true
+    }
   }
 }
 
