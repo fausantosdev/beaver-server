@@ -22,7 +22,7 @@ class UserRepository implements Repository {
     return await prisma.instance.user.findUnique({ where })
   }
 
-  public update = async (where: Prisma.UserWhereUniqueInput, data: object): Promise<User> => {
+  public update = async (where: Prisma.UserWhereUniqueInput, data: object): Promise<User | null> => {
     return prisma.instance.user.update({
       where, data
     })
