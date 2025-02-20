@@ -1,4 +1,4 @@
-import { decodeToken } from '@lib/jwt'
+import { JwtHelper } from '@lib/jwt-helper'
 import { FastifyReply, FastifyRequest, HookHandlerDoneFunction } from 'fastify'
 import { NotAuthorized } from 'src/app/errors/not-authorized'
 import { z } from 'zod'
@@ -12,6 +12,8 @@ type Token = {
   sub: string
 }
 
+const jwtHelper = new JwtHelper()
+
 const verifyToken = (request: FastifyRequest, reply: FastifyReply, done: HookHandlerDoneFunction) => {
   const authHeader = request.headers.authorization
 
@@ -19,7 +21,7 @@ const verifyToken = (request: FastifyRequest, reply: FastifyReply, done: HookHan
 
   const token = authHeader.split(' ')[1]
 
-  const { id, email, role } = decodeToken(token) as Token
+  const { id, email, role } = jwtHelper.decodeToken(token) as Token
 
   request.user = { id, email, role }
 

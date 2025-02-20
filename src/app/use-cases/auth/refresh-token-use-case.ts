@@ -1,18 +1,19 @@
 import { JwtPayloadDto } from '@dtos/auth-dtos'
 import { UserDto } from '@dtos/user.dtos'
-import { decodeToken, generateToken } from '@lib/jwt'
+import { Jwt } from '@protocols/jwt'
 import { Repository } from '@protocols/repository'
 import { RefreshToken } from '@protocols/use-cases/auth/refresh-token'
 
 class RefreshTokenUseCase implements RefreshToken {
   constructor(
-    private userRepository: Repository
+    private userRepository: Repository,
+    private jwtHelper: Jwt
   ) {
     this.execute = this.execute.bind(this)
   }
 
   async execute(token: string) {
-    const { id } = decodeToken(token) as JwtPayloadDto
+    const { id } = this.jwtHelper.decodeToken(token) as JwtPayloadDto
 
     const userExists = await this.userRepository.findOne({ id }) as UserDto
 
@@ -20,7 +21,7 @@ class RefreshTokenUseCase implements RefreshToken {
 
     const { email, role } = userExists
 
-    const jwt = generateToken({
+    const jwt = this.jwtHelper.generateToken({
       id,
       email,
       role
