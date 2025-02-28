@@ -1,5 +1,6 @@
-import { Email, SendEmailTypes } from '@protocols/email'
-import { createTransport, Transporter  } from 'nodemailer'
+import { Email, SendEmailResponse, SendEmailTypes } from '@protocols/email'
+import { createTransport,Transporter } from 'nodemailer'
+import { env } from 'src/env'
 
 class EmailHelper implements Email {
   private transporter: Transporter
@@ -16,18 +17,22 @@ class EmailHelper implements Email {
     })
   }
 
-  async sendMail({to, subject, text}: SendEmailTypes): Promise<boolean> {
-    const result = await this.transporter.sendMail({
-      from: 'flavio-_santos@hotmail.com',
-      to,
-      subject,
-      text,
-    })
+  async sendMail({ from, to, subject, text }: SendEmailTypes): Promise<SendEmailResponse> {
+    try {
+      await this.transporter.sendMail({
+        from,
+        to,
+        subject,
+        text,
+      })
 
-    if (result.accepted.length != 0) {
-      return true
-    } else {
-      return false
+      return { status: true, message: 'Email sent successfully' }
+    } catch (error) {
+      if (env.NODE_ENV === 'development') console.error('Error sending email:', error)
+      return {
+        status: false,
+        message: 'An error occurred while sending the email, please try again',
+      }
     }
   }
 }
