@@ -14,10 +14,15 @@ export default [
       semi: ["error", "never"],
       quotes: ["error", "single"],
       "simple-import-sort/imports": "error",
-      "@typescript-eslint/no-explicit-any": "off"
     }
   },
   {languageOptions: { globals: globals.node }},
   pluginJs.configs.recommended,
   ...tseslint.configs.recommended,
+  {
+    rules: {
+      "@typescript-eslint/no-explicit-any": "off",
+      "@typescript-eslint/no-unused-vars": "off"
+    }
+  }
 ];
