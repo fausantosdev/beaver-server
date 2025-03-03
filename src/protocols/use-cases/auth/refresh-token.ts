@@ -1,3 +1,5 @@
+import { Response } from '@protocols/response'
+
 export interface RefreshToken {
-  execute(token: string): Promise<{ jwt: string }>
+  execute(token: string): Promise<Response>
 }

@@ -1,5 +1,5 @@
-import { TaskDto } from '@dtos/task-dtos'
+import { Response } from '@protocols/response'
 
 export interface GetTasks {
-  execute(where?: object): Promise<TaskDto[] | TaskDto>
+  execute(where?: object): Promise<Response>
 }

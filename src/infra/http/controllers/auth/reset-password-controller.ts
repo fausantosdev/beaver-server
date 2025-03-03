@@ -18,12 +18,12 @@ class ResetPasswordController {
 
     const { token, email, newPassword } = schema.parse(request.body)
 
-    const result = await this.resetPasswordUseCase.execute({ token, email, newPassword })
+    const { status, data, message } = await this.resetPasswordUseCase.execute({ token, email, newPassword })
 
     return reply.send({
-      status: true,
-      data: result,
-      message: null
+      status,
+      data,
+      message
     })
   }
 }

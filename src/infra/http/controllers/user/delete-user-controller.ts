@@ -16,12 +16,12 @@ class DeleteUserController {
 
     const { id } = schema.parse(request.params)
 
-    const result = await this.deleteUserUseCase.execute(id)
+    const { status, data, message } = await this.deleteUserUseCase.execute(id)
 
     return reply.send({
-      status: true,
-      data: result,
-      message: null
+      status,
+      data,
+      message
     })
   }
 }

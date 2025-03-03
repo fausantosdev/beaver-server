@@ -1,5 +1,6 @@
 import { SignIn } from '@protocols/use-cases/auth/sign-in'
 import { FastifyReply,FastifyRequest } from 'fastify'
+import { response } from 'src/utils/response-helper'
 import { z } from 'zod'
 
 class SignInController {
@@ -17,12 +18,12 @@ class SignInController {
 
     const { email, password } = schema.parse(request.body)
 
-    const { jwt } = await this.signInUseCase.execute({ email, password })
+    const { status, data, message } = await this.signInUseCase.execute({ email, password })
 
     return reply.send({
-      status: true,
-      data: jwt,
-      message: null
+      status,
+      data,
+      message
     })
   }
 }

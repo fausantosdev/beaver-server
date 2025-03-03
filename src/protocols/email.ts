@@ -1,3 +1,5 @@
+import { Response } from './response'
+
 export type SendEmailTypes = {
   from: string
   to: string
@@ -5,11 +7,6 @@ export type SendEmailTypes = {
   text: string
 }
 
-export type SendEmailResponse = {
-  status: boolean
-  message: string
-}
-
 export interface Email {
-  sendMail({from, to, subject, text}: SendEmailTypes): Promise<SendEmailResponse>
+  sendMail({from, to, subject, text}: SendEmailTypes): Promise<Response>
 }

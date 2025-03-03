@@ -17,12 +17,12 @@ class ForgotPasswordController {
 
     const { email } = schema.parse(request.body)
 
-    const { status, message } = await this.forgotPasswordUseCase.execute(email)
+    const { status, data, message } = await this.forgotPasswordUseCase.execute(email)
 
     return reply.send({
       status,
-      data: status,
-      message: message
+      data: data,
+      message
     })
   }
 }

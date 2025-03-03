@@ -5,6 +5,7 @@ import { AppError } from '@errors/app-error'
 import { Email } from '@protocols/email'
 import { Repository } from '@protocols/repository'
 import { ForgotPassword } from '@protocols/use-cases/auth/forgot-password'
+import { response } from 'src/utils/response-helper'
 
 class ForgotPasswordUseCase implements ForgotPassword {
   constructor(
@@ -37,10 +38,13 @@ class ForgotPasswordUseCase implements ForgotPassword {
         text: `Use this token to recover your password: ${token}\nIf you didn't request this recovery, just disregard this email, your data is safe.`
       })
 
-      return {
-        status,
-        message
+      if (!status) {
+        throw new AppError(message!)
       }
+
+      return response({
+        message: 'If the provided email is registered, a password recovery token has been sent. Please check your inbox and spam folder.'
+      })
     } else {
       throw new AppError('An error occurred, please try later [1]')
     }

@@ -4,6 +4,7 @@ import { AppError } from '@errors/app-error'
 import { Encryption } from '@protocols/encryption'
 import { Repository } from '@protocols/repository'
 import { ResetPassword } from '@protocols/use-cases/auth/reset-password'
+import { response } from 'src/utils/response-helper'
 
 class ResetPasswordUseCase implements ResetPassword {
   constructor(
@@ -13,7 +14,7 @@ class ResetPasswordUseCase implements ResetPassword {
     this.execute = this.execute.bind(this)
   }
 
-  async execute({ token, email, newPassword }: ResetPasswordDto): Promise<boolean> {
+  async execute({ token, email, newPassword }: ResetPasswordDto) {
     const userExists = await this.userRepository.findOne({ email }) as UserDto
 
     if (!userExists) throw new AppError('E-mail not found', 401)
@@ -31,7 +32,7 @@ class ResetPasswordUseCase implements ResetPassword {
         password_reset_expires: null
       })
 
-      return true
+      return response({})
     }
   }
 }

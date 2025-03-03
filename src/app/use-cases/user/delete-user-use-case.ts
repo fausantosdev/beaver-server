@@ -1,5 +1,6 @@
 import { Repository } from '@protocols/repository'
 import { DeleteUser } from '@protocols/use-cases/user/delete-user'
+import { response } from 'src/utils/response-helper'
 
 class DeleteUserUseCase implements DeleteUser {
   constructor(
@@ -15,7 +16,7 @@ class DeleteUserUseCase implements DeleteUser {
 
     const result = await this.userRepository.delete({ id })
 
-    return !!result
+    return response({ data: !!result })
   }
 }
 

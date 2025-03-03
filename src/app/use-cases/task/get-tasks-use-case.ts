@@ -1,6 +1,7 @@
 import { TaskDto } from '@dtos/task-dtos'
 import { Repository } from '@protocols/repository'
 import { GetTasks } from '@protocols/use-cases/task/get-tasks'
+import { response } from 'src/utils/response-helper'
 
 class GetTasksUseCase implements GetTasks {
   constructor(
@@ -9,7 +10,7 @@ class GetTasksUseCase implements GetTasks {
     this.execute = this.execute.bind(this)
   }
 
-  async execute(where?: object): Promise<TaskDto[] | TaskDto> {
+  async execute(where?: object) {
     let result
 
     if (
@@ -24,7 +25,7 @@ class GetTasksUseCase implements GetTasks {
       result = await this.taskRepository.read(where!) as TaskDto[]
     }
 
-    return result
+    return response({ data: result })
   }
 }
 

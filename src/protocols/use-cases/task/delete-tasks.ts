@@ -1,3 +1,5 @@
+import { Response } from '@protocols/response'
+
 export interface DeleteTasks{
-  execute(where: object): Promise<object | null>
+  execute(where: object): Promise<Response>
 }

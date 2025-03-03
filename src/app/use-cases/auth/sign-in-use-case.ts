@@ -5,6 +5,7 @@ import { Encryption } from '@protocols/encryption'
 import { Jwt } from '@protocols/jwt'
 import { Repository } from '@protocols/repository'
 import { SignIn } from '@protocols/use-cases/auth/sign-in'
+import { response } from 'src/utils/response-helper'
 
 class SignInUseCase implements SignIn {
   constructor(
@@ -20,13 +21,17 @@ class SignInUseCase implements SignIn {
 
     if ( !user || (!(user && (await this.encryptionHelper.compare(password, user.password_hash)))) ) throw new AppError('Authentication failed, check your credentials', 401)
 
-    const jwt = this.jwtHelper.generateToken({
+    const { status, data, message } = this.jwtHelper.generateToken({
       id: user.id,
       email: user.email,
       role: user.role
     })
 
-    return { jwt }
+    return response({
+      status,
+      data,
+      message
+    })
   }
 }
 

@@ -1,6 +1,7 @@
 import { UserDto } from '@dtos/user.dtos'
 import { Repository } from '@protocols/repository'
 import { GetUsers } from '@protocols/use-cases/user/get-users'
+import { response } from 'src/utils/response-helper'
 
 class GetUsersUseCase implements GetUsers {
   constructor(
@@ -9,7 +10,7 @@ class GetUsersUseCase implements GetUsers {
     this.execute = this.execute.bind(this)
   }
 
-  async execute(where?: object): Promise<UserDto[] | UserDto> {
+  async execute(where?: object) {
     let result
 
     if (
@@ -25,7 +26,7 @@ class GetUsersUseCase implements GetUsers {
       result = await this.userRepository.read(where!) as UserDto[]
     }
 
-    return result
+    return response({ data: result })
   }
 }
 

@@ -1,5 +1,6 @@
-import { Email, SendEmailResponse, SendEmailTypes } from '@protocols/email'
-import { createTransport,Transporter } from 'nodemailer'
+import { Email, SendEmailTypes } from '@protocols/email'
+import { Response } from '@protocols/response'
+import { createTransport, Transporter } from 'nodemailer'
 import { env } from 'src/env'
 
 class EmailHelper implements Email {
@@ -17,7 +18,7 @@ class EmailHelper implements Email {
     })
   }
 
-  async sendMail({ from, to, subject, text }: SendEmailTypes): Promise<SendEmailResponse> {
+  async sendMail({ from, to, subject, text }: SendEmailTypes): Promise<Response> {
     try {
       await this.transporter.sendMail({
         from,

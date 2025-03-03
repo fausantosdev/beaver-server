@@ -1,6 +1,7 @@
 import { CreateTaskDto, TaskDto } from '@dtos/task-dtos'
 import { Repository } from '@protocols/repository'
 import { CreateTask } from '@protocols/use-cases/task/create-task'
+import { response } from 'src/utils/response-helper'
 
 class CreateTaskUseCase implements CreateTask {
   constructor(
@@ -24,7 +25,7 @@ class CreateTaskUseCase implements CreateTask {
       parent_id
     }) as TaskDto
 
-    return newTask
+    return response({ data: newTask })
   }
 }
 

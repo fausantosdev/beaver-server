@@ -16,14 +16,14 @@ class GetUsersController {
 
     const { id } = schema.parse(request.params)
 
-    const result = id ?
+    const { status, data, message } = id ?
       await this.getUsersUseCase.execute({ id }) :
       await this.getUsersUseCase.execute()
 
     return reply.send({
-      status: true,
-      data: result,
-      message: null
+      status,
+      data,
+      message
     })
   }
 }

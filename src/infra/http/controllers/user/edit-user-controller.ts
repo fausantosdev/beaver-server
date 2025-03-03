@@ -23,14 +23,14 @@ class EditUserController {
 
     const { id } = schemaId.parse(request.params)
 
-    const data = schema.parse(request.body)
+    const dataBody = schema.parse(request.body)
 
-    const user = await this.editUserUseCase.execute(id, data)
+    const { status, data, message } = await this.editUserUseCase.execute(id, dataBody)
 
     return reply.send({
-      status: true,
-      data: user,
-      message: null
+      status,
+      data,
+      message
     })
   }
 }

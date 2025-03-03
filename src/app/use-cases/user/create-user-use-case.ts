@@ -2,6 +2,7 @@ import { CreateUserDto, UserDto } from '@dtos/user.dtos'
 import { Encryption } from '@protocols/encryption'
 import { Repository } from '@protocols/repository'
 import { CreateUser } from '@protocols/use-cases/user/create-user'
+import { response } from 'src/utils/response-helper'
 
 class CreateUserUseCase implements CreateUser {
   constructor(
@@ -22,7 +23,7 @@ class CreateUserUseCase implements CreateUser {
       password_hash: await this.encryptionHelper.hash(password_hash, 8)
     }) as UserDto
 
-    return newUser
+    return response({ data: newUser })
   }
 }
 

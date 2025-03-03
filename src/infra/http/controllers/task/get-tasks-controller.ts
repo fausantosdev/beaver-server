@@ -26,12 +26,12 @@ class GetTasksController {
       query = { user_id: user.id, parent_id: null }
     }
 
-    const result = await this.getTasksUseCase.execute(query)
+    const { status, data, message } = await this.getTasksUseCase.execute(query)
 
     return reply.send({
-      status: true,
-      data: result,
-      message: null
+      status,
+      data,
+      message
     })
   }
 }

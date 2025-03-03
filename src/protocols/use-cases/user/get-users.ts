@@ -1,5 +1,5 @@
-import { UserDto } from '@dtos/user.dtos'
+import { Response } from '@protocols/response'
 
 export interface GetUsers {
-  execute(where?: object): Promise<UserDto[] | UserDto>
+  execute(where?: object): Promise<Response>
 }

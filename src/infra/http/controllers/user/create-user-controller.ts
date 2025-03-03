@@ -18,15 +18,16 @@ class CreateUserController {
 
     const { name, email, password } = schema.parse(request.body)
 
-    const user = await this.createUserUseCase.execute({
+    const { status, data, message } = await this.createUserUseCase.execute({
       name,
       email,
       password_hash: password
     })
+
     return reply.send({
-      status: true,
-      data: user,
-      message: null
+      status,
+      data,
+      message
     })
   }
 }

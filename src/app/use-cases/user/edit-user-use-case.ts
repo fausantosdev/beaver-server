@@ -2,6 +2,7 @@ import { UpdateUserDto, UserDto } from '@dtos/user.dtos'
 import { Encryption } from '@protocols/encryption'
 import { Repository } from '@protocols/repository'
 import { EditUser } from '@protocols/use-cases/user/edit-user'
+import { response } from 'src/utils/response-helper'
 
 class EditUserUseCase implements EditUser {
   constructor(
@@ -25,7 +26,7 @@ class EditUserUseCase implements EditUser {
 
       const result = await this.userRepository.update({ id }, data) as UserDto
 
-      return result
+      return response({ data: result })
   }
 }
 

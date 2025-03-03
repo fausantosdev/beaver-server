@@ -1,5 +1,6 @@
-import { EditTaskDto, TaskDto } from '@dtos/task-dtos'
+import { EditTaskDto } from '@dtos/task-dtos'
+import { Response } from '@protocols/response'
 
 export interface EditTask {
-  execute(id: string, data: EditTaskDto): Promise<TaskDto>
+  execute(id: string, data: EditTaskDto): Promise<Response>
 }

@@ -21,7 +21,11 @@ const verifyToken = (request: FastifyRequest, reply: FastifyReply, done: HookHan
 
   const token = authHeader.split(' ')[1]
 
-  const { id, email, role } = jwtHelper.decodeToken(token) as Token
+  const { status, data, message } = jwtHelper.decodeToken(token)
+
+  if(!status) throw new NotAuthorized(message!)
+
+  const { id, email, role } = data as Token
 
   request.user = { id, email, role }
 

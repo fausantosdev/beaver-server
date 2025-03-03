@@ -19,14 +19,14 @@ class EditTaskController {
     })
 
     const { id } = schemaId.parse(request.params)
-    const data = schema.parse(request.body)
+    const dataBody = schema.parse(request.body)
 
-    const user = await this.editTaskUseCase.execute(id, data)
+    const { status, data, message } = await this.editTaskUseCase.execute(id, dataBody)
 
     return reply.send({
-      status: true,
-      data: user,
-      message: null
+      status,
+      data,
+      message
     })
   }
 }

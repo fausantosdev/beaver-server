@@ -1,4 +1,6 @@
+import { Response } from './response'
+
 export interface Jwt {
-  generateToken(payload: object): string
-  decodeToken(token: string): object | string
+  generateToken(payload: object): Response
+  decodeToken(token: string): Response
 }

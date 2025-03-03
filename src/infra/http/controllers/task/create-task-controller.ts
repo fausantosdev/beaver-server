@@ -19,14 +19,14 @@ class CreateTaskController {
 
     const { user } = request
 
-    const task = await this.createTaskUseCase.execute({
+    const { status, data, message } = await this.createTaskUseCase.execute({
       user_id: user.id, description, parent_id
     })
 
     return reply.send({
-      status: true,
-      data: task,
-      message: null
+      status,
+      data,
+      message
     })
   }
 }
