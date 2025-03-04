@@ -1,5 +1,6 @@
 import { Email, SendEmailTypes } from '@protocols/email'
 import { Response } from '@protocols/response'
+import { response } from '@utils/response-helper'
 import { createTransport, Transporter } from 'nodemailer'
 import { env } from 'src/env'
 
@@ -27,13 +28,13 @@ class EmailHelper implements Email {
         text,
       })
 
-      return { status: true, message: 'Email sent successfully' }
+      return response({ message: 'Email sent successfully' })
     } catch (error) {
       if (env.NODE_ENV === 'development') console.error('Error sending email:', error)
-      return {
+      return response({
         status: false,
         message: 'An error occurred while sending the email, please try again',
-      }
+      })
     }
   }
 }
