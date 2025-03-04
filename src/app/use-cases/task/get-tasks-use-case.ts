@@ -1,7 +1,7 @@
 import { TaskDto } from '@dtos/task-dtos'
 import { Repository } from '@protocols/repository'
 import { GetTasks } from '@protocols/use-cases/task/get-tasks'
-import { response } from 'src/utils/response-helper'
+import { response } from '@utils/response-helper'
 
 class GetTasksUseCase implements GetTasks {
   constructor(

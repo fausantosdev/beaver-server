@@ -1,7 +1,7 @@
 import { Jwt } from '@protocols/jwt'
 import { Response } from '@protocols/response'
+import { response } from '@utils/response-helper'
 import { sign, verify } from 'jsonwebtoken'
-import { response } from 'src/utils/response-helper'
 
 import { env } from '../env'
 

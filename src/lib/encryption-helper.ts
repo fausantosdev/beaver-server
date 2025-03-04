@@ -1,7 +1,7 @@
 import { Encryption } from '@protocols/encryption'
 import { Response } from '@protocols/response'
+import { response } from '@utils/response-helper'
 import bcrypt from 'bcrypt'
-import { response } from 'src/utils/response-helper'
 
 class EncryptionHelper implements Encryption {
   public async hash(text: string, salt: number): Promise<Response> {

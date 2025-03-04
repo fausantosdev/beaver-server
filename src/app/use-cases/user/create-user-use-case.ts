@@ -2,7 +2,7 @@ import { CreateUserDto, UserDto } from '@dtos/user.dtos'
 import { Encryption } from '@protocols/encryption'
 import { Repository } from '@protocols/repository'
 import { CreateUser } from '@protocols/use-cases/user/create-user'
-import { response } from 'src/utils/response-helper'
+import { response } from '@utils/response-helper'
 
 class CreateUserUseCase implements CreateUser {
   constructor(

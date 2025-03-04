@@ -3,7 +3,7 @@ import { UserDto } from '@dtos/user.dtos'
 import { Jwt } from '@protocols/jwt'
 import { Repository } from '@protocols/repository'
 import { RefreshToken } from '@protocols/use-cases/auth/refresh-token'
-import { response } from 'src/utils/response-helper'
+import { response } from '@utils/response-helper'
 
 class RefreshTokenUseCase implements RefreshToken {
   constructor(

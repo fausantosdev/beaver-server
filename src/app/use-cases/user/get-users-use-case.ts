@@ -1,7 +1,7 @@
 import { UserDto } from '@dtos/user.dtos'
 import { Repository } from '@protocols/repository'
 import { GetUsers } from '@protocols/use-cases/user/get-users'
-import { response } from 'src/utils/response-helper'
+import { response } from '@utils/response-helper'
 
 class GetUsersUseCase implements GetUsers {
   constructor(

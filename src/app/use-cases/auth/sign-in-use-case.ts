@@ -5,7 +5,7 @@ import { Encryption } from '@protocols/encryption'
 import { Jwt } from '@protocols/jwt'
 import { Repository } from '@protocols/repository'
 import { SignIn } from '@protocols/use-cases/auth/sign-in'
-import { response } from 'src/utils/response-helper'
+import { response } from '@utils/response-helper'
 
 class SignInUseCase implements SignIn {
   constructor(

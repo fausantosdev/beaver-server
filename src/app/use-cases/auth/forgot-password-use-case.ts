@@ -5,7 +5,7 @@ import { AppError } from '@errors/app-error'
 import { Email } from '@protocols/email'
 import { Repository } from '@protocols/repository'
 import { ForgotPassword } from '@protocols/use-cases/auth/forgot-password'
-import { response } from 'src/utils/response-helper'
+import { response } from '@utils/response-helper'
 
 class ForgotPasswordUseCase implements ForgotPassword {
   constructor(

@@ -1,6 +1,6 @@
 import { Repository } from '@protocols/repository'
 import { DeleteUser } from '@protocols/use-cases/user/delete-user'
-import { response } from 'src/utils/response-helper'
+import { response } from '@utils/response-helper'
 
 class DeleteUserUseCase implements DeleteUser {
   constructor(

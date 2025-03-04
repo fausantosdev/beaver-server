@@ -4,7 +4,7 @@ import { AppError } from '@errors/app-error'
 import { Encryption } from '@protocols/encryption'
 import { Repository } from '@protocols/repository'
 import { ResetPassword } from '@protocols/use-cases/auth/reset-password'
-import { response } from 'src/utils/response-helper'
+import { response } from '@utils/response-helper'
 
 class ResetPasswordUseCase implements ResetPassword {
   constructor(
