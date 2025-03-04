@@ -2,7 +2,7 @@ import { UpdateUserDto, UserDto } from '@dtos/user.dtos'
 import { Encryption } from '@protocols/encryption'
 import { Repository } from '@protocols/repository'
 import { EditUser } from '@protocols/use-cases/user/edit-user'
-import { response } from 'src/utils/response-helper'
+import { response } from '@utils/response-helper'
 
 class EditUserUseCase implements EditUser {
   constructor(
