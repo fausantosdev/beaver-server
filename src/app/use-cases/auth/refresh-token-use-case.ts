@@ -1,5 +1,6 @@
 import { JwtPayloadDto } from '@dtos/auth-dtos'
 import { UserDto } from '@dtos/user.dtos'
+import { AppError } from '@errors/app-error'
 import { Jwt } from '@protocols/jwt'
 import { Repository } from '@protocols/repository'
 import { RefreshToken } from '@protocols/use-cases/auth/refresh-token'
@@ -16,13 +17,13 @@ class RefreshTokenUseCase implements RefreshToken {
   async execute(token: string) {
     const decodedToken = this.jwtHelper.decodeToken(token)
 
-    if (!decodedToken.status) throw new Error(decodedToken.message)
+    if (!decodedToken.status) throw new AppError(decodedToken.message!, 401)
 
     const { id } = decodedToken.data as JwtPayloadDto
 
     const userExists = await this.userRepository.findOne({ id }) as UserDto
 
-    if (!userExists) throw new Error('Invalid token, please log in again [1]')
+    if (!userExists) throw new AppError('Invalid token, please log in again', 401)
 
     const { email, role } = userExists
 
@@ -32,7 +33,7 @@ class RefreshTokenUseCase implements RefreshToken {
       role
     })
 
-    if (!generatedToken.status) throw new Error(generatedToken.message)
+    if (!generatedToken.status) throw new AppError(generatedToken.message!, 401)
 
     return response({
       data: generatedToken.data as string
