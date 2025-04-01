@@ -16,6 +16,9 @@ class EncryptionHelper implements Encryption {
   public async compare(text: string, hash: string): Promise<Response> {
     try {
       const isMatch = await bcrypt.compare(text, hash)
+
+      if (!isMatch) return response({ status: false})
+
       return response({ status: true, data: isMatch })
     } catch (error) {
       return response({ status: false, message: 'Erro ao comparar hash' })
