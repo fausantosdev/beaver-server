@@ -1,7 +1,7 @@
 import { UserRepository } from '@data/prisma/repositories/user-repository'
-import { EmailHelper } from '@lib/email-helper'
-import { EncryptionHelper } from '@lib/encryption-helper'
-import { JwtHelper } from '@lib/jwt-helper'
+import { EmailHelper } from 'src/infra/services/email-helper'
+import { EncryptionHelper } from 'src/infra/services/encryption-helper'
+import { JwtHelper } from 'src/infra/services/jwt-helper'
 
 import { ForgotPasswordUseCase } from './forgot-password-use-case'
 import { RefreshTokenUseCase } from './refresh-token-use-case'

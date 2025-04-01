@@ -1,5 +1,5 @@
 import { UserRepository } from '@data/prisma/repositories/user-repository'
-import { EncryptionHelper } from '@lib/encryption-helper'
+import { EncryptionHelper } from 'src/infra/services/encryption-helper'
 
 import { CreateUserUseCase } from './create-user-use-case'
 import { DeleteUserUseCase } from './delete-user-use-case'
