@@ -1,9 +1,9 @@
 import { SignInDto } from '@dtos/auth-dtos'
 import { UserDto } from '@dtos/user.dtos'
 import { AppError } from '@errors/app-error'
-import { Encryption } from '@protocols/encryption'
-import { Jwt } from '@protocols/jwt'
 import { Repository } from '@protocols/repository'
+import { Encryption } from '@protocols/services/encryption'
+import { Jwt } from '@protocols/services/jwt'
 import { SignIn } from '@protocols/use-cases/auth/sign-in'
 import { response } from '@utils/response-helper'
 

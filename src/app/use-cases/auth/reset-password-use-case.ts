@@ -1,8 +1,8 @@
 import { ResetPasswordDto } from '@dtos/auth-dtos'
 import { UserDto } from '@dtos/user.dtos'
 import { AppError } from '@errors/app-error'
-import { Encryption } from '@protocols/encryption'
 import { Repository } from '@protocols/repository'
+import { Encryption } from '@protocols/services/encryption'
 import { ResetPassword } from '@protocols/use-cases/auth/reset-password'
 import { response } from '@utils/response-helper'
 

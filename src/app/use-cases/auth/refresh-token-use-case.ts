@@ -1,8 +1,8 @@
 import { JwtPayloadDto } from '@dtos/auth-dtos'
 import { UserDto } from '@dtos/user.dtos'
 import { AppError } from '@errors/app-error'
-import { Jwt } from '@protocols/jwt'
 import { Repository } from '@protocols/repository'
+import { Jwt } from '@protocols/services/jwt'
 import { RefreshToken } from '@protocols/use-cases/auth/refresh-token'
 import { response } from '@utils/response-helper'
 

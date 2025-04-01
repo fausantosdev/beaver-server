@@ -1,6 +1,6 @@
 import { CreateUserDto, UserDto } from '@dtos/user.dtos'
-import { Encryption } from '@protocols/encryption'
 import { Repository } from '@protocols/repository'
+import { Encryption } from '@protocols/services/encryption'
 import { CreateUser } from '@protocols/use-cases/user/create-user'
 import { response } from '@utils/response-helper'
 

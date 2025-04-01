@@ -1,4 +1,4 @@
-import { Response } from './response'
+import { Response } from '../response'
 
 export type SendEmailTypes = {
   from: string

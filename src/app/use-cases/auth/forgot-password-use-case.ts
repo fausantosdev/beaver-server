@@ -2,8 +2,8 @@ import cripto from 'node:crypto'
 
 import { UserDto } from '@dtos/user.dtos'
 import { AppError } from '@errors/app-error'
-import { Email } from '@protocols/email'
 import { Repository } from '@protocols/repository'
+import { Email } from '@protocols/services/email'
 import { ForgotPassword } from '@protocols/use-cases/auth/forgot-password'
 import { response } from '@utils/response-helper'
 

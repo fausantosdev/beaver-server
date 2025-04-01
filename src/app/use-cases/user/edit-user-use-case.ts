@@ -1,6 +1,6 @@
 import { UpdateUserDto, UserDto } from '@dtos/user.dtos'
-import { Encryption } from '@protocols/encryption'
 import { Repository } from '@protocols/repository'
+import { Encryption } from '@protocols/services/encryption'
 import { EditUser } from '@protocols/use-cases/user/edit-user'
 import { response } from '@utils/response-helper'
 

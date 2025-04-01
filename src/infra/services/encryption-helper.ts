@@ -1,5 +1,5 @@
-import { Encryption } from '@protocols/encryption'
 import { Response } from '@protocols/response'
+import { Encryption } from '@protocols/services/encryption'
 import { response } from '@utils/response-helper'
 import bcrypt from 'bcrypt'
 
