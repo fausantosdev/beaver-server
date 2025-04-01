@@ -20,7 +20,7 @@ class EditUserUseCase implements EditUser {
       if (!userExists) throw new Error('User not found')
 
       if ( 'password' in data ) {
-        data.password_hash = await this.encryptionHelper.hash(String(data.password), 8)
+        data.password_hash = (await this.encryptionHelper.hash(String(data.password), 8)).data
         delete data.password
       }
 
