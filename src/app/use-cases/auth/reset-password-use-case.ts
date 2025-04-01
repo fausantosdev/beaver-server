@@ -27,7 +27,7 @@ class ResetPasswordUseCase implements ResetPassword {
       await this.userRepository.update({
         id: userExists.id
       }, {
-        password_hash: await this.encryptionHelper.hash(newPassword, 8),
+        password_hash: (await this.encryptionHelper.hash(newPassword, 8)).data,
         password_reset_token: null,
         password_reset_expires: null
       })
