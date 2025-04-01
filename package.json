@@ -8,7 +8,7 @@
     "dev": "tsx watch src/index.ts",
     "build": "tsc && tsc-alias",
     "prepare": "husky",
-    "test": "jest",
+    "test": "jest --runInBand",
     "test:staged": "jest --passWithNoTests"
   },
   "repository": {
@@ -58,4 +58,3 @@
     "zod": "^3.22.4"
   }
 }
-
