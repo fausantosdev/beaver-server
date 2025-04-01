@@ -36,7 +36,7 @@
       "@controllers/*": ["./src/infra/http/controllers/*"],
       "@repositories/*": ["src/infra/data/prisma/repositories/*"],
       "@usecases/*": ["./src/app/use-cases/*"],
-      "@lib/*": ["./src/lib/*"],
+      "@lib/*": ["src/infra/services/*"],
       "@dtos/*": ["./src/dtos/*"],
       "@data/*": ["./src/infra/data/*"],
       "@errors/*": ["./src/app/errors/*"],
