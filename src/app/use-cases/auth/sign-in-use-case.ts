@@ -22,9 +22,9 @@ class SignInUseCase implements SignIn {
 
       if ( !user ) throw new AppError('Authentication failed, check your credentials', 401)
 
-      const { status: encryptionStatus } = await this.encryptionHelper.compare(password, user.password_hash)
+      const { data: password_match } = await this.encryptionHelper.compare(password, user.password_hash)
 
-      if ( user && !encryptionStatus ) throw new AppError('Authentication failed, check your credentials', 401)
+      if ( user && !password_match ) throw new AppError('Authentication failed, check your credentials', 401)
 
       const { status, data, message } = this.jwtHelper.generateToken({
         id: user.id,
