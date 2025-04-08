@@ -11,16 +11,23 @@ class EditTaskUseCase implements EditTask{
   }
 
   async execute(id: string, data: EditTaskDto) {
-    const taskExists = await this.taskRepository.findOne({ id })
+    try {
+      const taskExists = await this.taskRepository.findOne({ id })
 
-    if (!taskExists) throw new Error('Task not found')
+      if (!taskExists) throw new Error('Task not found')
 
-    const newTask = await this.taskRepository.update(
-      { id },
-      data
-    ) as TaskDto
+      const newTask = await this.taskRepository.update(
+        { id },
+        data
+      ) as TaskDto
 
-    return response({ data: newTask })
+      return response({ data: newTask })
+    } catch (error) {
+      return response({
+        status: false,
+        message: 'Internal server error'
+      })
+    }
   }
 }
 

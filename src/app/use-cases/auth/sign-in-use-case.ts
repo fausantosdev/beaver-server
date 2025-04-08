@@ -1,6 +1,6 @@
 import { SignInDto } from '@dtos/auth-dtos'
 import { UserDto } from '@dtos/user.dtos'
-import { AppError } from '@errors/app-error'
+import { NotAuthorized } from '@errors/not-authorized'
 import { Repository } from '@protocols/repository'
 import { Encryption } from '@protocols/services/encryption'
 import { Jwt } from '@protocols/services/jwt'
@@ -20,11 +20,11 @@ class SignInUseCase implements SignIn {
     try {
       const user = await this.userRepository.findOne({ email }) as UserDto
 
-      if ( !user ) throw new AppError('Authentication failed, check your credentials', 401)
+      if ( !user ) throw new NotAuthorized('Authentication failed, check your credentials')
 
       const { status: encryptionStatus } = await this.encryptionHelper.compare(password, user.password_hash)
 
-      if ( user && !encryptionStatus ) throw new AppError('Authentication failed, check your credentials', 401)
+      if ( user && !encryptionStatus ) throw new NotAuthorized('Authentication failed, check your credentials')
 
       const { status, data, message } = this.jwtHelper.generateToken({
         id: user.id,
@@ -32,7 +32,7 @@ class SignInUseCase implements SignIn {
         role: user.role
       })
 
-      if ( !status ) throw new AppError(message!, 401)
+      if ( !status ) throw new NotAuthorized(message)
 
       return response({
         status,
@@ -42,7 +42,7 @@ class SignInUseCase implements SignIn {
     } catch (error) {
       return response({
         status: false,
-        message: error instanceof AppError ? error.message : 'Internal server error'
+        message: error instanceof NotAuthorized ? error.message : 'Internal server error'
       })
     }
   }

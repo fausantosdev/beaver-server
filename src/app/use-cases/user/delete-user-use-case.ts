@@ -10,13 +10,20 @@ class DeleteUserUseCase implements DeleteUser {
   }
 
   async execute(id: string) {
-    const userExists = await this.userRepository.findOne({ id })
+    try {
+      const userExists = await this.userRepository.findOne({ id })
 
-    if (!userExists) throw new Error('User not found')
+      if (!userExists) throw new Error('User not found')
 
-    const result = await this.userRepository.delete({ id })
+      const result = await this.userRepository.delete({ id })
 
-    return response({ data: !!result })
+      return response({ data: !!result })
+    } catch (error) {
+      return response({
+        status: false,
+        message: 'Internal server error'
+      })
+    }
   }
 }
 

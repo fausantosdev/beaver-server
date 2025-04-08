@@ -1,6 +1,6 @@
 import { JwtPayloadDto } from '@dtos/auth-dtos'
 import { UserDto } from '@dtos/user.dtos'
-import { AppError } from '@errors/app-error'
+import { NotAuthorized } from '@errors/not-authorized'
 import { Repository } from '@protocols/repository'
 import { Jwt } from '@protocols/services/jwt'
 import { RefreshToken } from '@protocols/use-cases/auth/refresh-token'
@@ -15,29 +15,36 @@ class RefreshTokenUseCase implements RefreshToken {
   }
 
   async execute(token: string) {
-    const decodedToken = this.jwtHelper.decodeToken(token)
+    try {
+      const decodedToken = this.jwtHelper.decodeToken(token)
 
-    if (!decodedToken.status) throw new AppError(decodedToken.message!, 401)
+      if (!decodedToken.status) throw new NotAuthorized(decodedToken.message!)
 
-    const { id } = decodedToken.data as JwtPayloadDto
+      const { id } = decodedToken.data as JwtPayloadDto
 
-    const userExists = await this.userRepository.findOne({ id }) as UserDto
+      const userExists = await this.userRepository.findOne({ id }) as UserDto
 
-    if (!userExists) throw new AppError('Invalid token, please log in again', 401)
+      if (!userExists) throw new NotAuthorized('Invalid token, please log in again')
 
-    const { email, role } = userExists
+      const { email, role } = userExists
 
-    const generatedToken = this.jwtHelper.generateToken({
-      id,
-      email,
-      role
-    })
+      const generatedToken = this.jwtHelper.generateToken({
+        id,
+        email,
+        role
+      })
 
-    if (!generatedToken.status) throw new AppError(generatedToken.message!, 401)
+      if (!generatedToken.status) throw new NotAuthorized(generatedToken.message)
 
-    return response({
-      data: generatedToken.data as string
-    })
+      return response({
+        data: generatedToken.data as string
+      })
+    } catch (error) {
+      return response({
+        status: false,
+        message: error instanceof NotAuthorized ? error.message : 'Internal server error'
+      })
+    }
   }
 }
 

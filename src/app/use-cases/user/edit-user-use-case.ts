@@ -13,7 +13,8 @@ class EditUserUseCase implements EditUser {
   }
 
   async execute(id: string, data: UpdateUserDto) {
-    if (Object.keys(data).length === 0)  throw new Error('No data sent')
+    try {
+      if (Object.keys(data).length === 0)  throw new Error('No data sent')
 
       const userExists = await this.userRepository.findOne({ id })
 
@@ -27,6 +28,12 @@ class EditUserUseCase implements EditUser {
       const result = await this.userRepository.update({ id }, data) as UserDto
 
       return response({ data: result })
+    } catch (error) {
+      return response({
+        status: false,
+        message: 'Internal server error'
+      })
+    }
   }
 }
 

@@ -10,13 +10,20 @@ class DeleteTasksUseCase implements DeleteTasks {
   }
 
   async execute(where: object) {
-    const tasks = await this.taskRepository.read(where)
+    try {
+      const tasks = await this.taskRepository.read(where)
 
-    if (tasks.length === 0) throw new Error('No tasks found')
+      if (tasks.length === 0) throw new Error('No tasks found')
 
-    const { count } = await this.taskRepository.delete(where) as { count: number }
+      const { count } = await this.taskRepository.delete(where) as { count: number }
 
-    return response({ data: count })
+      return response({ data: count })
+    } catch (error) {
+      return response({
+        status: false,
+        message: 'Internal server error'
+      })
+    }
   }
 }
 

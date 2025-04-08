@@ -13,17 +13,24 @@ class CreateUserUseCase implements CreateUser {
   }
 
   async execute({ name, email, password_hash }: CreateUserDto) {
-    const emailExists = await this.userRepository.findOne({ email })
+    try {
+      const emailExists = await this.userRepository.findOne({ email })
 
-    if (emailExists) throw new Error('This email is already registered in our system')
+      if (emailExists) throw new Error('This email is already registered in our system')
 
-    const newUser = await this.userRepository.create({
-      name,
-      email,
-      password_hash: await this.encryptionHelper.hash(password_hash, 8)
-    }) as UserDto
+      const newUser = await this.userRepository.create({
+        name,
+        email,
+        password_hash: await this.encryptionHelper.hash(password_hash, 8)
+      }) as UserDto
 
-    return response({ data: newUser })
+      return response({ data: newUser })
+    } catch (error) {
+      return response({
+        status: false,
+        message: 'Internal server error'
+      })
+    }
   }
 }
 

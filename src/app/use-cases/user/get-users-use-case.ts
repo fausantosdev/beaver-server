@@ -13,20 +13,27 @@ class GetUsersUseCase implements GetUsers {
   async execute(where?: object) {
     let result
 
-    if (
-      where &&
-      (
-        ('id' in where) ||
-        ('email' in where)
+    try {
+      if (
+        where &&
+        (
+          ('id' in where) ||
+          ('email' in where)
+        )
       )
-    )
-    {
-      result = await this.userRepository.findOne(where) as UserDto
-    } else {
-      result = await this.userRepository.read(where!) as UserDto[]
-    }
+      {
+        result = await this.userRepository.findOne(where) as UserDto
+      } else {
+        result = await this.userRepository.read(where!) as UserDto[]
+      }
 
-    return response({ data: result })
+      return response({ data: result })
+    } catch (error) {
+      return response({
+        status: false,
+        message: 'Internal server error'
+      })
+    }
   }
 }
 
