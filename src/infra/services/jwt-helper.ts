@@ -24,7 +24,7 @@ class JwtHelper implements Jwt {
     try {
       const decoded = verify(token, env.APP_KEY as string)
       return response({
-        status: true, data: decoded
+        data: decoded
       })
     } catch (error: any) {
       return response({
