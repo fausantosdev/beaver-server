@@ -12,20 +12,27 @@ class CreateTaskUseCase implements CreateTask {
   }
 
   async execute({ user_id, description, parent_id = null }: CreateTaskDto) {
-    if (!(await this.userRepository.findOne({ id: user_id }))) throw Error('User not found')
+    try {
+      if (!(await this.userRepository.findOne({ id: user_id }))) throw Error('User not found')
 
-    if (
-      parent_id &&
-      (await this.taskRepository.read({ user_id, id: parent_id })).length === 0
-    ) throw Error('Parent task not found')
+      if (
+        parent_id &&
+        (await this.taskRepository.read({ user_id, id: parent_id })).length === 0
+      ) throw Error('Parent task not found')
 
-    const newTask = await this.taskRepository.create({
-      user_id,
-      description,
-      parent_id
-    }) as TaskDto
+      const newTask = await this.taskRepository.create({
+        user_id,
+        description,
+        parent_id
+      }) as TaskDto
 
-    return response({ data: newTask })
+      return response({ data: newTask })
+    } catch (error) {
+      return response({
+        status: false,
+        message: 'Internal server error'
+      })
+    }
   }
 }
 
