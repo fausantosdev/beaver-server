@@ -6,6 +6,7 @@ import { NotAuthorized } from '@errors/not-authorized'
 import { Repository } from '@protocols/repository'
 import { Email } from '@protocols/services/email'
 import { ForgotPassword } from '@protocols/use-cases/auth/forgot-password'
+import { isCustomErrorHelper } from '@utils/is-cuscom-error-helper'
 import { response } from '@utils/response-helper'
 
 class ForgotPasswordUseCase implements ForgotPassword {
@@ -56,7 +57,7 @@ class ForgotPasswordUseCase implements ForgotPassword {
     } catch (error) {
       return response({
         status: false,
-        message: error instanceof NotAuthorized ? error.message : 'Internal server error'
+        message: isCustomErrorHelper(error) ? error.message : 'Internal server error'
       })
     }
   }
