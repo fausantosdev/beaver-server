@@ -1,9 +1,11 @@
 import { ResetPasswordDto } from '@dtos/auth-dtos'
 import { UserDto } from '@dtos/user.dtos'
+import { AppError } from '@errors/app-error'
 import { NotAuthorized } from '@errors/not-authorized'
 import { Repository } from '@protocols/repository'
 import { Encryption } from '@protocols/services/encryption'
 import { ResetPassword } from '@protocols/use-cases/auth/reset-password'
+import { isCustomErrorHelper } from '@utils/is-cuscom-error-helper'
 import { response } from '@utils/response-helper'
 
 class ResetPasswordUseCase implements ResetPassword {
@@ -25,7 +27,7 @@ class ResetPasswordUseCase implements ResetPassword {
       if (userExists.password_reset_expires && (new Date() > userExists.password_reset_expires)) {
         throw new NotAuthorized('Token expired, request a new one')
       } else {
-        await this.userRepository.update({
+        const updated = await this.userRepository.update({
           id: userExists.id
         }, {
           password_hash: (await this.encryptionHelper.hash(newPassword, 8)).data,
@@ -33,12 +35,14 @@ class ResetPasswordUseCase implements ResetPassword {
           password_reset_expires: null
         })
 
+        if (updated === null) throw new AppError('Error while updating password, try again later')
+
         return response({})
       }
     } catch (error) {
       return response({
         status: false,
-        message: error instanceof NotAuthorized ? error.message : 'Internal server error'
+        message: isCustomErrorHelper(error) ? error.message : 'Internal server error'
       })
     }
   }
