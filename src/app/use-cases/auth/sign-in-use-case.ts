@@ -5,6 +5,7 @@ import { Repository } from '@protocols/repository'
 import { Encryption } from '@protocols/services/encryption'
 import { Jwt } from '@protocols/services/jwt'
 import { SignIn } from '@protocols/use-cases/auth/sign-in'
+import { isCustomErrorHelper } from '@utils/is-cuscom-error-helper'
 import { response } from '@utils/response-helper'
 
 class SignInUseCase implements SignIn {
@@ -42,7 +43,7 @@ class SignInUseCase implements SignIn {
     } catch (error) {
       return response({
         status: false,
-        message: error instanceof NotAuthorized ? error.message : 'Internal server error'
+        message: isCustomErrorHelper(error) ? error.message : 'Internal server error'
       })
     }
   }

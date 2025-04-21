@@ -4,6 +4,7 @@ import { NotAuthorized } from '@errors/not-authorized'
 import { Repository } from '@protocols/repository'
 import { Jwt } from '@protocols/services/jwt'
 import { RefreshToken } from '@protocols/use-cases/auth/refresh-token'
+import { isCustomErrorHelper } from '@utils/is-cuscom-error-helper'
 import { response } from '@utils/response-helper'
 
 class RefreshTokenUseCase implements RefreshToken {
@@ -42,7 +43,7 @@ class RefreshTokenUseCase implements RefreshToken {
     } catch (error) {
       return response({
         status: false,
-        message: error instanceof NotAuthorized ? error.message : 'Internal server error'
+        message: isCustomErrorHelper(error) ? error.message : 'Internal server error'
       })
     }
   }
