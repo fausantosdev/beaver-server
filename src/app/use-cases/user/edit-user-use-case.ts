@@ -1,7 +1,9 @@
 import { UpdateUserDto, UserDto } from '@dtos/user.dtos'
+import { AppError } from '@errors/app-error'
 import { Repository } from '@protocols/repository'
 import { Encryption } from '@protocols/services/encryption'
 import { EditUser } from '@protocols/use-cases/user/edit-user'
+import { isCustomErrorHelper } from '@utils/is-cuscom-error-helper'
 import { response } from '@utils/response-helper'
 
 class EditUserUseCase implements EditUser {
@@ -18,7 +20,7 @@ class EditUserUseCase implements EditUser {
 
       const userExists = await this.userRepository.findOne({ id })
 
-      if (!userExists) throw new Error('User not found')
+      if (!userExists) throw new AppError('User not found')
 
       if ( 'password' in data ) {
         data.password_hash = (await this.encryptionHelper.hash(String(data.password), 8)).data
@@ -31,7 +33,7 @@ class EditUserUseCase implements EditUser {
     } catch (error) {
       return response({
         status: false,
-        message: 'Internal server error'
+        message: isCustomErrorHelper(error) ? error.message : 'Internal server error'
       })
     }
   }

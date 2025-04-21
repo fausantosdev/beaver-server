@@ -1,5 +1,7 @@
+import { AppError } from '@errors/app-error'
 import { Repository } from '@protocols/repository'
 import { DeleteUser } from '@protocols/use-cases/user/delete-user'
+import { isCustomErrorHelper } from '@utils/is-cuscom-error-helper'
 import { response } from '@utils/response-helper'
 
 class DeleteUserUseCase implements DeleteUser {
@@ -13,7 +15,7 @@ class DeleteUserUseCase implements DeleteUser {
     try {
       const userExists = await this.userRepository.findOne({ id })
 
-      if (!userExists) throw new Error('User not found')
+      if (!userExists) throw new AppError('User not found')
 
       const result = await this.userRepository.delete({ id })
 
@@ -21,7 +23,7 @@ class DeleteUserUseCase implements DeleteUser {
     } catch (error) {
       return response({
         status: false,
-        message: 'Internal server error'
+        message: isCustomErrorHelper(error) ? error.message : 'Internal server error'
       })
     }
   }

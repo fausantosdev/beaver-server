@@ -1,6 +1,7 @@
 import { UserDto } from '@dtos/user.dtos'
 import { Repository } from '@protocols/repository'
 import { GetUsers } from '@protocols/use-cases/user/get-users'
+import { isCustomErrorHelper } from '@utils/is-cuscom-error-helper'
 import { response } from '@utils/response-helper'
 
 class GetUsersUseCase implements GetUsers {
@@ -31,7 +32,7 @@ class GetUsersUseCase implements GetUsers {
     } catch (error) {
       return response({
         status: false,
-        message: 'Internal server error'
+        message: isCustomErrorHelper(error) ? error.message : 'Internal server error'
       })
     }
   }
