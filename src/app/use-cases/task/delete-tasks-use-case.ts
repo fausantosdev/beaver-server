@@ -1,5 +1,5 @@
-import { Repository } from '@protocols/repository'
-import { DeleteTasks } from '@protocols/use-cases/task/delete-tasks'
+import { Repository } from '@interfaces/repository'
+import { DeleteTasks } from '@interfaces/use-cases/task/delete-tasks'
 import { response } from '@utils/response-helper'
 
 class DeleteTasksUseCase implements DeleteTasks {

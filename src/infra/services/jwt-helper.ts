@@ -1,5 +1,5 @@
-import { Response } from '@protocols/response'
-import { Jwt } from '@protocols/services/jwt'
+import { Response } from '@interfaces/response'
+import { Jwt } from '@interfaces/services/jwt'
 import { response } from '@utils/response-helper'
 import { sign, verify } from 'jsonwebtoken'
 

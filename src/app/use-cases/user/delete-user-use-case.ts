@@ -1,6 +1,6 @@
 import { AppError } from '@errors/app-error'
-import { Repository } from '@protocols/repository'
-import { DeleteUser } from '@protocols/use-cases/user/delete-user'
+import { Repository } from '@interfaces/repository'
+import { DeleteUser } from '@interfaces/use-cases/user/delete-user'
 import { isCustomErrorHelper } from '@utils/is-cuscom-error-helper'
 import { response } from '@utils/response-helper'
 

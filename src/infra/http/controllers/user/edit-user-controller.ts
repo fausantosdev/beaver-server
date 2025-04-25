@@ -1,4 +1,4 @@
-import { EditUser } from '@protocols/use-cases/user/edit-user'
+import { EditUser } from '@interfaces/use-cases/user/edit-user'
 import { FastifyReply,FastifyRequest } from 'fastify'
 import { z } from 'zod'
 

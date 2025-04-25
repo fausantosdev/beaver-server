@@ -1,4 +1,4 @@
-import { Response } from '@protocols/response'
+import { Response } from '@interfaces/response'
 
 export interface DeleteUser {
   execute(id: string): Promise<Response>

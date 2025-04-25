@@ -1,6 +1,6 @@
 import { InMemoryUserRepository } from '@data/_test/repositories/in-memory-user-repository'
-import { Response } from '@protocols/response'
-import { Jwt } from '@protocols/services/jwt'
+import { Response } from '@interfaces/response'
+import { Jwt } from '@interfaces/services/jwt'
 import { RefreshTokenUseCase } from '@usecases/auth/refresh-token-use-case'
 import { response } from '@utils/response-helper'
 

@@ -1,8 +1,8 @@
 
 import { randomUUID } from 'node:crypto'
 
-import { CreateUserDto,UserDto } from '@dtos/user.dtos'
-import { Repository } from '@protocols/repository'
+import { CreateUserDto,UserDto } from '@interfaces/dtos/user.dtos'
+import { Repository } from '@interfaces/repository'
 
 class InMemoryUserRepository implements Repository {
   private users: UserDto[] = [

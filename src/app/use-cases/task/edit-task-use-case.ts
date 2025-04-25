@@ -1,6 +1,6 @@
-import { EditTaskDto, TaskDto } from '@dtos/task-dtos'
-import { Repository } from '@protocols/repository'
-import { EditTask } from '@protocols/use-cases/task/edit-task'
+import { EditTaskDto, TaskDto } from '@interfaces/dtos/task-dtos'
+import { Repository } from '@interfaces/repository'
+import { EditTask } from '@interfaces/use-cases/task/edit-task'
 import { response } from '@utils/response-helper'
 
 class EditTaskUseCase implements EditTask{

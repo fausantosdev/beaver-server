@@ -1,7 +1,7 @@
 import { InMemoryUserRepository } from '@data/_test/repositories/in-memory-user-repository'
 import { AppError } from '@errors/app-error'
-import { Response } from '@protocols/response'
-import { Email, SendEmailTypes } from '@protocols/services/email'
+import { Response } from '@interfaces/response'
+import { Email, SendEmailTypes } from '@interfaces/services/email'
 import { ForgotPasswordUseCase } from '@usecases/auth/forgot-password-use-case'
 import { response } from '@utils/response-helper'
 

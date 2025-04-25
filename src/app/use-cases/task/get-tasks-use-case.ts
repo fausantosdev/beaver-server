@@ -1,6 +1,6 @@
-import { TaskDto } from '@dtos/task-dtos'
-import { Repository } from '@protocols/repository'
-import { GetTasks } from '@protocols/use-cases/task/get-tasks'
+import { TaskDto } from '@interfaces/dtos/task-dtos'
+import { Repository } from '@interfaces/repository'
+import { GetTasks } from '@interfaces/use-cases/task/get-tasks'
 import { response } from '@utils/response-helper'
 
 class GetTasksUseCase implements GetTasks {

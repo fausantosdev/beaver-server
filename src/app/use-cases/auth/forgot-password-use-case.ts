@@ -1,11 +1,11 @@
 import cripto from 'node:crypto'
 
-import { UserDto } from '@dtos/user.dtos'
 import { AppError } from '@errors/app-error'
 import { NotAuthorized } from '@errors/not-authorized'
-import { Repository } from '@protocols/repository'
-import { Email } from '@protocols/services/email'
-import { ForgotPassword } from '@protocols/use-cases/auth/forgot-password'
+import { UserDto } from '@interfaces/dtos/user.dtos'
+import { Repository } from '@interfaces/repository'
+import { Email } from '@interfaces/services/email'
+import { ForgotPassword } from '@interfaces/use-cases/auth/forgot-password'
 import { isCustomErrorHelper } from '@utils/is-cuscom-error-helper'
 import { response } from '@utils/response-helper'
 

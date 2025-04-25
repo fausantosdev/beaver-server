@@ -1,6 +1,6 @@
-import { UserDto } from '@dtos/user.dtos'
-import { Repository } from '@protocols/repository'
-import { GetUsers } from '@protocols/use-cases/user/get-users'
+import { UserDto } from '@interfaces/dtos/user.dtos'
+import { Repository } from '@interfaces/repository'
+import { GetUsers } from '@interfaces/use-cases/user/get-users'
 import { isCustomErrorHelper } from '@utils/is-cuscom-error-helper'
 import { response } from '@utils/response-helper'
 

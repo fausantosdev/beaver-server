@@ -1,4 +1,4 @@
-import { ResetPassword } from '@protocols/use-cases/auth/reset-password'
+import { ResetPassword } from '@interfaces/use-cases/auth/reset-password'
 import { FastifyReply,FastifyRequest } from 'fastify'
 import { z } from 'zod'
 

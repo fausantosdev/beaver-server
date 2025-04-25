@@ -1,7 +1,7 @@
 import { InMemoryUserRepository } from '@data/_test/repositories/in-memory-user-repository'
-import { Response } from '@protocols/response'
-import { Encryption } from '@protocols/services/encryption'
-import { Jwt } from '@protocols/services/jwt'
+import { Response } from '@interfaces/response'
+import { Encryption } from '@interfaces/services/encryption'
+import { Jwt } from '@interfaces/services/jwt'
 import { SignInUseCase } from '@usecases/auth/sign-in-use-case'
 import { response } from '@utils/response-helper'
 

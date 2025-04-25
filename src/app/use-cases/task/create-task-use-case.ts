@@ -1,6 +1,6 @@
-import { CreateTaskDto, TaskDto } from '@dtos/task-dtos'
-import { Repository } from '@protocols/repository'
-import { CreateTask } from '@protocols/use-cases/task/create-task'
+import { CreateTaskDto, TaskDto } from '@interfaces/dtos/task-dtos'
+import { Repository } from '@interfaces/repository'
+import { CreateTask } from '@interfaces/use-cases/task/create-task'
 import { response } from '@utils/response-helper'
 
 class CreateTaskUseCase implements CreateTask {

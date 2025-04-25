@@ -1,4 +1,4 @@
-import { RefreshToken } from '@protocols/use-cases/auth/refresh-token'
+import { RefreshToken } from '@interfaces/use-cases/auth/refresh-token'
 import { FastifyReply,FastifyRequest } from 'fastify'
 
 class RefreshTokenController {

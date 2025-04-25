@@ -1,5 +1,5 @@
-import { Response } from '@protocols/response'
-import { Email, SendEmailTypes } from '@protocols/services/email'
+import { Response } from '@interfaces/response'
+import { Email, SendEmailTypes } from '@interfaces/services/email'
 import { response } from '@utils/response-helper'
 import { createTransport, Transporter } from 'nodemailer'
 import { env } from 'src/config/env'

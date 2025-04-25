@@ -1,4 +1,4 @@
-import { GetTasks } from '@protocols/use-cases/task/get-tasks'
+import { GetTasks } from '@interfaces/use-cases/task/get-tasks'
 import { FastifyReply,FastifyRequest } from 'fastify'
 import { z } from 'zod'
 

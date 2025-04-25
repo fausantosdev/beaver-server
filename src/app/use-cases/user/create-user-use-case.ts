@@ -1,8 +1,8 @@
-import { CreateUserDto, UserDto } from '@dtos/user.dtos'
 import { AppError } from '@errors/app-error'
-import { Repository } from '@protocols/repository'
-import { Encryption } from '@protocols/services/encryption'
-import { CreateUser } from '@protocols/use-cases/user/create-user'
+import { CreateUserDto, UserDto } from '@interfaces/dtos/user.dtos'
+import { Repository } from '@interfaces/repository'
+import { Encryption } from '@interfaces/services/encryption'
+import { CreateUser } from '@interfaces/use-cases/user/create-user'
 import { isCustomErrorHelper } from '@utils/is-cuscom-error-helper'
 import { response } from '@utils/response-helper'
 
