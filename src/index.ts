@@ -3,7 +3,7 @@ import { prisma } from '@shared/utils/prisma-helper'
 
 import { server } from './server'
 
-prisma.instance.$connect()
+prisma.connect()
   .then(() => {
     server.init({
       port: env.PORT,
