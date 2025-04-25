@@ -3,7 +3,7 @@ import { routes } from '@routes/index'
 import Fastify, { FastifyInstance, FastifyListenOptions } from 'fastify'
 
 import { AppError } from './app/errors/app-error'
-import { env } from './env'
+import { env } from './config/env'
 
 class Server {
   private readonly app: FastifyInstance
@@ -36,7 +36,7 @@ class Server {
 
   public init(options: FastifyListenOptions) {
     this.app.listen(options).then(() => {
-      console.log(`~ server running${env.NODE_ENV === 'development' ? ` on port ${options.port}` : ''}`)
+      console.log(`~ server running ${env.NODE_ENV === 'development' ? `on port ${options.port}` : ''}`)
     })
   }
 }

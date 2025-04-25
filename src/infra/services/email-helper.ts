@@ -2,7 +2,7 @@ import { Response } from '@protocols/response'
 import { Email, SendEmailTypes } from '@protocols/services/email'
 import { response } from '@utils/response-helper'
 import { createTransport, Transporter } from 'nodemailer'
-import { env } from 'src/env'
+import { env } from 'src/config/env'
 
 class EmailHelper implements Email {
   private transporter: Transporter

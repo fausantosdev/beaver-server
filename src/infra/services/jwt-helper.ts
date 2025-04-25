@@ -3,7 +3,7 @@ import { Jwt } from '@protocols/services/jwt'
 import { response } from '@utils/response-helper'
 import { sign, verify } from 'jsonwebtoken'
 
-import { env } from '../../env'
+import { env } from '../../config/env'
 
 class JwtHelper implements Jwt {
   public generateToken(payload: object): Response {
