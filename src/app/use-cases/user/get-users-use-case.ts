@@ -1,8 +1,8 @@
 import { UserDto } from '@interfaces/dtos/user.dtos'
 import { Repository } from '@interfaces/repository'
 import { GetUsers } from '@interfaces/use-cases/user/get-users'
-import { isCustomErrorHelper } from '@utils/is-cuscom-error-helper'
-import { response } from '@utils/response-helper'
+import { isCustomErrorHelper } from '@shared/utils/is-cuscom-error-helper'
+import { response } from '@shared/utils/response-helper'
 
 class GetUsersUseCase implements GetUsers {
   constructor(

@@ -34,12 +34,11 @@
       "@routes/*": ["./src/infra/http/routes/*"],
       "@middlewares/*": ["./src/infra/http/middlewares/*"],
       "@controllers/*": ["./src/infra/http/controllers/*"],
-      "@repositories/*": ["src/infra/data/prisma/repositories/*"],
+      "@repositories/*": ["./src/infra/data/prisma/repositories/*"],
       "@usecases/*": ["./src/app/use-cases/*"],
-      "@lib/*": ["src/infra/services/*"],
+      "@lib/*": ["./src/infra/services/*"],
       "@data/*": ["./src/infra/data/*"],
-      "@errors/*": ["./src/app/errors/*"],
-      "@utils/*": ["./src/utils/*"],
+      "@shared/*": ["./src/shared/*"],
       "@config/*": ["./src/config/*"]
     } /* Specify a set of entries that re-map imports to additional lookup locations. */,
     // "rootDirs": [],                                   /* Allow multiple folders to be treated as one when resolving modules. */

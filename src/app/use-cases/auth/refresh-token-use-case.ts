@@ -1,11 +1,11 @@
-import { NotAuthorized } from '@errors/not-authorized'
 import { JwtPayloadDto } from '@interfaces/dtos/auth-dtos'
 import { UserDto } from '@interfaces/dtos/user.dtos'
 import { Repository } from '@interfaces/repository'
 import { Jwt } from '@interfaces/services/jwt'
 import { RefreshToken } from '@interfaces/use-cases/auth/refresh-token'
-import { isCustomErrorHelper } from '@utils/is-cuscom-error-helper'
-import { response } from '@utils/response-helper'
+import { NotAuthorized } from '@shared/errors/not-authorized'
+import { isCustomErrorHelper } from '@shared/utils/is-cuscom-error-helper'
+import { response } from '@shared/utils/response-helper'
 
 class RefreshTokenUseCase implements RefreshToken {
   constructor(

@@ -1,9 +1,9 @@
 import { InMemoryUserRepository } from '@data/_test/repositories/in-memory-user-repository'
-import { AppError } from '@errors/app-error'
 import { Response } from '@interfaces/response'
 import { Email, SendEmailTypes } from '@interfaces/services/email'
+import { AppError } from '@shared/errors/app-error'
+import { response } from '@shared/utils/response-helper'
 import { ForgotPasswordUseCase } from '@usecases/auth/forgot-password-use-case'
-import { response } from '@utils/response-helper'
 
 const makeEmailHelper = () => {
   class EmailHelperStub implements Email {

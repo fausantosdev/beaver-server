@@ -1,10 +1,10 @@
-import { AppError } from '@errors/app-error'
 import { UpdateUserDto, UserDto } from '@interfaces/dtos/user.dtos'
 import { Repository } from '@interfaces/repository'
 import { Encryption } from '@interfaces/services/encryption'
 import { EditUser } from '@interfaces/use-cases/user/edit-user'
-import { isCustomErrorHelper } from '@utils/is-cuscom-error-helper'
-import { response } from '@utils/response-helper'
+import { AppError } from '@shared/errors/app-error'
+import { isCustomErrorHelper } from '@shared/utils/is-cuscom-error-helper'
+import { response } from '@shared/utils/response-helper'
 
 class EditUserUseCase implements EditUser {
   constructor(

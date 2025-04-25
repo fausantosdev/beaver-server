@@ -1,12 +1,12 @@
-import { NotAuthorized } from '@errors/not-authorized'
 import { SignInDto } from '@interfaces/dtos/auth-dtos'
 import { UserDto } from '@interfaces/dtos/user.dtos'
 import { Repository } from '@interfaces/repository'
 import { Encryption } from '@interfaces/services/encryption'
 import { Jwt } from '@interfaces/services/jwt'
 import { SignIn } from '@interfaces/use-cases/auth/sign-in'
-import { isCustomErrorHelper } from '@utils/is-cuscom-error-helper'
-import { response } from '@utils/response-helper'
+import { NotAuthorized } from '@shared/errors/not-authorized'
+import { isCustomErrorHelper } from '@shared/utils/is-cuscom-error-helper'
+import { response } from '@shared/utils/response-helper'
 
 class SignInUseCase implements SignIn {
   constructor(

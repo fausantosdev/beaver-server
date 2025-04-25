@@ -1,6 +1,6 @@
 import { Response } from '@interfaces/response'
 import { Jwt } from '@interfaces/services/jwt'
-import { response } from '@utils/response-helper'
+import { response } from '@shared/utils/response-helper'
 import { sign, verify } from 'jsonwebtoken'
 
 import { env } from '../../config/env'

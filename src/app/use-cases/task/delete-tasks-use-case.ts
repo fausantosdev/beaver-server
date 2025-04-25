@@ -1,6 +1,6 @@
 import { Repository } from '@interfaces/repository'
 import { DeleteTasks } from '@interfaces/use-cases/task/delete-tasks'
-import { response } from '@utils/response-helper'
+import { response } from '@shared/utils/response-helper'
 
 class DeleteTasksUseCase implements DeleteTasks {
   constructor(

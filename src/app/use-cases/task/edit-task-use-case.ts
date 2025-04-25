@@ -1,7 +1,7 @@
 import { EditTaskDto, TaskDto } from '@interfaces/dtos/task-dtos'
 import { Repository } from '@interfaces/repository'
 import { EditTask } from '@interfaces/use-cases/task/edit-task'
-import { response } from '@utils/response-helper'
+import { response } from '@shared/utils/response-helper'
 
 class EditTaskUseCase implements EditTask{
   constructor(

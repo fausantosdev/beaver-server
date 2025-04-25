@@ -1,6 +1,6 @@
 import { SignIn } from '@interfaces/use-cases/auth/sign-in'
 import { FastifyReply,FastifyRequest } from 'fastify'
-import { response } from 'src/utils/response-helper'
+import { response } from 'src/shared/utils/response-helper'
 import { z } from 'zod'
 
 class SignInController {

@@ -1,5 +1,5 @@
-import { AppError } from '@errors/app-error'
-import { NotAuthorized } from '@errors/not-authorized'
+import { AppError } from '@shared/errors/app-error'
+import { NotAuthorized } from '@shared/errors/not-authorized'
 
 const customErrors = [
   AppError,

@@ -1,8 +1,8 @@
 import { InMemoryUserRepository } from '@data/_test/repositories/in-memory-user-repository'
 import { Response } from '@interfaces/response'
 import { Jwt } from '@interfaces/services/jwt'
+import { response } from '@shared/utils/response-helper'
 import { RefreshTokenUseCase } from '@usecases/auth/refresh-token-use-case'
-import { response } from '@utils/response-helper'
 
 const makeJwtHelper = () => {
   class JwtHelper implements Jwt {

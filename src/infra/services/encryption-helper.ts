@@ -1,6 +1,6 @@
 import { Response } from '@interfaces/response'
 import { Encryption } from '@interfaces/services/encryption'
-import { response } from '@utils/response-helper'
+import { response } from '@shared/utils/response-helper'
 import bcrypt from 'bcrypt'
 
 class EncryptionHelper implements Encryption {

@@ -1,6 +1,6 @@
+import { JwtHelper } from '@lib/jwt-helper'
+import { NotAuthorized } from '@shared/errors/not-authorized'
 import { FastifyReply, FastifyRequest, HookHandlerDoneFunction } from 'fastify'
-import { NotAuthorized } from 'src/app/errors/not-authorized'
-import { JwtHelper } from 'src/infra/services/jwt-helper'
 import { z } from 'zod'
 
 type Token = {

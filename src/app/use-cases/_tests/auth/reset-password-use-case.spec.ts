@@ -3,8 +3,8 @@ import { InMemoryUserRepository } from '@data/_test/repositories/in-memory-user-
 import { Response } from '@interfaces/response'
 import { Encryption } from '@interfaces/services/encryption'
 import { EncryptionHelper } from '@lib/encryption-helper'
+import { response } from '@shared/utils/response-helper'
 import { ResetPasswordUseCase } from '@usecases/auth/reset-password-use-case'
-import { response } from '@utils/response-helper'
 
 const makeEcriptionHelper = () => {
   class EncryptionHelper implements Encryption {

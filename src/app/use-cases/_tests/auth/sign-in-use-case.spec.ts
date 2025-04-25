@@ -2,8 +2,8 @@ import { InMemoryUserRepository } from '@data/_test/repositories/in-memory-user-
 import { Response } from '@interfaces/response'
 import { Encryption } from '@interfaces/services/encryption'
 import { Jwt } from '@interfaces/services/jwt'
+import { response } from '@shared/utils/response-helper'
 import { SignInUseCase } from '@usecases/auth/sign-in-use-case'
-import { response } from '@utils/response-helper'
 
 const makeEncrypterHelper = () => {
   class EncryptionHelperStub implements Encryption {
