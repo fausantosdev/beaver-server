@@ -1,4 +1,4 @@
-import { prisma } from '@data/prisma/prisma-client'
+import { prisma } from '@config/prisma/prisma-client'
 import { CreateUserDto } from '@dtos/user.dtos'
 import { Prisma, User } from '@prisma/client'
 import { Repository } from '@protocols/repository'

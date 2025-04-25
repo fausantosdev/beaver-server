@@ -1,6 +1,6 @@
-import { prisma } from '@data/prisma/prisma-client'
+import { env } from '@config/env'
+import { prisma } from '@config/prisma/prisma-client'
 
-import { env } from './config/env'
 import { server } from './server'
 
 prisma.instance.$connect()
