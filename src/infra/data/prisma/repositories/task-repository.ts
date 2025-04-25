@@ -1,7 +1,7 @@
-import { prisma } from '@config/prisma/prisma-client'
 import { CreateTaskDto, TaskDto } from '@interfaces/dtos/task-dtos'
 import { Repository } from '@interfaces/repository'
 import { Prisma } from '@prisma/client'
+import { prisma } from '@shared/utils/prisma-helper'
 
 class TaskRepository implements Repository {
   public create = async ({ user_id, description, parent_id }: CreateTaskDto): Promise<TaskDto> => {
