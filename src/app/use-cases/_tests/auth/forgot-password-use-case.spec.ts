@@ -1,12 +1,11 @@
 import { InMemoryUserRepository } from '@data/_test/repositories/in-memory-user-repository'
 import { Response } from '@interfaces/response'
 import { Email, SendEmailTypes } from '@interfaces/services/email'
-import { AppError } from '@shared/errors/app-error'
 import { response } from '@shared/utils/response-helper'
 import { ForgotPasswordUseCase } from '@usecases/auth/forgot-password-use-case'
 
-const makeEmailHelper = () => {
-  class EmailHelperStub implements Email {
+const makeEmailService = () => {
+  class EmailServiceStub implements Email {
     sendMail({ to, subject, text }: SendEmailTypes): Promise<Response> {
       return Promise.resolve(response({
         message: 'Email sent successfully'
@@ -14,22 +13,22 @@ const makeEmailHelper = () => {
     }
   }
 
-  return new EmailHelperStub()
+  return new EmailServiceStub()
 }
 
 const makeSut = () => {
-  const emailHelperStub = makeEmailHelper()
+  const EmailServiceStub = makeEmailService()
   const inMemoryUserRepositoryStub = new InMemoryUserRepository()
 
   const forgotPasswordSUT = new ForgotPasswordUseCase(
     inMemoryUserRepositoryStub,
-    emailHelperStub
+    EmailServiceStub
   )
 
   return {
     forgotPasswordSUT,
     inMemoryUserRepositoryStub,
-    emailHelperStub
+    EmailServiceStub
   }
 }
 
@@ -57,9 +56,9 @@ describe('Forgot password use case', () => {
   })
 
   it('Should return an error response if email sending fails', async () => {
-    const { forgotPasswordSUT, emailHelperStub } = makeSut()
+    const { forgotPasswordSUT, EmailServiceStub } = makeSut()
 
-    jest.spyOn(emailHelperStub, 'sendMail').mockResolvedValueOnce(response({
+    jest.spyOn(EmailServiceStub, 'sendMail').mockResolvedValueOnce(response({
       status: false,
       message: 'An error occurred while sending the email, please try again',
     }))
@@ -72,9 +71,9 @@ describe('Forgot password use case', () => {
   })
 
   it('Should return an error response with "Internal server error" message if the error is unidentified', async () => {
-    const { forgotPasswordSUT, emailHelperStub } = makeSut()
+    const { forgotPasswordSUT, EmailServiceStub } = makeSut()
 
-    jest.spyOn(emailHelperStub, 'sendMail').mockImplementation(() => {
+    jest.spyOn(EmailServiceStub, 'sendMail').mockImplementation(() => {
       throw new Error()
     })
 

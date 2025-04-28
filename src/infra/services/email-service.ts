@@ -4,7 +4,7 @@ import { response } from '@shared/utils/response-helper'
 import { createTransport, Transporter } from 'nodemailer'
 import { env } from 'src/config/env'
 
-class EmailHelper implements Email {
+class EmailService implements Email {
   private transporter: Transporter
 
   constructor() {
@@ -39,4 +39,4 @@ class EmailHelper implements Email {
   }
 }
 
-export { EmailHelper }
+export { EmailService }

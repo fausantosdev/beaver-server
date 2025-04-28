@@ -12,7 +12,7 @@ import { response } from '@shared/utils/response-helper'
 class ForgotPasswordUseCase implements ForgotPassword {
   constructor(
     private userRepository: Repository,
-    private emailHelper: Email
+    private emailService: Email
   ) {
     this.execute = this.execute.bind(this)
   }
@@ -34,7 +34,7 @@ class ForgotPasswordUseCase implements ForgotPassword {
       ) as UserDto
 
       if (updated) {
-        const { status, message } = await this.emailHelper.sendMail({
+        const { status, message } = await this.emailService.sendMail({
           from: 'noreply@beaversaas.com',
           to: updated.email,
           subject: '[Beaver SaaS] - Password recovery',
