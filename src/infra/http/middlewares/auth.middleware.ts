@@ -1,4 +1,4 @@
-import { JwtHelper } from '@lib/jwt-helper'
+import { JwtService } from '@lib/jwt-service'
 import { NotAuthorized } from '@shared/errors/not-authorized'
 import { FastifyReply, FastifyRequest, HookHandlerDoneFunction } from 'fastify'
 import { z } from 'zod'
@@ -12,7 +12,7 @@ type Token = {
   sub: string
 }
 
-const jwtHelper = new JwtHelper()
+const jwtService = new JwtService()
 
 const verifyToken = (request: FastifyRequest, reply: FastifyReply, done: HookHandlerDoneFunction) => {
   const authHeader = request.headers.authorization
@@ -21,7 +21,7 @@ const verifyToken = (request: FastifyRequest, reply: FastifyReply, done: HookHan
 
   const token = authHeader.split(' ')[1]
 
-  const { status, data, message } = jwtHelper.decodeToken(token)
+  const { status, data, message } = jwtService.decodeToken(token)
 
   if(!status) throw new NotAuthorized(message)
 

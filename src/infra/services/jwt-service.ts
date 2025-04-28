@@ -5,7 +5,7 @@ import { sign, verify } from 'jsonwebtoken'
 
 import { env } from '../../config/env'
 
-class JwtHelper implements Jwt {
+class JwtService implements Jwt {
   public generateToken(payload: object): Response {
     try {
       const token = sign(payload, env.APP_KEY, { expiresIn: '1d' })
@@ -35,4 +35,4 @@ class JwtHelper implements Jwt {
   }
 }
 
-export { JwtHelper }
+export { JwtService }

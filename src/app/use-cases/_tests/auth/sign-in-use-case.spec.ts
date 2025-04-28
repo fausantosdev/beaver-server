@@ -18,8 +18,8 @@ const makeEncrypterHelper = () => {
   return new EncryptionHelperStub()
 }
 
-const makeJwtHelper = () => {
-  class JwtHelper implements Jwt {
+const makeJwtService = () => {
+  class JwtService implements Jwt {
     generateToken(payload: object): Response {
       return response({ data: 'token' })
     }
@@ -36,23 +36,23 @@ const makeJwtHelper = () => {
     }
   }
 
-  return new JwtHelper()
+  return new JwtService()
 }
 
 const makeSut = () => {// Factory
   const encryptionHelperStub = makeEncrypterHelper()
-  const jwtHelperStub = makeJwtHelper()
+  const JwtServiceStub = makeJwtService()
 
   const signInSUT = new SignInUseCase(
     new InMemoryUserRepository(),
     encryptionHelperStub,
-    jwtHelperStub
+    JwtServiceStub
   )
 
   return {
     signInSUT,
     encryptionHelperStub,
-    jwtHelperStub
+    JwtServiceStub
   }
 }
 
@@ -85,10 +85,10 @@ describe('Sign in use case', () => {
     }))
   })
 
-  it('Should call JwtHelper with the correct parameters', async () => {
-    const { signInSUT, jwtHelperStub } = makeSut()
+  it('Should call JwtService with the correct parameters', async () => {
+    const { signInSUT, JwtServiceStub } = makeSut()
 
-    const jwtGenerateTokenSpy = jest.spyOn(jwtHelperStub, 'generateToken')
+    const jwtGenerateTokenSpy = jest.spyOn(JwtServiceStub, 'generateToken')
 
     await signInSUT.execute({
       email: 'johndoe@mail.com',
@@ -104,9 +104,9 @@ describe('Sign in use case', () => {
   })
 
   it('Should return an error response if the token is not generated', async () => {
-    const { signInSUT, jwtHelperStub } = makeSut()
+    const { signInSUT, JwtServiceStub } = makeSut()
 
-    jest.spyOn(jwtHelperStub, 'generateToken')
+    jest.spyOn(JwtServiceStub, 'generateToken')
       .mockReturnValueOnce(response({
         status: false,
         message: 'Error generating token, please try again'
@@ -122,9 +122,9 @@ describe('Sign in use case', () => {
   })
 
   it('Should return an error response with "Internal server error" message if the error is unidentified', async () => {
-    const { signInSUT, jwtHelperStub } = makeSut()
+    const { signInSUT, JwtServiceStub } = makeSut()
 
-    jest.spyOn(jwtHelperStub, 'generateToken').mockImplementation(() => {
+    jest.spyOn(JwtServiceStub, 'generateToken').mockImplementation(() => {
       throw new Error()
     })
 
@@ -151,17 +151,17 @@ describe('Sign in use case', () => {
       .toHaveBeenCalledWith('some-password', 'some-password')
   })
 
-  it('Should call JwtHelper/generateToken with the correct parameters', async () => {
-    const { jwtHelperStub, signInSUT } = makeSut()
+  it('Should call JwtService/generateToken with the correct parameters', async () => {
+    const { JwtServiceStub, signInSUT } = makeSut()
 
-    const jwtHelperSpy = jest.spyOn(jwtHelperStub, 'generateToken')
+    const JwtServiceSpy = jest.spyOn(JwtServiceStub, 'generateToken')
 
     await signInSUT.execute({
       email: 'johndoe@mail.com',
       password: 'some-password'
     })
 
-    expect(jwtHelperSpy)
+    expect(JwtServiceSpy)
       .toHaveBeenCalledWith({
         id: 'some-id',
         email: 'johndoe@mail.com',
