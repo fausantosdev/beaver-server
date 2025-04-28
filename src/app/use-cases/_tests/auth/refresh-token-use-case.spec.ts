@@ -4,8 +4,8 @@ import { Jwt } from '@interfaces/services/jwt'
 import { response } from '@shared/utils/response-helper'
 import { RefreshTokenUseCase } from '@usecases/auth/refresh-token-use-case'
 
-const makeJwtHelper = () => {
-  class JwtHelper implements Jwt {
+const makeJwtService = () => {
+  class JwtServiceStub implements Jwt {
     generateToken(payload: object): Response {
       return response({ data: 'token' })
     }
@@ -23,30 +23,30 @@ const makeJwtHelper = () => {
     }
   }
 
-  return new JwtHelper()
+  return new JwtServiceStub()
 }
 
 const makeSut = () => {// Factory
-  const jwtHelperStub = makeJwtHelper()
+  const jwtServiceStub = makeJwtService()
   const inMemoryUserRepositoryStub = new InMemoryUserRepository()
 
   const refreshTokenSUT = new RefreshTokenUseCase(
     inMemoryUserRepositoryStub,
-    jwtHelperStub
+    jwtServiceStub
   )
 
   return {
     refreshTokenSUT,
-    jwtHelperStub,
+    jwtServiceStub,
     inMemoryUserRepositoryStub
   }
 }
 
 describe('Refresh token use case', () => {
   it('Should return an error response if token is invalid', async () => {
-    const { refreshTokenSUT, jwtHelperStub } = makeSut()
+    const { refreshTokenSUT, jwtServiceStub } = makeSut()
 
-    jest.spyOn(jwtHelperStub, 'decodeToken')
+    jest.spyOn(jwtServiceStub, 'decodeToken')
       .mockReturnValueOnce(response({
         status: false,
         message: 'Invalid or expired token, please, log in again.'
@@ -60,13 +60,13 @@ describe('Refresh token use case', () => {
   })
 
   it('Should call decodeToken with a valid token', async () => {
-    const { refreshTokenSUT, jwtHelperStub } = makeSut()
+    const { refreshTokenSUT, jwtServiceStub } = makeSut()
 
-    const jwtHelperStubSpy = jest.spyOn(jwtHelperStub, 'decodeToken')
+    const jwtServiceStubSpy = jest.spyOn(jwtServiceStub, 'decodeToken')
 
     await refreshTokenSUT.execute('valid-token')
 
-    expect(jwtHelperStubSpy)
+    expect(jwtServiceStubSpy)
       .toHaveBeenCalledWith('valid-token')
   })
 
@@ -83,9 +83,9 @@ describe('Refresh token use case', () => {
   })
 
   it('Should return error response if token is not generated', async () => {
-    const { refreshTokenSUT, jwtHelperStub } = makeSut()
+    const { refreshTokenSUT, jwtServiceStub } = makeSut()
 
-    jest.spyOn(jwtHelperStub, 'generateToken')
+    jest.spyOn(jwtServiceStub, 'generateToken')
       .mockReturnValueOnce(response({
         status: false,
         message: 'Error generating token, please try again'
@@ -98,10 +98,10 @@ describe('Refresh token use case', () => {
       }))
   })
 
-  it('Should call JwtHelper with correct params', async () => {
-    const { refreshTokenSUT, jwtHelperStub } = makeSut()
+  it('Should call JwtService with correct params', async () => {
+    const { refreshTokenSUT, jwtServiceStub } = makeSut()
 
-    const jwtGenerateTokenSpy = jest.spyOn(jwtHelperStub, 'generateToken')
+    const jwtGenerateTokenSpy = jest.spyOn(jwtServiceStub, 'generateToken')
 
     await refreshTokenSUT.execute('valid-token')
 
@@ -114,9 +114,9 @@ describe('Refresh token use case', () => {
   })
 
   it('Should return an error response with "Internal server error" message if the error is unidentified', async () => {
-    const { refreshTokenSUT, jwtHelperStub } = makeSut()
+    const { refreshTokenSUT, jwtServiceStub } = makeSut()
 
-    jest.spyOn(jwtHelperStub, 'generateToken').mockImplementation(() => {
+    jest.spyOn(jwtServiceStub, 'generateToken').mockImplementation(() => {
       throw new Error()
     })
 
