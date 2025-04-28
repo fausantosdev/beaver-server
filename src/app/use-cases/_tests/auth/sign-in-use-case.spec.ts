@@ -5,8 +5,8 @@ import { Jwt } from '@interfaces/services/jwt'
 import { response } from '@shared/utils/response-helper'
 import { SignInUseCase } from '@usecases/auth/sign-in-use-case'
 
-const makeEncrypterHelper = () => {
-  class EncryptionHelperStub implements Encryption {
+const makeEncrypterService = () => {
+  class EncryptionServiceStub implements Encryption {
     hash(text: string, salt: number): Promise<Response> {
       return new Promise(resolve => resolve(response({ data: 'hashedText' })))
     }
@@ -15,11 +15,11 @@ const makeEncrypterHelper = () => {
     }
   }
 
-  return new EncryptionHelperStub()
+  return new EncryptionServiceStub()
 }
 
 const makeJwtService = () => {
-  class JwtService implements Jwt {
+  class JwtServiceStub implements Jwt {
     generateToken(payload: object): Response {
       return response({ data: 'token' })
     }
@@ -36,23 +36,23 @@ const makeJwtService = () => {
     }
   }
 
-  return new JwtService()
+  return new JwtServiceStub()
 }
 
 const makeSut = () => {// Factory
-  const encryptionHelperStub = makeEncrypterHelper()
-  const JwtServiceStub = makeJwtService()
+  const encryptionServiceStub = makeEncrypterService()
+  const jwtServiceStub = makeJwtService()
 
   const signInSUT = new SignInUseCase(
     new InMemoryUserRepository(),
-    encryptionHelperStub,
-    JwtServiceStub
+    encryptionServiceStub,
+    jwtServiceStub
   )
 
   return {
     signInSUT,
-    encryptionHelperStub,
-    JwtServiceStub
+    encryptionServiceStub,
+    jwtServiceStub
   }
 }
 
@@ -70,9 +70,9 @@ describe('Sign in use case', () => {
   })
 
   it('Should return an error response if the provided password is incorrect', async () => {
-    const { signInSUT, encryptionHelperStub } = makeSut()
+    const { signInSUT, encryptionServiceStub } = makeSut()
 
-    jest.spyOn(encryptionHelperStub, 'compare').mockResolvedValueOnce(response({
+    jest.spyOn(encryptionServiceStub, 'compare').mockResolvedValueOnce(response({
       status: false
     }))
 
@@ -86,9 +86,9 @@ describe('Sign in use case', () => {
   })
 
   it('Should call JwtService with the correct parameters', async () => {
-    const { signInSUT, JwtServiceStub } = makeSut()
+    const { signInSUT, jwtServiceStub } = makeSut()
 
-    const jwtGenerateTokenSpy = jest.spyOn(JwtServiceStub, 'generateToken')
+    const jwtGenerateTokenSpy = jest.spyOn(jwtServiceStub, 'generateToken')
 
     await signInSUT.execute({
       email: 'johndoe@mail.com',
@@ -104,9 +104,9 @@ describe('Sign in use case', () => {
   })
 
   it('Should return an error response if the token is not generated', async () => {
-    const { signInSUT, JwtServiceStub } = makeSut()
+    const { signInSUT, jwtServiceStub } = makeSut()
 
-    jest.spyOn(JwtServiceStub, 'generateToken')
+    jest.spyOn(jwtServiceStub, 'generateToken')
       .mockReturnValueOnce(response({
         status: false,
         message: 'Error generating token, please try again'
@@ -122,9 +122,9 @@ describe('Sign in use case', () => {
   })
 
   it('Should return an error response with "Internal server error" message if the error is unidentified', async () => {
-    const { signInSUT, JwtServiceStub } = makeSut()
+    const { signInSUT, jwtServiceStub } = makeSut()
 
-    jest.spyOn(JwtServiceStub, 'generateToken').mockImplementation(() => {
+    jest.spyOn(jwtServiceStub, 'generateToken').mockImplementation(() => {
       throw new Error()
     })
 
@@ -138,9 +138,9 @@ describe('Sign in use case', () => {
   })
 
   it('Should call EncriptionHelper/compare with the correct parameters', async () => {
-    const { signInSUT, encryptionHelperStub } = makeSut()
+    const { signInSUT, encryptionServiceStub } = makeSut()
 
-    const encryptionHelperSpy = jest.spyOn(encryptionHelperStub, 'compare')
+    const encryptionHelperSpy = jest.spyOn(encryptionServiceStub, 'compare')
 
     await signInSUT.execute({
       email: 'johndoe@mail.com',
@@ -152,9 +152,9 @@ describe('Sign in use case', () => {
   })
 
   it('Should call JwtService/generateToken with the correct parameters', async () => {
-    const { JwtServiceStub, signInSUT } = makeSut()
+    const { jwtServiceStub, signInSUT } = makeSut()
 
-    const JwtServiceSpy = jest.spyOn(JwtServiceStub, 'generateToken')
+    const JwtServiceSpy = jest.spyOn(jwtServiceStub, 'generateToken')
 
     await signInSUT.execute({
       email: 'johndoe@mail.com',

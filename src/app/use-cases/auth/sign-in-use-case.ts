@@ -11,7 +11,7 @@ import { response } from '@shared/utils/response-helper'
 class SignInUseCase implements SignIn {
   constructor(
     private userRepository: Repository,
-    private encryptionHelper: Encryption,
+    private encryptionService: Encryption,
     private jwtHelper: Jwt
   ) {
     this.execute = this.execute.bind(this)
@@ -23,7 +23,7 @@ class SignInUseCase implements SignIn {
 
       if ( !user ) throw new NotAuthorized('Authentication failed, check your credentials')
 
-      const { status: encryptionStatus } = await this.encryptionHelper.compare(password, user.password_hash)
+      const { status: encryptionStatus } = await this.encryptionService.compare(password, user.password_hash)
 
       if ( user && !encryptionStatus ) throw new NotAuthorized('Authentication failed, check your credentials')
 

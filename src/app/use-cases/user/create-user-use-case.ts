@@ -9,7 +9,7 @@ import { response } from '@shared/utils/response-helper'
 class CreateUserUseCase implements CreateUser {
   constructor(
     private userRepository: Repository,
-    private encryptionHelper: Encryption
+    private encryptionService: Encryption
   ) {
     this.execute = this.execute.bind(this)
   }
@@ -23,7 +23,7 @@ class CreateUserUseCase implements CreateUser {
       const newUser = await this.userRepository.create({
         name,
         email,
-        password_hash: (await this.encryptionHelper.hash(password_hash, 8)).data
+        password_hash: (await this.encryptionService.hash(password_hash, 8)).data
       }) as UserDto
 
       return response({ data: newUser })

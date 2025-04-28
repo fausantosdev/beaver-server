@@ -11,7 +11,7 @@ import { response } from '@shared/utils/response-helper'
 class ResetPasswordUseCase implements ResetPassword {
   constructor(
     private userRepository: Repository,
-    private encryptionHelper: Encryption
+    private encryptionService: Encryption
   ) {
     this.execute = this.execute.bind(this)
   }
@@ -30,7 +30,7 @@ class ResetPasswordUseCase implements ResetPassword {
         const updated = await this.userRepository.update({
           id: userExists.id
         }, {
-          password_hash: (await this.encryptionHelper.hash(newPassword, 8)).data,
+          password_hash: (await this.encryptionService.hash(newPassword, 8)).data,
           password_reset_token: null,
           password_reset_expires: null
         })

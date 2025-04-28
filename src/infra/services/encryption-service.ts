@@ -3,7 +3,7 @@ import { Encryption } from '@interfaces/services/encryption'
 import { response } from '@shared/utils/response-helper'
 import bcrypt from 'bcrypt'
 
-class EncryptionHelper implements Encryption {
+class EncryptionService implements Encryption {
   public async hash(text: string, salt: number): Promise<Response> {
     try {
       const hashedText = await bcrypt.hash(text, salt)
@@ -26,4 +26,4 @@ class EncryptionHelper implements Encryption {
   }
 }
 
-export { EncryptionHelper }
+export { EncryptionService }

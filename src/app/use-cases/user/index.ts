@@ -1,5 +1,5 @@
 import { UserRepository } from '@data/prisma/repositories/user-repository'
-import { EncryptionHelper } from 'src/infra/services/encryption-helper'
+import { EncryptionService} from '@lib/encryption-service'
 
 import { CreateUserUseCase } from './create-user-use-case'
 import { DeleteUserUseCase } from './delete-user-use-case'
@@ -8,12 +8,12 @@ import { GetUsersUseCase } from './get-users-use-case'
 
 export function createUserUseCases() {
   const userRepository = new UserRepository()
-  const encryptionHelper = new EncryptionHelper()
+  const encryptionService = new EncryptionService()
 
   return {
-    create: new CreateUserUseCase(userRepository, encryptionHelper),
+    create: new CreateUserUseCase(userRepository, encryptionService),
     get: new GetUsersUseCase(userRepository),
-    edit: new EditUserUseCase(userRepository, encryptionHelper),
+    edit: new EditUserUseCase(userRepository, encryptionService),
     delete: new DeleteUserUseCase(userRepository),
   }
 }

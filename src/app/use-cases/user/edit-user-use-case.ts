@@ -9,7 +9,7 @@ import { response } from '@shared/utils/response-helper'
 class EditUserUseCase implements EditUser {
   constructor(
     private userRepository: Repository,
-    private encryptionHelper: Encryption
+    private encryptionService: Encryption
   ) {
     this.execute = this.execute.bind(this)
   }
@@ -23,7 +23,7 @@ class EditUserUseCase implements EditUser {
       if (!userExists) throw new AppError('User not found')
 
       if ( 'password' in data ) {
-        data.password_hash = (await this.encryptionHelper.hash(String(data.password), 8)).data
+        data.password_hash = (await this.encryptionService.hash(String(data.password), 8)).data
         delete data.password
       }
 

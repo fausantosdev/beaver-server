@@ -1,13 +1,11 @@
-
 import { InMemoryUserRepository } from '@data/_test/repositories/in-memory-user-repository'
 import { Response } from '@interfaces/response'
 import { Encryption } from '@interfaces/services/encryption'
-import { EncryptionHelper } from '@lib/encryption-helper'
 import { response } from '@shared/utils/response-helper'
 import { ResetPasswordUseCase } from '@usecases/auth/reset-password-use-case'
 
-const makeEcriptionHelper = () => {
-  class EncryptionHelper implements Encryption {
+const makeEcriptionService = () => {
+  class EncryptionServiceStub implements Encryption {
     hash(text: string, salt: number): Promise<Response> {
       return Promise.resolve(response({
         data: 'hashedText'
@@ -21,22 +19,22 @@ const makeEcriptionHelper = () => {
     }
   }
 
-  return new EncryptionHelper()
+  return new EncryptionServiceStub()
 }
 
 const makeSut = () => {
   const inMemoryUserRepositoryStub = new InMemoryUserRepository()
-  const encryptionHelperStub = makeEcriptionHelper()
+  const encryptionServiceStub = makeEcriptionService()
 
   const resetPasswordSUT = new ResetPasswordUseCase(
     inMemoryUserRepositoryStub,
-    encryptionHelperStub
+    encryptionServiceStub
   )
 
   return {
     resetPasswordSUT,
     inMemoryUserRepositoryStub,
-    encryptionHelperStub
+    encryptionServiceStub
   }
 }
 
@@ -57,7 +55,7 @@ describe('Refresh token use case', () => {
   })
 
   it('Should return an error response if the password reset token is invalid', async () => {
-    const { resetPasswordSUT,  } = makeSut()
+    const { resetPasswordSUT } = makeSut()
 
     await expect(resetPasswordSUT.execute({
       email: 'johndoe@mail.com',
@@ -132,7 +130,7 @@ describe('Refresh token use case', () => {
   })
 
   it('Should call EncriptionHelper/hash with the correct parameters', async () => {
-    const { resetPasswordSUT, inMemoryUserRepositoryStub, encryptionHelperStub } = makeSut()
+    const { resetPasswordSUT, inMemoryUserRepositoryStub, encryptionServiceStub } = makeSut()
 
     const current = new Date()
 
@@ -148,7 +146,7 @@ describe('Refresh token use case', () => {
       updated_at: new Date()
     })
 
-    const encryptionHelperSpy = jest.spyOn(encryptionHelperStub, 'hash')
+    const encryptionServiceSpy = jest.spyOn(encryptionServiceStub, 'hash')
 
     await resetPasswordSUT.execute({
       email: 'johndoe@mail.com',
@@ -156,12 +154,12 @@ describe('Refresh token use case', () => {
       newPassword: 'new-password'
     })
 
-    expect(encryptionHelperSpy)
+    expect(encryptionServiceSpy)
       .toHaveBeenCalledWith('new-password', 8)
   })
 
   it('Should return an error response with "Internal server error" message if the error is unidentified', async () => {
-    const { encryptionHelperStub, inMemoryUserRepositoryStub, resetPasswordSUT } = makeSut()
+    const { encryptionServiceStub, inMemoryUserRepositoryStub, resetPasswordSUT } = makeSut()
 
     const current = new Date()
 
@@ -177,7 +175,7 @@ describe('Refresh token use case', () => {
       updated_at: new Date()
     })
 
-    jest.spyOn(encryptionHelperStub, 'hash').mockImplementation(() => {
+    jest.spyOn(encryptionServiceStub, 'hash').mockImplementation(() => {
       throw new Error()
     })
 
