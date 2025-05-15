@@ -1,15 +1,48 @@
 import { createTaskControllers } from '@controllers/task'
-import { verifyToken } from '@middlewares/auth.middleware'
+import { createMiddlewares } from '@middlewares/index'
 import { FastifyInstance } from 'fastify'
 
 const tasksControllers = createTaskControllers()
+const middlewares = createMiddlewares()
 
 export async function taskRoutes (app: FastifyInstance) {
-  app.post('/', { preHandler: [verifyToken] }, tasksControllers.create.handle)
+  app.post(
+    '/',
+    {
+      preHandler: [
+        middlewares.authMiddleware.verifyToken
+      ]
+    },
+    tasksControllers.create.handle
+  )
 
-  app.get('/:id?', { preHandler: [verifyToken] }, tasksControllers.get.handle)
+  app.get(
+    '/:id?',
+    {
+      preHandler: [
+        middlewares.authMiddleware.verifyToken
+      ]
+    },
+    tasksControllers.get.handle
+  )
 
-  app.patch('/:id', { preHandler: [verifyToken] }, tasksControllers.edit.handle)
+  app.patch(
+    '/:id',
+    {
+      preHandler: [
+        middlewares.authMiddleware.verifyToken
+      ]
+    },
+    tasksControllers.edit.handle
+  )
 
-  app.delete('/', { preHandler: [verifyToken] }, tasksControllers.delete.handle)
+  app.delete(
+    '/',
+    {
+      preHandler: [
+        middlewares.authMiddleware.verifyToken
+      ]
+    },
+    tasksControllers.delete.handle
+  )
 }
