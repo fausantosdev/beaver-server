@@ -1,4 +1,5 @@
-import { CreateUserDto, UserDto } from '@interfaces/dtos/user.dtos'
+import { User } from '@entities/user'
+import { CreateUserDto } from '@interfaces/dtos/user.dtos'
 import { Repository } from '@interfaces/repository'
 import { Encryption } from '@interfaces/services/encryption'
 import { CreateUser } from '@interfaces/use-cases/user/create-user'
@@ -16,7 +17,7 @@ class CreateUserUseCase implements CreateUser {
 
   async execute({ name, email, password_hash }: CreateUserDto) {
     try {
-      const emailExists = await this.userRepository.findOne({ email })
+      const emailExists = await this.userRepository.findOne({ email }) as User
 
       if (emailExists) throw new AppError('This email is already registered in our system')
 
@@ -24,11 +25,11 @@ class CreateUserUseCase implements CreateUser {
         name,
         email,
         password_hash: (await this.encryptionService.hash(password_hash, 8)).data
-      }) as UserDto
+      }) as User
 
       return response({ data: newUser })
     } catch (error) {
-      console.log(error)
+
       return response({
         status: false,
         message: isCustomErrorHelper(error) ? error.message : 'Internal server error'
