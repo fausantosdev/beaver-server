@@ -1,9 +1,9 @@
 import cripto from 'node:crypto'
 
+import { ForgotPassword } from '@app/interfaces/use-cases/auth/forgot-password'
 import { Repository } from '@domain/interfaces/repository'
 import { UserDto } from '@interfaces/dtos/user.dtos'
 import { Email } from '@interfaces/services/email'
-import { ForgotPassword } from '@interfaces/use-cases/auth/forgot-password'
 import { AppError } from '@shared/errors/app-error'
 import { NotAuthorized } from '@shared/errors/not-authorized'
 import { isCustomErrorHelper } from '@shared/utils/is-cuscom-error-helper'

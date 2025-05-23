@@ -1,7 +1,7 @@
+import { EditTask } from '@app/interfaces/use-cases/task/edit-task'
 import { Repository } from '@domain/interfaces/repository'
 import { Task } from '@entities/task'
 import { EditTaskDto } from '@interfaces/dtos/task-dtos'
-import { EditTask } from '@interfaces/use-cases/task/edit-task'
 import { response } from '@shared/utils/response-helper'
 class EditTaskUseCase implements EditTask{
   constructor(

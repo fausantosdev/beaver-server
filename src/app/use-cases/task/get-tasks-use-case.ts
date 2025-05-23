@@ -1,6 +1,6 @@
+import { GetTasks } from '@app/interfaces/use-cases/task/get-tasks'
 import { Repository } from '@domain/interfaces/repository'
 import { Task } from '@entities/task'
-import { GetTasks } from '@interfaces/use-cases/task/get-tasks'
 import { response } from '@shared/utils/response-helper'
 
 class GetTasksUseCase implements GetTasks {
