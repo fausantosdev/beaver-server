@@ -1,4 +1,5 @@
-import { CreateTaskDto, TaskDto } from '@interfaces/dtos/task-dtos'
+import { Task } from '@entities/task'
+import { CreateTaskDto } from '@interfaces/dtos/task-dtos'
 import { Repository } from '@interfaces/repository'
 import { CreateTask } from '@interfaces/use-cases/task/create-task'
 import { response } from '@shared/utils/response-helper'
@@ -24,7 +25,7 @@ class CreateTaskUseCase implements CreateTask {
         user_id,
         description,
         parent_id
-      }) as TaskDto
+      }) as Task
 
       return response({ data: newTask })
     } catch (error) {

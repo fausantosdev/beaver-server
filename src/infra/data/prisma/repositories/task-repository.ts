@@ -1,10 +1,11 @@
-import { CreateTaskDto, TaskDto } from '@interfaces/dtos/task-dtos'
+import { Task } from '@entities/task'
+import { CreateTaskDto } from '@interfaces/dtos/task-dtos'
 import { Repository } from '@interfaces/repository'
 import { Prisma } from '@prisma/client'
 import { prisma } from '@shared/utils/prisma-helper'
 
 class TaskRepository implements Repository {
-  public create = async ({ user_id, description, parent_id }: CreateTaskDto): Promise<TaskDto> => {
+  public create = async ({ user_id, description, parent_id }: CreateTaskDto): Promise<Task> => {
     return await prisma.instance.task.create({
       data: {
         user_id,
@@ -14,7 +15,7 @@ class TaskRepository implements Repository {
     })
   }
 
-  public read = async (where: Prisma.TaskWhereInput): Promise<TaskDto[]> => {
+  public read = async (where: Prisma.TaskWhereInput): Promise<Task[]> => {
     return await prisma.instance.task.findMany({
       where,
       include: {
@@ -27,7 +28,7 @@ class TaskRepository implements Repository {
     })
   }
 
-  public findOne = async (where: Prisma.TaskWhereUniqueInput): Promise<TaskDto | null> => {
+  public findOne = async (where: Prisma.TaskWhereUniqueInput): Promise<Task | null> => {
     return await prisma.instance.task.findUnique({
       where,
       include: {
@@ -36,7 +37,7 @@ class TaskRepository implements Repository {
     })
   }
 
-  public update = async (where: Prisma.TaskWhereUniqueInput, data: object): Promise<TaskDto> => {
+  public update = async (where: Prisma.TaskWhereUniqueInput, data: object): Promise<Task> => {
     return await prisma.instance.task.update({
       where, data
     })

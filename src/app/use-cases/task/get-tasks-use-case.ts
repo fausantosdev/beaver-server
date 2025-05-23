@@ -1,4 +1,4 @@
-import { TaskDto } from '@interfaces/dtos/task-dtos'
+import { Task } from '@entities/task'
 import { Repository } from '@interfaces/repository'
 import { GetTasks } from '@interfaces/use-cases/task/get-tasks'
 import { response } from '@shared/utils/response-helper'
@@ -21,9 +21,9 @@ class GetTasksUseCase implements GetTasks {
         )
       )
       {
-        result = await this.taskRepository.findOne(where) as TaskDto
+        result = await this.taskRepository.findOne(where) as Task
       } else {
-        result = await this.taskRepository.read(where!) as TaskDto[]
+        result = await this.taskRepository.read(where!) as Task[]
       }
 
       return response({ data: result })

@@ -1,8 +1,8 @@
-import { EditTaskDto, TaskDto } from '@interfaces/dtos/task-dtos'
+import { Task } from '@entities/task'
+import { EditTaskDto } from '@interfaces/dtos/task-dtos'
 import { Repository } from '@interfaces/repository'
 import { EditTask } from '@interfaces/use-cases/task/edit-task'
 import { response } from '@shared/utils/response-helper'
-
 class EditTaskUseCase implements EditTask{
   constructor(
     private taskRepository: Repository
@@ -19,7 +19,7 @@ class EditTaskUseCase implements EditTask{
       const newTask = await this.taskRepository.update(
         { id },
         data
-      ) as TaskDto
+      ) as Task
 
       return response({ data: newTask })
     } catch (error) {
