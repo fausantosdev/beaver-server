@@ -1,4 +1,4 @@
-import { Repository } from '@interfaces/repository'
+import { Repository } from '@domain/interfaces/repository'
 import { DeleteUser } from '@interfaces/use-cases/user/delete-user'
 import { AppError } from '@shared/errors/app-error'
 import { isCustomErrorHelper } from '@shared/utils/is-cuscom-error-helper'

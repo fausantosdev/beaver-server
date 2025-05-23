@@ -1,4 +1,4 @@
-import { Repository } from '@interfaces/repository'
+import { Repository } from '@domain/interfaces/repository'
 import { DeleteTasks } from '@interfaces/use-cases/task/delete-tasks'
 import { response } from '@shared/utils/response-helper'
 

@@ -1,6 +1,6 @@
+import { Repository } from '@domain/interfaces/repository'
 import { JwtPayloadDto } from '@interfaces/dtos/auth-dtos'
 import { UserDto } from '@interfaces/dtos/user.dtos'
-import { Repository } from '@interfaces/repository'
 import { Jwt } from '@interfaces/services/jwt'
 import { RefreshToken } from '@interfaces/use-cases/auth/refresh-token'
 import { NotAuthorized } from '@shared/errors/not-authorized'

@@ -1,7 +1,7 @@
 import cripto from 'node:crypto'
 
+import { Repository } from '@domain/interfaces/repository'
 import { UserDto } from '@interfaces/dtos/user.dtos'
-import { Repository } from '@interfaces/repository'
 import { Email } from '@interfaces/services/email'
 import { ForgotPassword } from '@interfaces/use-cases/auth/forgot-password'
 import { AppError } from '@shared/errors/app-error'

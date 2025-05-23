@@ -1,5 +1,5 @@
+import { Repository } from '@domain/interfaces/repository'
 import { Task } from '@entities/task'
-import { Repository } from '@interfaces/repository'
 import { GetTasks } from '@interfaces/use-cases/task/get-tasks'
 import { response } from '@shared/utils/response-helper'
 

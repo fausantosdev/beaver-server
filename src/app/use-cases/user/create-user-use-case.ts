@@ -1,6 +1,6 @@
+import { Repository } from '@domain/interfaces/repository'
 import { User } from '@entities/user'
 import { CreateUserDto } from '@interfaces/dtos/user.dtos'
-import { Repository } from '@interfaces/repository'
 import { Encryption } from '@interfaces/services/encryption'
 import { CreateUser } from '@interfaces/use-cases/user/create-user'
 import { AppError } from '@shared/errors/app-error'

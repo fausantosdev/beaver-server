@@ -1,5 +1,5 @@
+import { Repository } from '@domain/interfaces/repository'
 import { UserDto } from '@interfaces/dtos/user.dtos'
-import { Repository } from '@interfaces/repository'
 import { GetUsers } from '@interfaces/use-cases/user/get-users'
 import { isCustomErrorHelper } from '@shared/utils/is-cuscom-error-helper'
 import { response } from '@shared/utils/response-helper'

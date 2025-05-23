@@ -1,6 +1,6 @@
+import { Repository } from '@domain/interfaces/repository'
 import { ResetPasswordDto } from '@interfaces/dtos/auth-dtos'
 import { UserDto } from '@interfaces/dtos/user.dtos'
-import { Repository } from '@interfaces/repository'
 import { Encryption } from '@interfaces/services/encryption'
 import { ResetPassword } from '@interfaces/use-cases/auth/reset-password'
 import { AppError } from '@shared/errors/app-error'

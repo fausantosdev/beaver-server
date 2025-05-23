@@ -1,5 +1,5 @@
+import { Repository } from '@domain/interfaces/repository'
 import { UpdateUserDto, UserDto } from '@interfaces/dtos/user.dtos'
-import { Repository } from '@interfaces/repository'
 import { Encryption } from '@interfaces/services/encryption'
 import { EditUser } from '@interfaces/use-cases/user/edit-user'
 import { AppError } from '@shared/errors/app-error'
