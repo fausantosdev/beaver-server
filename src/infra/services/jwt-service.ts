@@ -1,9 +1,8 @@
+import { env } from '@config/env'
 import { Response } from '@interfaces/response'
 import { Jwt } from '@interfaces/services/jwt'
 import { response } from '@shared/utils/response-helper'
 import { sign, verify } from 'jsonwebtoken'
-
-import { env } from '../../config/env'
 
 class JwtService implements Jwt {
   public generateToken(payload: object): Response {

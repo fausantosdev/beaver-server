@@ -1,8 +1,8 @@
+import { env } from '@config/env'
 import { Response } from '@interfaces/response'
 import { Email, SendEmailTypes } from '@interfaces/services/email'
 import { response } from '@shared/utils/response-helper'
 import { createTransport, Transporter } from 'nodemailer'
-import { env } from 'src/config/env'
 
 class EmailService implements Email {
   private transporter: Transporter
