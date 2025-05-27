@@ -1,4 +1,4 @@
-import { UserRepository } from '@data/prisma/repositories/user-repository'
+import { UserRepository } from '@data/repositories/user-repository'
 import { EncryptionService} from '@lib/encryption-service'
 
 import { CreateUserUseCase } from './create-user-use-case'

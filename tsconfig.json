@@ -34,7 +34,7 @@
       "@routes/*": ["./src/infra/http/routes/*"],
       "@middlewares/*": ["./src/infra/http/middlewares/*"],
       "@controllers/*": ["./src/infra/http/controllers/*"],
-      "@repositories/*": ["./src/infra/data/prisma/repositories/*"],
+      "@repositories/*": ["src/infra/data/repositories/*"],
       "@usecases/*": ["./src/app/use-cases/*"],
       "@lib/*": ["./src/infra/services/*"],
       "@data/*": ["./src/infra/data/*"],

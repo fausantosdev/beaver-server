@@ -1,4 +1,4 @@
-import { UserRepository } from '@data/prisma/repositories/user-repository'
+import { UserRepository } from '@data/repositories/user-repository'
 import { EmailService } from '@lib/email-service'
 import { EncryptionService } from '@lib/encryption-service'
 import { JwtService } from '@lib/jwt-service'
