@@ -1,4 +1,4 @@
-import { DeleteUser } from '@interfaces/use-cases/user/delete-user'
+import { DeleteUser } from '@app/interfaces/use-cases/user/delete-user'
 import { FastifyReply,FastifyRequest } from 'fastify'
 import { z } from 'zod'
 

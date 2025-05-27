@@ -1,4 +1,4 @@
-import { CreateUser } from '@interfaces/use-cases/user/create-user'
+import { CreateUser } from '@app/interfaces/use-cases/user/create-user'
 import { FastifyReply,FastifyRequest } from 'fastify'
 import { z } from 'zod'
 

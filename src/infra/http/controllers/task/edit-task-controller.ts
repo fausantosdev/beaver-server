@@ -1,4 +1,4 @@
-import { EditTask } from '@interfaces/use-cases/task/edit-task'
+import { EditTask } from '@app/interfaces/use-cases/task/edit-task'
 import { FastifyReply,FastifyRequest } from 'fastify'
 import { z } from 'zod'
 

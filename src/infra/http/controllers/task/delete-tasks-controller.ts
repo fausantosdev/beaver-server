@@ -1,4 +1,4 @@
-import { DeleteTasks } from '@interfaces/use-cases/task/delete-tasks'
+import { DeleteTasks } from '@app/interfaces/use-cases/task/delete-tasks'
 import { FastifyReply,FastifyRequest } from 'fastify'
 import { z } from 'zod'
 

@@ -1,4 +1,4 @@
-import { ForgotPassword } from '@interfaces/use-cases/auth/forgot-password'
+import { ForgotPassword } from '@app/interfaces/use-cases/auth/forgot-password'
 import { FastifyReply,FastifyRequest } from 'fastify'
 import { z } from 'zod'
 
