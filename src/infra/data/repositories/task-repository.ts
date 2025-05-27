@@ -1,7 +1,7 @@
-import { CreateTaskDto } from '@app/dtos/task-dtos'
 import { Repository } from '@domain/interfaces/repository'
 import { Task } from '@entities/task'
 import { Prisma } from '@prisma/client'
+import { CreateTaskDto } from '@shared/dtos/task-dtos'
 import { prisma } from '@shared/utils/prisma-helper'
 
 class TaskRepository implements Repository {

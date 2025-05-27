@@ -1,5 +1,5 @@
-import { UpdateUserDto } from '@app/dtos/user.dtos'
 import { Response } from '@interfaces/response'
+import { UpdateUserDto } from '@shared/dtos/user.dtos'
 
 export interface EditUser {
   execute(id: string, data: UpdateUserDto): Promise<Response>

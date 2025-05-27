@@ -1,7 +1,7 @@
-import { CreateUserDto } from '@app/dtos/user.dtos'
 import { User } from '@domain/entities/user'
 import { Repository } from '@domain/interfaces/repository'
 import { Prisma } from '@prisma/client'
+import { CreateUserDto } from '@shared/dtos/user.dtos'
 import { prisma } from '@shared/utils/prisma-helper'
 
 class UserRepository implements Repository {
