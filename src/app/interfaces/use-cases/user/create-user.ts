@@ -1,4 +1,4 @@
-import { CreateUserDto } from '@interfaces/dtos/user.dtos'
+import { CreateUserDto } from '@app/dtos/user.dtos'
 import { Response } from '@interfaces/response'
 
 export interface CreateUser {

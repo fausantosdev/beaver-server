@@ -1,4 +1,4 @@
-import { SignInDto } from '@interfaces/dtos/auth-dtos'
+import { SignInDto } from '@app/dtos/auth-dtos'
 import { Response } from '@interfaces/response'
 
 export interface SignIn {

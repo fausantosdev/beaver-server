@@ -1,7 +1,7 @@
+import { CreateTaskDto } from '@app/dtos/task-dtos'
 import { CreateTask } from '@app/interfaces/use-cases/task/create-task'
 import { Repository } from '@domain/interfaces/repository'
 import { Task } from '@entities/task'
-import { CreateTaskDto } from '@interfaces/dtos/task-dtos'
 import { response } from '@shared/utils/response-helper'
 
 class CreateTaskUseCase implements CreateTask {

@@ -1,7 +1,7 @@
+import { JwtPayloadDto } from '@app/dtos/auth-dtos'
 import { RefreshToken } from '@app/interfaces/use-cases/auth/refresh-token'
 import { Repository } from '@domain/interfaces/repository'
-import { JwtPayloadDto } from '@interfaces/dtos/auth-dtos'
-import { UserDto } from '@interfaces/dtos/user.dtos'
+import { User } from '@entities/user'
 import { Jwt } from '@interfaces/services/jwt'
 import { NotAuthorized } from '@shared/errors/not-authorized'
 import { isCustomErrorHelper } from '@shared/utils/is-cuscom-error-helper'
@@ -23,7 +23,7 @@ class RefreshTokenUseCase implements RefreshToken {
 
       const { id } = decodedToken.data as JwtPayloadDto
 
-      const userExists = await this.userRepository.findOne({ id }) as UserDto
+      const userExists = await this.userRepository.findOne({ id }) as User
 
       if (!userExists) throw new NotAuthorized('Invalid token, please log in again')
 

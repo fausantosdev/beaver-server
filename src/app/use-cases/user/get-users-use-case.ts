@@ -1,6 +1,6 @@
 import { GetUsers } from '@app/interfaces/use-cases/user/get-users'
 import { Repository } from '@domain/interfaces/repository'
-import { UserDto } from '@interfaces/dtos/user.dtos'
+import { User } from '@entities/user'
 import { isCustomErrorHelper } from '@shared/utils/is-cuscom-error-helper'
 import { response } from '@shared/utils/response-helper'
 
@@ -23,9 +23,9 @@ class GetUsersUseCase implements GetUsers {
         )
       )
       {
-        result = await this.userRepository.findOne(where) as UserDto
+        result = await this.userRepository.findOne(where) as User
       } else {
-        result = await this.userRepository.read(where!) as UserDto[]
+        result = await this.userRepository.read(where!) as User[]
       }
 
       return response({ data: result })

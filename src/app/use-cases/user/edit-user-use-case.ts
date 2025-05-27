@@ -1,6 +1,7 @@
+import { UpdateUserDto } from '@app/dtos/user.dtos'
 import { EditUser } from '@app/interfaces/use-cases/user/edit-user'
 import { Repository } from '@domain/interfaces/repository'
-import { UpdateUserDto, UserDto } from '@interfaces/dtos/user.dtos'
+import { User } from '@entities/user'
 import { Encryption } from '@interfaces/services/encryption'
 import { AppError } from '@shared/errors/app-error'
 import { isCustomErrorHelper } from '@shared/utils/is-cuscom-error-helper'
@@ -27,7 +28,7 @@ class EditUserUseCase implements EditUser {
         delete data.password
       }
 
-      const result = await this.userRepository.update({ id }, data) as UserDto
+      const result = await this.userRepository.update({ id }, data) as User
 
       return response({ data: result })
     } catch (error) {

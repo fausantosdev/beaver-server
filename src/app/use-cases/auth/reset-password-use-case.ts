@@ -1,7 +1,7 @@
+import { ResetPasswordDto } from '@app/dtos/auth-dtos'
 import { ResetPassword } from '@app/interfaces/use-cases/auth/reset-password'
 import { Repository } from '@domain/interfaces/repository'
-import { ResetPasswordDto } from '@interfaces/dtos/auth-dtos'
-import { UserDto } from '@interfaces/dtos/user.dtos'
+import { User } from '@entities/user'
 import { Encryption } from '@interfaces/services/encryption'
 import { AppError } from '@shared/errors/app-error'
 import { NotAuthorized } from '@shared/errors/not-authorized'
@@ -18,7 +18,7 @@ class ResetPasswordUseCase implements ResetPassword {
 
   async execute({ token, email, newPassword }: ResetPasswordDto) {
     try {
-      const userExists = await this.userRepository.findOne({ email }) as UserDto
+      const userExists = await this.userRepository.findOne({ email }) as User
 
       if (!userExists) throw new NotAuthorized('E-mail not found')
 

@@ -1,4 +1,4 @@
-import { UpdateUserDto } from '@interfaces/dtos/user.dtos'
+import { UpdateUserDto } from '@app/dtos/user.dtos'
 import { Response } from '@interfaces/response'
 
 export interface EditUser {

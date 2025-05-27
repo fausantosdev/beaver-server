@@ -1,7 +1,7 @@
+import { SignInDto } from '@app/dtos/auth-dtos'
 import { SignIn } from '@app/interfaces/use-cases/auth/sign-in'
 import { Repository } from '@domain/interfaces/repository'
-import { SignInDto } from '@interfaces/dtos/auth-dtos'
-import { UserDto } from '@interfaces/dtos/user.dtos'
+import { User } from '@entities/user'
 import { Encryption } from '@interfaces/services/encryption'
 import { Jwt } from '@interfaces/services/jwt'
 import { NotAuthorized } from '@shared/errors/not-authorized'
@@ -19,11 +19,11 @@ class SignInUseCase implements SignIn {
 
   async execute({ email, password }: SignInDto) {
     try {
-      const user = await this.userRepository.findOne({ email }) as UserDto
+      const user = await this.userRepository.findOne({ email }) as User
 
       if ( !user ) throw new NotAuthorized('Authentication failed, check your credentials')
 
-      const { status: encryptionStatus } = await this.encryptionService.compare(password, user.password_hash)
+      const { status: encryptionStatus } = await this.encryptionService.compare(password, user.password_hash!)
 
       if ( user && !encryptionStatus ) throw new NotAuthorized('Authentication failed, check your credentials')
 

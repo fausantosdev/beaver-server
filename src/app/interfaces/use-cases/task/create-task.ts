@@ -1,4 +1,4 @@
-import { CreateTaskDto } from '@interfaces/dtos/task-dtos'
+import { CreateTaskDto } from '@app/dtos/task-dtos'
 import { Response } from '@interfaces/response'
 
 export interface CreateTask {

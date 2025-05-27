@@ -2,7 +2,7 @@ import cripto from 'node:crypto'
 
 import { ForgotPassword } from '@app/interfaces/use-cases/auth/forgot-password'
 import { Repository } from '@domain/interfaces/repository'
-import { UserDto } from '@interfaces/dtos/user.dtos'
+import { User } from '@entities/user'
 import { Email } from '@interfaces/services/email'
 import { AppError } from '@shared/errors/app-error'
 import { NotAuthorized } from '@shared/errors/not-authorized'
@@ -19,7 +19,7 @@ class ForgotPasswordUseCase implements ForgotPassword {
 
   async execute(email: string) {
     try {
-      const userExists = await this.userRepository.findOne({ email }) as UserDto
+      const userExists = await this.userRepository.findOne({ email }) as User
 
       if(!userExists) throw new NotAuthorized('E-mail not found')
 
@@ -31,12 +31,12 @@ class ForgotPasswordUseCase implements ForgotPassword {
       const updated = await this.userRepository.update(
         { id: userExists?.id },
         { password_reset_token: token, password_reset_expires: now }
-      ) as UserDto
+      ) as User
 
       if (updated) {
         const { status, message } = await this.emailService.sendMail({
           from: 'noreply@beaversaas.com',
-          to: updated.email,
+          to: updated.email!,
           subject: '[Beaver SaaS] - Password recovery',
           text: `Use this token to recover your password: ${token}\nIf you didn't request this recovery, just disregard this email, your data is safe.`
         })
