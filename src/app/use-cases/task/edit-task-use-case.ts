@@ -7,11 +7,9 @@ import { response } from '@shared/utils/response-helper'
 class EditTaskUseCase implements EditTask{
   constructor(
     private taskRepository: Repository
-  ) {
-    this.execute = this.execute.bind(this)
-  }
+  ) {}
 
-  async execute(id: string, data: EditTaskDto) {
+  public execute = async (id: string, data: EditTaskDto) =>{
     try {
       const taskExists = await this.taskRepository.findOne({ id })
 

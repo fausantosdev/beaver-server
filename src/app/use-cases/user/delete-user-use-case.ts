@@ -7,11 +7,9 @@ import { response } from '@shared/utils/response-helper'
 class DeleteUserUseCase implements DeleteUser {
   constructor(
     private userRepository: Repository
-  ) {
-    this.execute = this.execute.bind(this)
-  }
+  ) {}
 
-  async execute(id: string) {
+  public execute = async (id: string) => {
     try {
       const userExists = await this.userRepository.findOne({ id })
 

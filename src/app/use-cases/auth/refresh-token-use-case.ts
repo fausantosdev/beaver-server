@@ -11,11 +11,9 @@ class RefreshTokenUseCase implements RefreshToken {
   constructor(
     private userRepository: Repository,
     private jwtHelper: Jwt
-  ) {
-    this.execute = this.execute.bind(this)
-  }
+  ) {}
 
-  async execute(token: string) {
+  public execute = async (token: string) => {
     try {
       const decodedToken = this.jwtHelper.decodeToken(token)
 

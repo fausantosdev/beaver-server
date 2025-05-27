@@ -16,7 +16,7 @@ class ResetPasswordUseCase implements ResetPassword {
     this.execute = this.execute.bind(this)
   }
 
-  async execute({ token, email, newPassword }: ResetPasswordDto) {
+  public execute = async ({ token, email, newPassword }: ResetPasswordDto) => {
     try {
       const userExists = await this.userRepository.findOne({ email }) as User
 

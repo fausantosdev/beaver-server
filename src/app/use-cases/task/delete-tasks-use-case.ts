@@ -5,11 +5,9 @@ import { response } from '@shared/utils/response-helper'
 class DeleteTasksUseCase implements DeleteTasks {
   constructor(
     private taskRepository: Repository
-  ) {
-    this.execute = this.execute.bind(this)
-  }
+  ) {}
 
-  async execute(where: object) {
+  public execute = async (where: object) => {
     try {
       const tasks = await this.taskRepository.read(where)
 

@@ -6,11 +6,9 @@ import { response } from '@shared/utils/response-helper'
 class GetTasksUseCase implements GetTasks {
   constructor(
     private taskRepository: Repository
-  ) {
-    this.execute = this.execute.bind(this)
-  }
+  ) {}
 
-  async execute(where?: object) {
+  public execute = async (where?: object) =>{
     let result
 
     try {

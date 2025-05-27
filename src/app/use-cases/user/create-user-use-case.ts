@@ -11,11 +11,9 @@ class CreateUserUseCase implements CreateUser {
   constructor(
     private userRepository: Repository,
     private encryptionService: Encryption
-  ) {
-    this.execute = this.execute.bind(this)
-  }
+  ) {}
 
-  async execute({ name, email, password_hash }: CreateUserDto) {
+  public execute = async ({ name, email, password_hash }: CreateUserDto) => {
     try {
       const emailExists = await this.userRepository.findOne({ email }) as User
 

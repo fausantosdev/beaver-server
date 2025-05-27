@@ -6,11 +6,9 @@ import { z } from 'zod'
 class GetTasksController {
   constructor(
     private getTasksUseCase: GetTasks
-  ) {
-    this.handle = this.handle.bind(this)
-  }
+  ) {}
 
-  async handle(request: FastifyRequest, reply: FastifyReply): Promise<FastifyReply> {
+  public handle = async (request: FastifyRequest, reply: FastifyReply): Promise<FastifyReply> => {
     const schema = z.object({
       id: z.string().uuid().optional()
     })

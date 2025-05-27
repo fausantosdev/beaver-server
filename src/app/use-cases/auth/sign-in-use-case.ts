@@ -13,11 +13,9 @@ class SignInUseCase implements SignIn {
     private userRepository: Repository,
     private encryptionService: Encryption,
     private jwtHelper: Jwt
-  ) {
-    this.execute = this.execute.bind(this)
-  }
+  ) {}
 
-  async execute({ email, password }: SignInDto) {
+  public execute = async ({ email, password }: SignInDto) => {
     try {
       const user = await this.userRepository.findOne({ email }) as User
 

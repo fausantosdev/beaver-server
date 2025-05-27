@@ -6,11 +6,9 @@ import { z } from 'zod'
 class ForgotPasswordController {
   constructor(
     private forgotPasswordUseCase: ForgotPassword
-  ) {
-    this.handle = this.handle.bind(this)
-  }
+  ) {}
 
-  async handle(request: FastifyRequest, reply: FastifyReply): Promise<FastifyReply> {
+  public handle = async (request: FastifyRequest, reply: FastifyReply): Promise<FastifyReply> => {
     const schema = z.object({
       email: z.string().email({ message: 'Invalid email address' })
     })

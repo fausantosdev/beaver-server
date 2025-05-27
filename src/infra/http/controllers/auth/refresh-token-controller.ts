@@ -4,11 +4,9 @@ import { FastifyReply,FastifyRequest } from 'fastify'
 class RefreshTokenController {
   constructor(
     private refreshTokenUseCase: RefreshToken
-  ) {
-    this.handle = this.handle.bind(this)
-  }
+  ) {}
 
-  async handle(request: FastifyRequest, reply: FastifyReply): Promise<FastifyReply> {
+  public handle = async (request: FastifyRequest, reply: FastifyReply): Promise<FastifyReply> => {
     const token = request.headers?.authorization!.split(' ')[1]
 
     const { status, data, message } = await this.refreshTokenUseCase.execute(token)

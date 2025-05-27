@@ -5,11 +5,9 @@ import { z } from 'zod'
 class ResetPasswordController {
   constructor(
     private resetPasswordUseCase: ResetPassword
-  ) {
-    this.handle = this.handle.bind(this)
-  }
+  ) {}
 
-  async handle(request: FastifyRequest, reply: FastifyReply): Promise<FastifyReply> {
+  public handle = async (request: FastifyRequest, reply: FastifyReply): Promise<FastifyReply> => {
     const schema = z.object({
       token: z.string().min(35, { message: 'You need to send the token' }),
       email: z.string().email({ message: 'Invalid email address' }),

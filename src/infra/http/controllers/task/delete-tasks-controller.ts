@@ -6,11 +6,9 @@ import { z } from 'zod'
 class DeleteTasksController {
   constructor(
     private deleteTasksUseCase: DeleteTasks
-  ) {
-    this.handle = this.handle.bind(this)
-  }
+  ) {}
 
-  async handle(request: FastifyRequest, reply: FastifyReply): Promise<FastifyReply> {
+  public handle = async (request: FastifyRequest, reply: FastifyReply): Promise<FastifyReply> => {
     const schema = z.object({
       tasks_ids: z.array(z.string().uuid()).min(1, 'You have not selected any tasks')
     })

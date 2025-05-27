@@ -13,11 +13,9 @@ class ForgotPasswordUseCase implements ForgotPassword {
   constructor(
     private userRepository: Repository,
     private emailService: Email
-  ) {
-    this.execute = this.execute.bind(this)
-  }
+  ) {}
 
-  async execute(email: string) {
+  public execute = async (email: string) => {
     try {
       const userExists = await this.userRepository.findOne({ email }) as User
 

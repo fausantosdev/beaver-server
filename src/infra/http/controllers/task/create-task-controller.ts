@@ -5,11 +5,9 @@ import { z } from 'zod'
 class CreateTaskController {
   constructor(
     private createTaskUseCase: CreateTask
-  ) {
-    this.handle = this.handle.bind(this)
-  }
+  ) {}
 
-  async handle(request: FastifyRequest, reply: FastifyReply): Promise<FastifyReply> {
+  public handle = async (request: FastifyRequest, reply: FastifyReply): Promise<FastifyReply> => {
     const schema = z.object({
       parent_id: z.string().uuid().optional(),
       description: z.string().min(2, { message: 'The text must have at least two characters' })

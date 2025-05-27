@@ -11,11 +11,9 @@ class EditUserUseCase implements EditUser {
   constructor(
     private userRepository: Repository,
     private encryptionService: Encryption
-  ) {
-    this.execute = this.execute.bind(this)
-  }
+  ) {}
 
-  async execute(id: string, data: UpdateUserDto) {
+  public execute = async (id: string, data: UpdateUserDto) => {
     try {
       if (Object.keys(data).length === 0)  throw new Error('No data sent')
 

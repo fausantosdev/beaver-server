@@ -5,11 +5,9 @@ import { z } from 'zod'
 class GetUsersController {
   constructor(
     private getUsersUseCase: GetUsers
-  ) {
-    this.handle = this.handle.bind(this)
-  }
+  ) {}
 
-  async handle(request: FastifyRequest, reply: FastifyReply): Promise<FastifyReply> {
+  public handle = async (request: FastifyRequest, reply: FastifyReply): Promise<FastifyReply> => {
     const schema = z.object({
       id: z.string().uuid({ message: 'Id is required' })
     })

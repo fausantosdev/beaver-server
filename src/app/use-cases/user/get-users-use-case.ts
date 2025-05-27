@@ -7,11 +7,9 @@ import { response } from '@shared/utils/response-helper'
 class GetUsersUseCase implements GetUsers {
   constructor(
     private userRepository: Repository
-  ) {
-    this.execute = this.execute.bind(this)
-  }
+  ) {}
 
-  async execute(where?: object) {
+  public execute = async (where?: object) => {
     let result
 
     try {

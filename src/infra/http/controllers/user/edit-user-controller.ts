@@ -5,11 +5,9 @@ import { z } from 'zod'
 class EditUserController {
   constructor(
     private editUserUseCase: EditUser
-  ) {
-    this.handle = this.handle.bind(this)
-  }
+  ) {}
 
-  async handle(request: FastifyRequest, reply: FastifyReply): Promise<FastifyReply> {
+  public handle = async (request: FastifyRequest, reply: FastifyReply): Promise<FastifyReply> => {
     const schemaId = z.object({
       id: z.string().uuid({ message: 'Incorrect ID format' })
     })
