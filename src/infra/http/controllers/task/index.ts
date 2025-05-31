@@ -1,4 +1,4 @@
-import { createTaskUseCases } from '@usecases/task'
+import { createTaskUseCases } from '@infra/di/use-cases/task'
 
 import { CreateTaskController } from './create-task-controller'
 import { DeleteTasksController } from './delete-tasks-controller'

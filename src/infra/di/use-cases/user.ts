@@ -1,10 +1,9 @@
+import { CreateUserUseCase } from '@app/use-cases/user/create-user-use-case'
+import { DeleteUserUseCase } from '@app/use-cases/user/delete-user-use-case'
+import { EditUserUseCase } from '@app/use-cases/user/edit-user-use-case'
+import { GetUsersUseCase } from '@app/use-cases/user/get-users-use-case'
 import { UserRepository } from '@data/repositories/user-repository'
 import { EncryptionService} from '@lib/encryption-service'
-
-import { CreateUserUseCase } from './create-user-use-case'
-import { DeleteUserUseCase } from './delete-user-use-case'
-import { EditUserUseCase } from './edit-user-use-case'
-import { GetUsersUseCase } from './get-users-use-case'
 
 export function createUserUseCases() {
   const userRepository = new UserRepository()

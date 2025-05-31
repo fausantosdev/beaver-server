@@ -1,12 +1,11 @@
+import { ForgotPasswordUseCase } from '@app/use-cases/auth/forgot-password-use-case'
+import { RefreshTokenUseCase } from '@app/use-cases/auth/refresh-token-use-case'
+import { ResetPasswordUseCase } from '@app/use-cases/auth/reset-password-use-case'
+import { SignInUseCase } from '@app/use-cases/auth/sign-in-use-case'
 import { UserRepository } from '@data/repositories/user-repository'
 import { EmailService } from '@lib/email-service'
 import { EncryptionService } from '@lib/encryption-service'
 import { JwtService } from '@lib/jwt-service'
-
-import { ForgotPasswordUseCase } from './forgot-password-use-case'
-import { RefreshTokenUseCase } from './refresh-token-use-case'
-import { ResetPasswordUseCase } from './reset-password-use-case'
-import { SignInUseCase } from './sign-in-use-case'
 
 export function createAuthUseCases() {
   const userRepository = new UserRepository()

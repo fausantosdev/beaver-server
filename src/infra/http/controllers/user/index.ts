@@ -1,4 +1,4 @@
-import { createUserUseCases } from '@usecases/user'
+import { createUserUseCases } from '@infra/di/use-cases/user'
 
 import { CreateUserController } from './create-user-controller'
 import { DeleteUserController } from './delete-user-controller'

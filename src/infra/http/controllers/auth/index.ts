@@ -1,4 +1,4 @@
-import { createAuthUseCases } from '@usecases/auth'
+import { createAuthUseCases } from '@infra/di/use-cases/auth'
 
 import { ForgotPasswordController } from './forgot-password-controller'
 import { RefreshTokenController } from './refresh-token-controller'
