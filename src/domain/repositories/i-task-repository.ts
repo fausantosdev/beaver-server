@@ -1,4 +1,4 @@
-import { Task } from '@entities/task'
+import { Task } from '@domain/entities/task'
 import { CreateTaskDto } from '@shared/dtos/task-dtos'
 
 export interface ITaskRepository {

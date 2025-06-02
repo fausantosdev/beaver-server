@@ -1,4 +1,4 @@
-import { User } from '@entities/user'
+import { User } from '@domain/entities/user'
 import { CreateUserDto } from '@shared/dtos/user-dtos'
 
 export interface IUserRepository {
