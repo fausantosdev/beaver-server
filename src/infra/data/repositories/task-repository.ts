@@ -1,5 +1,5 @@
+import { Task } from '@domain/entities/task'
 import { ITaskRepository } from '@domain/repositories/i-task-repository'
-import { Task } from '@entities/task'
 import { Prisma } from '@prisma/client'
 import { CreateTaskDto } from '@shared/dtos/task-dtos'
 import { prisma } from '@shared/utils/prisma-helper'

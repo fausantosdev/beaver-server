@@ -1,7 +1,7 @@
 import { User } from '@domain/entities/user'
 import { IUserRepository } from '@domain/repositories/i-user-repository'
 import { Prisma } from '@prisma/client'
-import { CreateUserDto } from '@shared/dtos/user.dtos'
+import { CreateUserDto } from '@shared/dtos/user-dtos'
 import { prisma } from '@shared/utils/prisma-helper'
 
 class UserRepository implements IUserRepository {
