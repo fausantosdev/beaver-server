@@ -1,10 +1,11 @@
 import { randomUUID } from 'node:crypto'
 
-import { Repository } from '@domain/interfaces/repository'
-import { CreateUserDto,UserDto } from '@shared/dtos/user-dtos'
+import { User } from '@domain/entities/user'
+import { IUserRepository } from '@domain/repositories/i-user-repository'
+import { CreateUserDto } from '@shared/dtos/user-dtos'
 
-class InMemoryUserRepository implements Repository {
-  private users: UserDto[] = [
+class InMemoryUserRepository implements IUserRepository {
+  private users: User[] = [
     {
       id: 'some-id',
       name: 'John Doe',
@@ -18,7 +19,7 @@ class InMemoryUserRepository implements Repository {
     }
   ]
 
-  public create = async ({ name, email, password_hash }: CreateUserDto): Promise<UserDto> => {
+  public create = async ({ name, email, password_hash }: CreateUserDto): Promise<User> => {
     const user = {
       id: randomUUID(),
       name,
@@ -29,37 +30,37 @@ class InMemoryUserRepository implements Repository {
       password_reset_expires: new Date(),
       created_at: new Date(),
       updated_at: new Date()
-    } as UserDto
+    } as User
 
     this.users.push(user)
 
     return user
   }
 
-  public read = async ({ email }: { email: string }): Promise<UserDto[]> => {
-    const users = this.users.find((user: UserDto) => user.email === email)
+  public read = async ({ email }: { email: string }): Promise<User[]> => {
+    const users = this.users.find((user: User) => user.email === email)
     return users ? [users] : []
   }
 
-  public findOne = async ({ id, email }: { id: string, email: string }): Promise<UserDto | null> => {
-    const user = this.users.find((user: UserDto) => user.email === email || user.id === id) as UserDto
+  public findOne = async ({ id, email }: { id: string, email: string }): Promise<User | null> => {
+    const user = this.users.find((user: User) => user.email === email || user.id === id) as User
 
     return user
   }
 
-  public update = async ({ id, email }: { id?: string, email?: string }, data: object): Promise<UserDto | null> => {
-    const userIndex = this.users.findIndex((user: UserDto) => id ? user.id === id : user.email === email)
+  public update = async ({ id, email }: { id?: string, email?: string }, data: object): Promise<User | null> => {
+    const userIndex = this.users.findIndex((user: User) => id ? user.id === id : user.email === email)
 
     this.users[userIndex] = { ...this.users[userIndex], ...data }
 
     return this.users[userIndex]
   }
 
-  public delete = async ({ id }: { id: string }): Promise<UserDto | null> => {
-    const userIndex = this.users.findIndex((user: UserDto) => user.id === id)
+  public delete = async ({ id }: { id: string }): Promise<User | null> => {
+    const userIndex = this.users.findIndex((user: User) => user.id === id)
     const deletedUser = this.users[userIndex]
 
-    this.users = this.users.filter((user: UserDto) => user.id !== id)
+    this.users = this.users.filter((user: User) => user.id !== id)
 
     return deletedUser
   }
