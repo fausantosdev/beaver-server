@@ -1,12 +1,12 @@
 import { GetUsers } from '@app/interfaces/use-cases/user/get-users'
-import { Repository } from '@domain/interfaces/repository'
+import { IUserRepository } from '@domain/repositories/i-user-repository'
 import { User } from '@entities/user'
 import { isCustomErrorHelper } from '@shared/utils/is-cuscom-error-helper'
 import { response } from '@shared/utils/response-helper'
 
 class GetUsersUseCase implements GetUsers {
   constructor(
-    private userRepository: Repository
+    private userRepository: IUserRepository
   ) {}
 
   public execute = async (where?: object) => {

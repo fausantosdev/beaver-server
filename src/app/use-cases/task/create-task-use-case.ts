@@ -1,13 +1,14 @@
 import { CreateTask } from '@app/interfaces/use-cases/task/create-task'
-import { Repository } from '@domain/interfaces/repository'
+import { ITaskRepository } from '@domain/repositories/i-task-repository'
+import { IUserRepository } from '@domain/repositories/i-user-repository'
 import { Task } from '@entities/task'
 import { CreateTaskDto } from '@shared/dtos/task-dtos'
 import { response } from '@shared/utils/response-helper'
 
 class CreateTaskUseCase implements CreateTask {
   constructor(
-    private taskRepository: Repository,
-    private userRepository: Repository
+    private taskRepository: ITaskRepository,
+    private userRepository: IUserRepository
   ) {}
 
   public execute = async ({ user_id, description, parent_id = null }: CreateTaskDto) => {

@@ -1,5 +1,5 @@
 import { ResetPassword } from '@app/interfaces/use-cases/auth/reset-password'
-import { Repository } from '@domain/interfaces/repository'
+import { IUserRepository } from '@domain/repositories/i-user-repository'
 import { User } from '@entities/user'
 import { Encryption } from '@interfaces/services/encryption'
 import { ResetPasswordDto } from '@shared/dtos/auth-dtos'
@@ -10,7 +10,7 @@ import { response } from '@shared/utils/response-helper'
 
 class ResetPasswordUseCase implements ResetPassword {
   constructor(
-    private userRepository: Repository,
+    private userRepository: IUserRepository,
     private encryptionService: Encryption
   ) {
     this.execute = this.execute.bind(this)

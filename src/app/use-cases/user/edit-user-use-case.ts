@@ -1,5 +1,5 @@
 import { EditUser } from '@app/interfaces/use-cases/user/edit-user'
-import { Repository } from '@domain/interfaces/repository'
+import { IUserRepository } from '@domain/repositories/i-user-repository'
 import { User } from '@entities/user'
 import { Encryption } from '@interfaces/services/encryption'
 import { UpdateUserDto } from '@shared/dtos/user.dtos'
@@ -9,7 +9,7 @@ import { response } from '@shared/utils/response-helper'
 
 class EditUserUseCase implements EditUser {
   constructor(
-    private userRepository: Repository,
+    private userRepository: IUserRepository,
     private encryptionService: Encryption
   ) {}
 

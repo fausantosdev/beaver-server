@@ -1,14 +1,14 @@
 import { GetTasks } from '@app/interfaces/use-cases/task/get-tasks'
-import { Repository } from '@domain/interfaces/repository'
+import { ITaskRepository } from '@domain/repositories/i-task-repository'
 import { Task } from '@entities/task'
 import { response } from '@shared/utils/response-helper'
 
 class GetTasksUseCase implements GetTasks {
   constructor(
-    private taskRepository: Repository
+    private taskRepository: ITaskRepository
   ) {}
 
-  public execute = async (where?: object) =>{
+  public execute = async (where?: object) => {
     let result
 
     try {

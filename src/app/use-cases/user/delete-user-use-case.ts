@@ -1,12 +1,12 @@
 import { DeleteUser } from '@app/interfaces/use-cases/user/delete-user'
-import { Repository } from '@domain/interfaces/repository'
+import { IUserRepository } from '@domain/repositories/i-user-repository'
 import { AppError } from '@shared/errors/app-error'
 import { isCustomErrorHelper } from '@shared/utils/is-cuscom-error-helper'
 import { response } from '@shared/utils/response-helper'
 
 class DeleteUserUseCase implements DeleteUser {
   constructor(
-    private userRepository: Repository
+    private userRepository: IUserRepository
   ) {}
 
   public execute = async (id: string) => {

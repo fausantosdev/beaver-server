@@ -1,12 +1,12 @@
 import { EditTask } from '@app/interfaces/use-cases/task/edit-task'
-import { Repository } from '@domain/interfaces/repository'
+import { ITaskRepository } from '@domain/repositories/i-task-repository'
 import { Task } from '@entities/task'
 import { EditTaskDto } from '@shared/dtos/task-dtos'
 import { response } from '@shared/utils/response-helper'
 
 class EditTaskUseCase implements EditTask{
   constructor(
-    private taskRepository: Repository
+    private taskRepository: ITaskRepository
   ) {}
 
   public execute = async (id: string, data: EditTaskDto) =>{

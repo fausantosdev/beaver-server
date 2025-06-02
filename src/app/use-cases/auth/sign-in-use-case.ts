@@ -1,5 +1,5 @@
 import { SignIn } from '@app/interfaces/use-cases/auth/sign-in'
-import { Repository } from '@domain/interfaces/repository'
+import { IUserRepository } from '@domain/repositories/i-user-repository'
 import { User } from '@entities/user'
 import { Encryption } from '@interfaces/services/encryption'
 import { Jwt } from '@interfaces/services/jwt'
@@ -10,7 +10,7 @@ import { response } from '@shared/utils/response-helper'
 
 class SignInUseCase implements SignIn {
   constructor(
-    private userRepository: Repository,
+    private userRepository: IUserRepository,
     private encryptionService: Encryption,
     private jwtHelper: Jwt
   ) {}

@@ -1,10 +1,10 @@
-import { Repository } from '@domain/interfaces/repository'
+import { ITaskRepository } from '@domain/repositories/i-task-repository'
 import { Task } from '@entities/task'
 import { Prisma } from '@prisma/client'
 import { CreateTaskDto } from '@shared/dtos/task-dtos'
 import { prisma } from '@shared/utils/prisma-helper'
 
-class TaskRepository implements Repository {
+class TaskRepository implements ITaskRepository {
   public create = async ({ user_id, description, parent_id }: CreateTaskDto): Promise<Task> => {
     return await prisma.instance.task.create({
       data: {

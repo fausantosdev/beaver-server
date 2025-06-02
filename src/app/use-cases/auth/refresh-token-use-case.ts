@@ -1,5 +1,5 @@
 import { RefreshToken } from '@app/interfaces/use-cases/auth/refresh-token'
-import { Repository } from '@domain/interfaces/repository'
+import { IUserRepository } from '@domain/repositories/i-user-repository'
 import { User } from '@entities/user'
 import { Jwt } from '@interfaces/services/jwt'
 import { JwtPayloadDto } from '@shared/dtos/auth-dtos'
@@ -9,7 +9,7 @@ import { response } from '@shared/utils/response-helper'
 
 class RefreshTokenUseCase implements RefreshToken {
   constructor(
-    private userRepository: Repository,
+    private userRepository: IUserRepository,
     private jwtHelper: Jwt
   ) {}
 

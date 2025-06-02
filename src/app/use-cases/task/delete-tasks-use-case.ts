@@ -1,10 +1,10 @@
 import { DeleteTasks } from '@app/interfaces/use-cases/task/delete-tasks'
-import { Repository } from '@domain/interfaces/repository'
+import { ITaskRepository } from '@domain/repositories/i-task-repository'
 import { response } from '@shared/utils/response-helper'
 
 class DeleteTasksUseCase implements DeleteTasks {
   constructor(
-    private taskRepository: Repository
+    private taskRepository: ITaskRepository
   ) {}
 
   public execute = async (where: object) => {

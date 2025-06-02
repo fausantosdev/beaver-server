@@ -1,10 +1,10 @@
 import { User } from '@domain/entities/user'
-import { Repository } from '@domain/interfaces/repository'
+import { IUserRepository } from '@domain/repositories/i-user-repository'
 import { Prisma } from '@prisma/client'
 import { CreateUserDto } from '@shared/dtos/user.dtos'
 import { prisma } from '@shared/utils/prisma-helper'
 
-class UserRepository implements Repository {
+class UserRepository implements IUserRepository {
   public create = async ({ name, email, password_hash }: CreateUserDto): Promise<User> => {
     return await prisma.instance.user.create({
       data: {
