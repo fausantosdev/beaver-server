@@ -1,7 +1,7 @@
 import { CreateTask } from '@app/interfaces/use-cases/task/create-task'
+import { Task } from '@domain/entities/task'
 import { ITaskRepository } from '@domain/repositories/i-task-repository'
 import { IUserRepository } from '@domain/repositories/i-user-repository'
-import { Task } from '@entities/task'
 import { CreateTaskDto } from '@shared/dtos/task-dtos'
 import { response } from '@shared/utils/response-helper'
 
@@ -20,11 +20,13 @@ class CreateTaskUseCase implements CreateTask {
         (await this.taskRepository.read({ user_id, id: parent_id })).length === 0
       ) throw Error('Parent task not found')
 
-      const newTask = await this.taskRepository.create({
+      const task = new Task({
         user_id,
         description,
         parent_id
-      }) as Task
+      })
+
+      const newTask = await this.taskRepository.create(task)
 
       return response({ data: newTask })
     } catch (error) {

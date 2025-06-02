@@ -1,6 +1,6 @@
 import { CreateUser } from '@app/interfaces/use-cases/user/create-user'
+import { User } from '@domain/entities/user'
 import { IUserRepository } from '@domain/repositories/i-user-repository'
-import { User } from '@entities/user'
 import { Encryption } from '@interfaces/services/encryption'
 import { CreateUserDto } from '@shared/dtos/user-dtos'
 import { AppError } from '@shared/errors/app-error'
@@ -19,11 +19,13 @@ class CreateUserUseCase implements CreateUser {
 
       if (emailExists) throw new AppError('This email is already registered in our system')
 
-      const newUser = await this.userRepository.create({
+      const user = new User({
         name,
         email,
         password_hash: (await this.encryptionService.hash(password_hash, 8)).data
-      }) as User
+      })
+
+      const newUser = await this.userRepository.create(user)
 
       return response({ data: newUser })
     } catch (error) {
