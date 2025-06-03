@@ -1,6 +1,6 @@
 import { EditUser } from '@app/interfaces/use-cases/user/edit-user'
+import { User } from '@domain/entities/user'
 import { IUserRepository } from '@domain/repositories/i-user-repository'
-import { User } from '@entities/user'
 import { Encryption } from '@interfaces/services/encryption'
 import { UpdateUserDto } from '@shared/dtos/user-dtos'
 import { AppError } from '@shared/errors/app-error'

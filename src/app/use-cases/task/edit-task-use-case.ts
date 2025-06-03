@@ -1,6 +1,6 @@
 import { EditTask } from '@app/interfaces/use-cases/task/edit-task'
+import { Task } from '@domain/entities/task'
 import { ITaskRepository } from '@domain/repositories/i-task-repository'
-import { Task } from '@entities/task'
 import { EditTaskDto } from '@shared/dtos/task-dtos'
 import { response } from '@shared/utils/response-helper'
 
