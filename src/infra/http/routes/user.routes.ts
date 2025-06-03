@@ -1,5 +1,5 @@
-import { createUserControllers } from '@controllers/user'
-import { createMiddlewares } from '@middlewares/index'
+import { createUserControllers } from '@infra/http/controllers/user'
+import { createMiddlewares } from '@infra/http/middlewares/index'
 import { FastifyInstance } from 'fastify'
 
 const userControllers = createUserControllers()

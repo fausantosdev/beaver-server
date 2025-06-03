@@ -1,4 +1,4 @@
-import { JwtService } from '@lib/jwt-service'
+import { JwtService } from '@infra/services/jwt-service'
 
 import { AuthMiddleware } from './auth-middleware'
 

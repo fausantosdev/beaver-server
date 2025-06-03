@@ -1,5 +1,5 @@
 import cors from '@fastify/cors'
-import { routes } from '@routes/index'
+import { routes } from '@infra/http/routes'
 import { AppError } from '@shared/errors/app-error'
 import Fastify, { FastifyInstance, FastifyListenOptions } from 'fastify'
 
