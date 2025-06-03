@@ -1,6 +1,6 @@
 import { ResetPassword } from '@app/interfaces/use-cases/auth/reset-password'
+import { User } from '@domain/entities/user'
 import { IUserRepository } from '@domain/repositories/i-user-repository'
-import { User } from '@entities/user'
 import { Encryption } from '@interfaces/services/encryption'
 import { ResetPasswordDto } from '@shared/dtos/auth-dtos'
 import { AppError } from '@shared/errors/app-error'

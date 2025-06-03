@@ -1,8 +1,8 @@
 import cripto from 'node:crypto'
 
 import { ForgotPassword } from '@app/interfaces/use-cases/auth/forgot-password'
+import { User } from '@domain/entities/user'
 import { IUserRepository } from '@domain/repositories/i-user-repository'
-import { User } from '@entities/user'
 import { Email } from '@interfaces/services/email'
 import { AppError } from '@shared/errors/app-error'
 import { NotAuthorized } from '@shared/errors/not-authorized'

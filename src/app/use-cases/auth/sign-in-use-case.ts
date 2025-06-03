@@ -1,6 +1,6 @@
 import { SignIn } from '@app/interfaces/use-cases/auth/sign-in'
+import { User } from '@domain/entities/user'
 import { IUserRepository } from '@domain/repositories/i-user-repository'
-import { User } from '@entities/user'
 import { Encryption } from '@interfaces/services/encryption'
 import { Jwt } from '@interfaces/services/jwt'
 import { SignInDto } from '@shared/dtos/auth-dtos'
