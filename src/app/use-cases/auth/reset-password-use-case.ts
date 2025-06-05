@@ -1,7 +1,7 @@
+import { Encryption } from '@app/interfaces/services/encryption'
 import { ResetPassword } from '@app/interfaces/use-cases/auth/reset-password'
 import { User } from '@domain/entities/user'
 import { IUserRepository } from '@domain/repositories/i-user-repository'
-import { Encryption } from '@interfaces/services/encryption'
 import { ResetPasswordDto } from '@shared/dtos/auth-dtos'
 import { AppError } from '@shared/errors/app-error'
 import { NotAuthorized } from '@shared/errors/not-authorized'

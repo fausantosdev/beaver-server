@@ -1,4 +1,4 @@
-import { Encryption } from '@interfaces/services/encryption'
+import { Encryption } from '@app/interfaces/services/encryption'
 import { Response } from '@shared/types/response'
 import { response } from '@shared/utils/response-helper'
 import bcrypt from 'bcrypt'

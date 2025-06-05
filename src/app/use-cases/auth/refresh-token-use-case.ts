@@ -1,7 +1,7 @@
+import { Jwt } from '@app/interfaces/services/jwt'
 import { RefreshToken } from '@app/interfaces/use-cases/auth/refresh-token'
 import { User } from '@domain/entities/user'
 import { IUserRepository } from '@domain/repositories/i-user-repository'
-import { Jwt } from '@interfaces/services/jwt'
 import { JwtPayloadDto } from '@shared/dtos/auth-dtos'
 import { NotAuthorized } from '@shared/errors/not-authorized'
 import { isCustomErrorHelper } from '@shared/utils/is-cuscom-error-helper'

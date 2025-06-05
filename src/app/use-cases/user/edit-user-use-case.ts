@@ -1,7 +1,7 @@
+import { Encryption } from '@app/interfaces/services/encryption'
 import { EditUser } from '@app/interfaces/use-cases/user/edit-user'
 import { User } from '@domain/entities/user'
 import { IUserRepository } from '@domain/repositories/i-user-repository'
-import { Encryption } from '@interfaces/services/encryption'
 import { UpdateUserDto } from '@shared/dtos/user-dtos'
 import { AppError } from '@shared/errors/app-error'
 import { ResourceNotFound } from '@shared/errors/resource-not-found'

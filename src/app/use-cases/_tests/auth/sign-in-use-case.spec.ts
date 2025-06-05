@@ -1,7 +1,7 @@
+import { Encryption } from '@app/interfaces/services/encryption'
+import { Jwt } from '@app/interfaces/services/jwt'
 import { SignInUseCase } from '@app/use-cases/auth/sign-in-use-case'
 import { InMemoryUserRepository } from '@infra/data/_test/repositories/in-memory-user-repository'
-import { Encryption } from '@interfaces/services/encryption'
-import { Jwt } from '@interfaces/services/jwt'
 import { Response } from '@shared/types/response'
 import { response } from '@shared/utils/response-helper'
 

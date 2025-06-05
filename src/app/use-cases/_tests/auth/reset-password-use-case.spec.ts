@@ -1,6 +1,6 @@
+import { Encryption } from '@app/interfaces/services/encryption'
 import { ResetPasswordUseCase } from '@app/use-cases/auth/reset-password-use-case'
 import { InMemoryUserRepository } from '@infra/data/_test/repositories/in-memory-user-repository'
-import { Encryption } from '@interfaces/services/encryption'
 import { Response } from '@shared/types/response'
 import { response } from '@shared/utils/response-helper'
 

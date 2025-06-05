@@ -1,4 +1,4 @@
-import { Jwt } from '@interfaces/services/jwt'
+import { Jwt } from '@app/interfaces/services/jwt'
 import { NotAuthorized } from '@shared/errors/not-authorized'
 import { FastifyReply, FastifyRequest, HookHandlerDoneFunction } from 'fastify'
 import { z } from 'zod'
