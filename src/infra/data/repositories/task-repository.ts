@@ -4,12 +4,12 @@ import { Prisma } from '@prisma/client'
 import { prisma } from '@shared/utils/prisma-helper'
 
 class TaskRepository implements ITaskRepository {
-  public create = async ({ user, description, parent }: Prisma.TaskCreateInput): Promise<Task> => {
+  public create = async ({ user_id, description, parent_id }: Prisma.TaskUncheckedCreateInput): Promise<Task> => {
     return await prisma.instance.task.create({
       data: {
-        user,
+        user_id,
         description,
-        parent
+        parent_id
       }
     })
   }
