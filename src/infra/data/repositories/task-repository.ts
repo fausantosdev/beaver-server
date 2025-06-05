@@ -1,16 +1,15 @@
 import { Task } from '@domain/entities/task'
 import { ITaskRepository } from '@domain/repositories/i-task-repository'
 import { Prisma } from '@prisma/client'
-import { CreateTaskDto } from '@shared/dtos/task-dtos'
 import { prisma } from '@shared/utils/prisma-helper'
 
 class TaskRepository implements ITaskRepository {
-  public create = async ({ user_id, description, parent_id }: CreateTaskDto): Promise<Task> => {
+  public create = async ({ user, description, parent }: Prisma.TaskCreateInput): Promise<Task> => {
     return await prisma.instance.task.create({
       data: {
-        user_id,
+        user,
         description,
-        parent_id
+        parent
       }
     })
   }
