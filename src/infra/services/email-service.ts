@@ -1,6 +1,6 @@
 import { env } from '@config/env'
-import { Response } from '@interfaces/response'
 import { Email, SendEmailTypes } from '@interfaces/services/email'
+import { Response } from '@shared/types/response'
 import { response } from '@shared/utils/response-helper'
 import { createTransport, Transporter } from 'nodemailer'
 

@@ -1,4 +1,4 @@
-import { Response } from '@interfaces/response'
+import { Response } from '@shared/types/response'
 
 export interface Encryption {
   hash(text: string, salt: number): Promise<Response>

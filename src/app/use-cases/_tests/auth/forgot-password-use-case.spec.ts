@@ -1,8 +1,8 @@
-import { InMemoryUserRepository } from '@data/_test/repositories/in-memory-user-repository'
-import { Response } from '@interfaces/response'
+import { ForgotPasswordUseCase } from '@app/use-cases/auth/forgot-password-use-case'
+import { InMemoryUserRepository } from '@infra/data/_test/repositories/in-memory-user-repository'
 import { Email, SendEmailTypes } from '@interfaces/services/email'
+import { Response } from '@shared/types/response'
 import { response } from '@shared/utils/response-helper'
-import { ForgotPasswordUseCase } from '@usecases/auth/forgot-password-use-case'
 
 const makeEmailService = () => {
   class EmailServiceStub implements Email {
