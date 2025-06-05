@@ -2,6 +2,7 @@ import { EditTask } from '@app/interfaces/use-cases/task/edit-task'
 import { Task } from '@domain/entities/task'
 import { ITaskRepository } from '@domain/repositories/i-task-repository'
 import { EditTaskDto } from '@shared/dtos/task-dtos'
+import { isCustomErrorHelper } from '@shared/utils/is-cuscom-error-helper'
 import { response } from '@shared/utils/response-helper'
 
 class EditTaskUseCase implements EditTask{
@@ -24,7 +25,7 @@ class EditTaskUseCase implements EditTask{
     } catch (error) {
       return response({
         status: false,
-        message: 'Internal server error'
+        message: isCustomErrorHelper(error) ? error.message : 'Internal server error'
       })
     }
   }

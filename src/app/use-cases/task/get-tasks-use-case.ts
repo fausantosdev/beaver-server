@@ -1,6 +1,7 @@
 import { GetTasks } from '@app/interfaces/use-cases/task/get-tasks'
 import { Task } from '@domain/entities/task'
 import { ITaskRepository } from '@domain/repositories/i-task-repository'
+import { isCustomErrorHelper } from '@shared/utils/is-cuscom-error-helper'
 import { response } from '@shared/utils/response-helper'
 
 class GetTasksUseCase implements GetTasks {
@@ -28,7 +29,7 @@ class GetTasksUseCase implements GetTasks {
     } catch (error) {
       return response({
         status: false,
-        message: 'Internal server error'
+        message: isCustomErrorHelper(error) ? error.message : 'Internal server error'
       })
     }
   }
