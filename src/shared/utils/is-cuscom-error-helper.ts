@@ -1,9 +1,11 @@
 import { AppError } from '@shared/errors/app-error'
 import { NotAuthorized } from '@shared/errors/not-authorized'
+import { ResourceNotFound } from '@shared/errors/resource-not-found'
 
 const customErrors = [
   AppError,
-  NotAuthorized
+  NotAuthorized,
+  ResourceNotFound
 ]
 
 /**
@@ -20,7 +22,9 @@ const customErrors = [
  * @returns {boolean} Returns `true` if the error is an instance of `AppError` or `NotAuthorized`.
  */
 export function isCustomErrorHelper(error: unknown):
-  error is AppError |
-  NotAuthorized {
+  error is
+  AppError |
+  NotAuthorized |
+  ResourceNotFound {
   return customErrors.some((customError) => error instanceof customError)
 }

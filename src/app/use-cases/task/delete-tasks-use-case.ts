@@ -1,5 +1,6 @@
 import { DeleteTasks } from '@app/interfaces/use-cases/task/delete-tasks'
 import { ITaskRepository } from '@domain/repositories/i-task-repository'
+import { ResourceNotFound } from '@shared/errors/resource-not-found'
 import { isCustomErrorHelper } from '@shared/utils/is-cuscom-error-helper'
 import { response } from '@shared/utils/response-helper'
 
@@ -12,7 +13,7 @@ class DeleteTasksUseCase implements DeleteTasks {
     try {
       const tasks = await this.taskRepository.read(where)
 
-      if (tasks.length === 0) throw new Error('No tasks found')
+      if (tasks.length === 0) throw new ResourceNotFound('No tasks found')
 
       const { count } = await this.taskRepository.delete(where) as { count: number }
 

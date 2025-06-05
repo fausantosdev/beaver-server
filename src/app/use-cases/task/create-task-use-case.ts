@@ -3,6 +3,7 @@ import { Task } from '@domain/entities/task'
 import { ITaskRepository } from '@domain/repositories/i-task-repository'
 import { IUserRepository } from '@domain/repositories/i-user-repository'
 import { CreateTaskDto } from '@shared/dtos/task-dtos'
+import { ResourceNotFound } from '@shared/errors/resource-not-found'
 import { isCustomErrorHelper } from '@shared/utils/is-cuscom-error-helper'
 import { response } from '@shared/utils/response-helper'
 
@@ -14,12 +15,12 @@ class CreateTaskUseCase implements CreateTask {
 
   public execute = async ({ user_id, description, parent_id = null }: CreateTaskDto) => {
     try {
-      if (!(await this.userRepository.findOne({ id: user_id }))) throw Error('User not found')
+      if (!(await this.userRepository.findOne({ id: user_id }))) throw new ResourceNotFound('User not found')
 
       if (
         parent_id &&
         (await this.taskRepository.read({ user_id, id: parent_id })).length === 0
-      ) throw Error('Parent task not found')
+      ) throw new ResourceNotFound('Parent task not found')
 
       const task = new Task({
         user_id,

@@ -1,6 +1,6 @@
 import { DeleteUser } from '@app/interfaces/use-cases/user/delete-user'
 import { IUserRepository } from '@domain/repositories/i-user-repository'
-import { AppError } from '@shared/errors/app-error'
+import { ResourceNotFound } from '@shared/errors/resource-not-found'
 import { isCustomErrorHelper } from '@shared/utils/is-cuscom-error-helper'
 import { response } from '@shared/utils/response-helper'
 
@@ -13,7 +13,7 @@ class DeleteUserUseCase implements DeleteUser {
     try {
       const userExists = await this.userRepository.findOne({ id })
 
-      if (!userExists) throw new AppError('User not found')
+      if (!userExists) throw new ResourceNotFound('User not found')
 
       const result = await this.userRepository.delete({ id })
 
