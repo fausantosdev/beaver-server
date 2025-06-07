@@ -1,6 +1,5 @@
+import { AuthMiddleware } from '@infra/http/middlewares/auth-middleware'
 import { JwtService } from '@infra/services/jwt-service'
-
-import { AuthMiddleware } from './auth-middleware'
 
 export function createMiddlewares() {
   return {

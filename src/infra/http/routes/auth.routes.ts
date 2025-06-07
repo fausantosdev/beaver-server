@@ -1,5 +1,5 @@
 import { createAuthControllers } from '@infra/di/controllers/auth'
-import { createMiddlewares } from '@infra/http/middlewares/index'
+import { createMiddlewares } from '@infra/di/middlewares/auth'
 import { FastifyInstance } from 'fastify'
 
 const authControllers = createAuthControllers()
