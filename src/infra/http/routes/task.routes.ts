@@ -1,4 +1,4 @@
-import { createTaskControllers } from '@infra/http/controllers/task'
+import { createTaskControllers } from '@infra/di/controllers/task'
 import { createMiddlewares } from '@infra/http/middlewares/index'
 import { FastifyInstance } from 'fastify'
 

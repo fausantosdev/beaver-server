@@ -1,4 +1,4 @@
-import { createAuthControllers } from '@infra/http/controllers/auth'
+import { createAuthControllers } from '@infra/di/controllers/auth'
 import { createMiddlewares } from '@infra/http/middlewares/index'
 import { FastifyInstance } from 'fastify'
 

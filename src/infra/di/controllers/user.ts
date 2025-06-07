@@ -1,9 +1,8 @@
 import { createUserUseCases } from '@infra/di/use-cases/user'
-
-import { CreateUserController } from './create-user-controller'
-import { DeleteUserController } from './delete-user-controller'
-import { EditUserController } from './edit-user-controller'
-import { GetUsersController } from './get-users-controller'
+import { CreateUserController } from '@infra/http/controllers/user/create-user-controller'
+import { DeleteUserController } from '@infra/http/controllers/user/delete-user-controller'
+import { EditUserController } from '@infra/http/controllers/user/edit-user-controller'
+import { GetUsersController } from '@infra/http/controllers/user/get-users-controller'
 
 export function createUserControllers() {
   const userUseCases = createUserUseCases()

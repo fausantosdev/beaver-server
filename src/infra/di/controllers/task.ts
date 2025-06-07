@@ -1,9 +1,8 @@
 import { createTaskUseCases } from '@infra/di/use-cases/task'
-
-import { CreateTaskController } from './create-task-controller'
-import { DeleteTasksController } from './delete-tasks-controller'
-import { EditTaskController } from './edit-task-controller'
-import { GetTasksController } from './get-tasks-controller'
+import { CreateTaskController } from '@infra/http/controllers/task/create-task-controller'
+import { DeleteTasksController } from '@infra/http/controllers/task/delete-tasks-controller'
+import { EditTaskController } from '@infra/http/controllers/task/edit-task-controller'
+import { GetTasksController } from '@infra/http/controllers/task/get-tasks-controller'
 
 export function createTaskControllers() {
   const taskUseCases = createTaskUseCases()
