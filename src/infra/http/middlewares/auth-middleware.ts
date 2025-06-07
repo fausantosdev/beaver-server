@@ -17,7 +17,7 @@ class AuthMiddleware {
     private jwtService: Jwt
   ) {}
 
-  public verifyToken = (request: FastifyRequest, reply: FastifyReply, done: HookHandlerDoneFunction) => {
+  public verifyToken = (request: FastifyRequest, reply: FastifyReply, done: HookHandlerDoneFunction): void => {
     const authHeader = request.headers.authorization
 
     if (!authHeader) throw new NotAuthorized('Token not provided')
@@ -35,7 +35,7 @@ class AuthMiddleware {
     return done()
   }
 
-  public isAdmin = (request: FastifyRequest, response: FastifyReply, done: HookHandlerDoneFunction) => {
+  public isAdmin = (request: FastifyRequest, response: FastifyReply, done: HookHandlerDoneFunction): void => {
     this.verifyToken(request, response, () => {
       if (request.user.role === 'admin') {
         return done()
@@ -45,7 +45,7 @@ class AuthMiddleware {
     })
   }
 
-  public checkUserOrIsAdmin = (request: FastifyRequest, response: FastifyReply, done: HookHandlerDoneFunction) => {
+  public checkUserOrIsAdmin = (request: FastifyRequest, response: FastifyReply, done: HookHandlerDoneFunction): void => {
     const paramsSchema = z.object({
       id: z.string().uuid({ message: 'Incorrect ID format' })
     })
