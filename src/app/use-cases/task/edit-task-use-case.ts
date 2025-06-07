@@ -1,4 +1,3 @@
-import { EditTask } from '@app/interfaces/use-cases/task/edit-task'
 import { Task } from '@domain/entities/task'
 import { ITaskRepository } from '@domain/repositories/i-task-repository'
 import { EditTaskDto } from '@shared/dtos/task-dtos'
@@ -6,7 +5,7 @@ import { ResourceNotFound } from '@shared/errors/resource-not-found'
 import { isCustomErrorHelper } from '@shared/utils/is-cuscom-error-helper'
 import { response } from '@shared/utils/response-helper'
 
-class EditTaskUseCase implements EditTask{
+class EditTaskUseCase {
   constructor(
     private taskRepository: ITaskRepository
   ) {}

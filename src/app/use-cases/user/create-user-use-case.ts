@@ -1,5 +1,4 @@
 import { Encryption } from '@app/interfaces/services/encryption'
-import { CreateUser } from '@app/interfaces/use-cases/user/create-user'
 import { User } from '@domain/entities/user'
 import { IUserRepository } from '@domain/repositories/i-user-repository'
 import { CreateUserDto } from '@shared/dtos/user-dtos'
@@ -7,7 +6,7 @@ import { AppError } from '@shared/errors/app-error'
 import { isCustomErrorHelper } from '@shared/utils/is-cuscom-error-helper'
 import { response } from '@shared/utils/response-helper'
 
-class CreateUserUseCase implements CreateUser {
+class CreateUserUseCase {
   constructor(
     private userRepository: IUserRepository,
     private encryptionService: Encryption

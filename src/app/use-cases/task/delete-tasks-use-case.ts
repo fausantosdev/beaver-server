@@ -1,10 +1,9 @@
-import { DeleteTasks } from '@app/interfaces/use-cases/task/delete-tasks'
 import { ITaskRepository } from '@domain/repositories/i-task-repository'
 import { ResourceNotFound } from '@shared/errors/resource-not-found'
 import { isCustomErrorHelper } from '@shared/utils/is-cuscom-error-helper'
 import { response } from '@shared/utils/response-helper'
 
-class DeleteTasksUseCase implements DeleteTasks {
+class DeleteTasksUseCase {
   constructor(
     private taskRepository: ITaskRepository
   ) {}

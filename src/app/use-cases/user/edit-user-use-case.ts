@@ -1,5 +1,4 @@
 import { Encryption } from '@app/interfaces/services/encryption'
-import { EditUser } from '@app/interfaces/use-cases/user/edit-user'
 import { User } from '@domain/entities/user'
 import { IUserRepository } from '@domain/repositories/i-user-repository'
 import { UpdateUserDto } from '@shared/dtos/user-dtos'
@@ -8,7 +7,7 @@ import { ResourceNotFound } from '@shared/errors/resource-not-found'
 import { isCustomErrorHelper } from '@shared/utils/is-cuscom-error-helper'
 import { response } from '@shared/utils/response-helper'
 
-class EditUserUseCase implements EditUser {
+class EditUserUseCase {
   constructor(
     private userRepository: IUserRepository,
     private encryptionService: Encryption
