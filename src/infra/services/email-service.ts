@@ -1,7 +1,6 @@
 import { Email, SendEmailTypes } from '@app/interfaces/services/email'
 import { env } from '@config/env'
-import { Response } from '@shared/types/response'
-import { response } from '@shared/utils/response-helper'
+import { Response, response } from '@shared/utils/response-helper'
 import { createTransport, Transporter } from 'nodemailer'
 
 class EmailService implements Email {

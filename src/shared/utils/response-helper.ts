@@ -1,15 +1,15 @@
-import { Response } from '@shared/types/response'
-
-type Props = {
+type Response = {
   status?: boolean,
-  data?: any,
+  data?: any
   message?: string
 }
 
-export function response({ status = true, data = null, message = '' }: Props): Response{
+function response({ status = true, data = null, message = '' }: Response): Response {
   return {
     status,
     data,
     message
   }
 }
+
+export { response, Response }
