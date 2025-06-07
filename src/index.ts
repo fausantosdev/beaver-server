@@ -1,5 +1,5 @@
 import { env } from '@config/env'
-import { prisma } from '@shared/utils/prisma-helper'
+import { prisma } from '@infra/data/prisma/prisma-helper'
 
 import { server } from './server'
 

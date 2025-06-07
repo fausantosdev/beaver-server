@@ -1,7 +1,7 @@
 import { User } from '@domain/entities/user'
 import { IUserRepository } from '@domain/repositories/i-user-repository'
+import { prisma } from '@infra/data/prisma/prisma-helper'
 import { Prisma } from '@prisma/client'
-import { prisma } from '@shared/utils/prisma-helper'
 
 class UserRepository implements IUserRepository {
   public create = async ({ name, email, password_hash }: Prisma.UserCreateInput): Promise<User> => {

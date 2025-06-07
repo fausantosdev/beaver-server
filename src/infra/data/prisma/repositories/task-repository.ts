@@ -1,7 +1,7 @@
 import { Task } from '@domain/entities/task'
 import { ITaskRepository } from '@domain/repositories/i-task-repository'
+import { prisma } from '@infra/data/prisma/prisma-helper'
 import { Prisma } from '@prisma/client'
-import { prisma } from '@shared/utils/prisma-helper'
 
 class TaskRepository implements ITaskRepository {
   public create = async ({ user_id, description, parent_id }: Prisma.TaskUncheckedCreateInput): Promise<Task> => {
