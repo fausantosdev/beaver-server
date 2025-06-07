@@ -1,10 +1,9 @@
 import { Encryption } from '@app/interfaces/services/encryption'
-import { Response } from '@shared/utils/response-helper'
 import { response } from '@shared/utils/response-helper'
 import bcrypt from 'bcrypt'
 
 class EncryptionService implements Encryption {
-  public async hash(text: string, salt: number): Promise<Response> {
+  public async hash(text: string, salt: number) {
     try {
       const hashedText = await bcrypt.hash(text, salt)
       return response({ status: true, data: hashedText })
@@ -13,7 +12,7 @@ class EncryptionService implements Encryption {
     }
   }
 
-  public async compare(text: string, hash: string): Promise<Response> {
+  public async compare(text: string, hash: string) {
     try {
       const isMatch = await bcrypt.compare(text, hash)
 

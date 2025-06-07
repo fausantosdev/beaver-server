@@ -1,11 +1,10 @@
 import { Jwt } from '@app/interfaces/services/jwt'
 import { env } from '@config/env'
-import { Response } from '@shared/utils/response-helper'
 import { response } from '@shared/utils/response-helper'
 import { sign, verify } from 'jsonwebtoken'
 
 class JwtService implements Jwt {
-  public generateToken(payload: object): Response {
+  public generateToken(payload: object) {
     try {
       const token = sign(payload, env.APP_KEY, { expiresIn: '1d' })
       return response({
@@ -19,7 +18,7 @@ class JwtService implements Jwt {
     }
   }
 
-  public decodeToken(token: string): Response {
+  public decodeToken(token: string) {
     try {
       const decoded = verify(token, env.APP_KEY as string)
       return response({
