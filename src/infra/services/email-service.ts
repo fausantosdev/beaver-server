@@ -18,7 +18,7 @@ class EmailService implements Email {
     })
   }
 
-  async sendMail({ from, to, subject, text }: SendEmailTypes) {
+  public async sendMail({ from, to, subject, text }: SendEmailTypes) {
     try {
       await this.transporter.sendMail({
         from,
