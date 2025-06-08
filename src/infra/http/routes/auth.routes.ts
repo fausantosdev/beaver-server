@@ -12,7 +12,7 @@ export async function authRoutes(app: FastifyInstance) {
     '/token-refresh',
     {
       preHandler: [
-        middlewares.authMiddleware.verifyToken
+        middlewares.isAuthenticateMiddleware.handle
       ]
     },
     authControllers.refreshToken.handle

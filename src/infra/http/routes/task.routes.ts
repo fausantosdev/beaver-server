@@ -10,7 +10,7 @@ export async function taskRoutes (app: FastifyInstance) {
     '/',
     {
       preHandler: [
-        middlewares.authMiddleware.verifyToken
+        middlewares.isAuthenticateMiddleware.handle
       ]
     },
     tasksControllers.create.handle
@@ -20,7 +20,7 @@ export async function taskRoutes (app: FastifyInstance) {
     '/:id?',
     {
       preHandler: [
-        middlewares.authMiddleware.verifyToken
+        middlewares.isAuthenticateMiddleware.handle
       ]
     },
     tasksControllers.get.handle
@@ -30,7 +30,7 @@ export async function taskRoutes (app: FastifyInstance) {
     '/:id',
     {
       preHandler: [
-        middlewares.authMiddleware.verifyToken
+        middlewares.isAuthenticateMiddleware.handle
       ]
     },
     tasksControllers.edit.handle
@@ -40,7 +40,7 @@ export async function taskRoutes (app: FastifyInstance) {
     '/',
     {
       preHandler: [
-        middlewares.authMiddleware.verifyToken
+        middlewares.isAuthenticateMiddleware.handle
       ]
     },
     tasksControllers.delete.handle

@@ -12,7 +12,7 @@ export async function userRoutes (app: FastifyInstance) {
     '/:id',
     {
       preHandler: [
-        middlewares.authMiddleware.checkUserOrIsAdmin
+        middlewares.ensureSelfOrAdminMiddleware.handle
       ]
     },
     userControllers.get.handle
@@ -22,7 +22,7 @@ export async function userRoutes (app: FastifyInstance) {
     '/:id',
     {
       preHandler: [
-        middlewares.authMiddleware.checkUserOrIsAdmin
+        middlewares.ensureSelfOrAdminMiddleware.handle
       ]
     },
     userControllers.edit.handle
@@ -32,7 +32,7 @@ export async function userRoutes (app: FastifyInstance) {
     '/:id',
     {
       preHandler: [
-        middlewares.authMiddleware.checkUserOrIsAdmin
+        middlewares.ensureSelfOrAdminMiddleware.handle
       ]
     },
     userControllers.delete.handle
