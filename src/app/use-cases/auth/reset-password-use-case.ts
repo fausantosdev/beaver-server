@@ -1,4 +1,5 @@
 import { Encryption } from '@app/interfaces/services/encryption'
+import { ResetPassword } from '@app/interfaces/use-cases/auth/reset-password'
 import { User } from '@domain/entities/user'
 import { IUserRepository } from '@domain/repositories/i-user-repository'
 import { ResetPasswordDto } from '@shared/dtos/auth-dtos'
@@ -7,7 +8,7 @@ import { NotAuthorized } from '@shared/errors/not-authorized'
 import { isCustomErrorHelper } from '@shared/utils/is-cuscom-error-helper'
 import { response } from '@shared/utils/response-helper'
 
-class ResetPasswordUseCase {
+class ResetPasswordUseCase implements ResetPassword {
   constructor(
     private userRepository: IUserRepository,
     private encryptionService: Encryption

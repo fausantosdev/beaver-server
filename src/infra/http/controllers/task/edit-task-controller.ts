@@ -19,7 +19,13 @@ class EditTaskController {
     const { id } = schemaId.parse(request.params)
     const dataBody = schema.parse(request.body)
 
-    const { status, data, message } = await this.editTaskUseCase.execute(id, dataBody)
+    const { status, data, message } = await this.editTaskUseCase.execute({
+      where: {
+        user_id: request.user.id,
+        id: id
+      },
+      query: dataBody
+    })
 
     return reply.send({
       status,

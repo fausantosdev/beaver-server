@@ -1,5 +1,6 @@
 import { Encryption } from '@app/interfaces/services/encryption'
 import { Jwt } from '@app/interfaces/services/jwt'
+import { SignIn } from '@app/interfaces/use-cases/auth/sign-in'
 import { User } from '@domain/entities/user'
 import { IUserRepository } from '@domain/repositories/i-user-repository'
 import { SignInDto } from '@shared/dtos/auth-dtos'
@@ -7,7 +8,7 @@ import { NotAuthorized } from '@shared/errors/not-authorized'
 import { isCustomErrorHelper } from '@shared/utils/is-cuscom-error-helper'
 import { response } from '@shared/utils/response-helper'
 
-class SignInUseCase {
+class SignInUseCase implements SignIn {
   constructor(
     private userRepository: IUserRepository,
     private encryptionService: Encryption,

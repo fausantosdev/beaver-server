@@ -1,4 +1,5 @@
 import { Jwt } from '@app/interfaces/services/jwt'
+import { RefreshToken } from '@app/interfaces/use-cases/auth/refresh-token'
 import { User } from '@domain/entities/user'
 import { IUserRepository } from '@domain/repositories/i-user-repository'
 import { JwtPayloadDto } from '@shared/dtos/auth-dtos'
@@ -6,7 +7,7 @@ import { NotAuthorized } from '@shared/errors/not-authorized'
 import { isCustomErrorHelper } from '@shared/utils/is-cuscom-error-helper'
 import { response } from '@shared/utils/response-helper'
 
-class RefreshTokenUseCase {
+class RefreshTokenUseCase implements RefreshToken {
   constructor(
     private userRepository: IUserRepository,
     private jwtHelper: Jwt

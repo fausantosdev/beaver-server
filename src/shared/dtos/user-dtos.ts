@@ -10,7 +10,7 @@ type UpdateUserDto = {
     name?: string
     email?: string
     role?: string
-    password?: string
+    password_hash?: string
   }
 }
 

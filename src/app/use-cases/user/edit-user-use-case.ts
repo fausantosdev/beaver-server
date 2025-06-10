@@ -1,4 +1,5 @@
 import { Encryption } from '@app/interfaces/services/encryption'
+import { EditUser } from '@app/interfaces/use-cases/user/edit-user'
 import { User } from '@domain/entities/user'
 import { IUserRepository } from '@domain/repositories/i-user-repository'
 import { UpdateUserDto } from '@shared/dtos/user-dtos'
@@ -7,13 +8,13 @@ import { ResourceNotFound } from '@shared/errors/resource-not-found'
 import { isCustomErrorHelper } from '@shared/utils/is-cuscom-error-helper'
 import { response } from '@shared/utils/response-helper'
 
-class EditUserUseCase {
+class EditUserUseCase implements EditUser {
   constructor(
     private userRepository: IUserRepository,
     private encryptionService: Encryption
   ) {}
 
-  public execute = async (id: string, data: UpdateUserDto) => {
+  public execute = async ({ id, data }: UpdateUserDto) => {
     try {
       if (Object.keys(data).length === 0)  throw new AppError('No data sent')
 
@@ -23,7 +24,7 @@ class EditUserUseCase {
 
       if ( 'password' in data ) {
         data.password_hash = (await this.encryptionService.hash(String(data.password), 8)).data
-        delete data.password
+        delete data.password_hash
       }
 
       const result = await this.userRepository.update({ id }, data) as User

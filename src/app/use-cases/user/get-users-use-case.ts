@@ -1,9 +1,10 @@
+import { GetUsers } from '@app/interfaces/use-cases/user/get-users'
 import { User } from '@domain/entities/user'
 import { IUserRepository } from '@domain/repositories/i-user-repository'
 import { isCustomErrorHelper } from '@shared/utils/is-cuscom-error-helper'
 import { response } from '@shared/utils/response-helper'
 
-class GetUsersUseCase {
+class GetUsersUseCase implements GetUsers {
   constructor(
     private userRepository: IUserRepository
   ) {}

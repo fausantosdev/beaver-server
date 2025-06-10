@@ -16,11 +16,10 @@ class DeleteTasksController {
     const { tasks_ids } = schema.parse(request.body)
 
     const { status, data, message } = await this.deleteTasksUseCase.execute({
-      id: {
-        in: tasks_ids
-      },
-      user_id: request.user.id
+      user_id: request.user.id,
+      tasksIds: tasks_ids
     })
+
     return reply.send({
       status,
       data,

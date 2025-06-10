@@ -1,6 +1,7 @@
 import cripto from 'node:crypto'
 
 import { Email } from '@app/interfaces/services/email'
+import { ForgotPassword } from '@app/interfaces/use-cases/auth/forgot-password'
 import { User } from '@domain/entities/user'
 import { IUserRepository } from '@domain/repositories/i-user-repository'
 import { AppError } from '@shared/errors/app-error'
@@ -8,7 +9,7 @@ import { NotAuthorized } from '@shared/errors/not-authorized'
 import { isCustomErrorHelper } from '@shared/utils/is-cuscom-error-helper'
 import { response } from '@shared/utils/response-helper'
 
-class ForgotPasswordUseCase {
+class ForgotPasswordUseCase implements ForgotPassword {
   constructor(
     private userRepository: IUserRepository,
     private emailService: Email

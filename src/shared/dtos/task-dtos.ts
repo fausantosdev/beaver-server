@@ -5,11 +5,23 @@ type CreateTaskDto = {
 }
 
 type EditTaskDto = {
-  description?: string
-  progress?: number
+  query: {
+    description?: string
+    progress?: number
+  },
+  where: {
+    user_id: string
+    id?: string
+  }
+}
+
+type DeleteTaskDto = {
+  user_id: string
+  tasksIds?: string[]
 }
 
 export {
   CreateTaskDto,
-  EditTaskDto
+  EditTaskDto,
+  DeleteTaskDto
 }
