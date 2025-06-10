@@ -5,11 +5,13 @@ type CreateUserDto = {
 }
 
 type UpdateUserDto = {
-  name?: string
-  email?: string
-  role?: string
-  password?: string
-  password_hash?: string
+  id: string
+  data: {
+    name?: string
+    email?: string
+    role?: string
+    password?: string
+  }
 }
 
 export {
