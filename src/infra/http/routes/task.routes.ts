@@ -13,7 +13,7 @@ export async function taskRoutes (app: FastifyInstance) {
         middlewares.isAuthenticateMiddleware.handle
       ]
     },
-    tasksControllers.create.handle
+    tasksControllers.create
   )
 
   app.get(
@@ -23,7 +23,7 @@ export async function taskRoutes (app: FastifyInstance) {
         middlewares.isAuthenticateMiddleware.handle
       ]
     },
-    tasksControllers.get.handle
+    tasksControllers.read
   )
 
   app.patch(
@@ -33,7 +33,7 @@ export async function taskRoutes (app: FastifyInstance) {
         middlewares.isAuthenticateMiddleware.handle
       ]
     },
-    tasksControllers.edit.handle
+    tasksControllers.update
   )
 
   app.delete(
@@ -43,6 +43,6 @@ export async function taskRoutes (app: FastifyInstance) {
         middlewares.isAuthenticateMiddleware.handle
       ]
     },
-    tasksControllers.delete.handle
+    tasksControllers.delete
   )
 }

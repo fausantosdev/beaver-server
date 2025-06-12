@@ -1,16 +1,25 @@
 import { createAuthUseCases } from '@infra/di/use-cases/auth'
-import { ForgotPasswordController } from '@infra/http/controllers/auth/forgot-password-controller'
-import { RefreshTokenController } from '@infra/http/controllers/auth/refresh-token-controller'
-import { ResetPasswordController } from '@infra/http/controllers/auth/reset-password-controller'
-import { SignInController } from '@infra/http/controllers/auth/sign-in-controller'
+import { AuthController } from '@infra/http/controllers/autn-controller'
 
-export function createAuthControllers() {
+import { createUserUseCases } from '../use-cases/user'
+
+export function createAuthController() {
   const authUseCases = createAuthUseCases()
+  const userUseCases = createUserUseCases()
+
+  const authController = new AuthController(
+    authUseCases.signIn,
+    userUseCases.create,
+    authUseCases.forgotPassword,
+    authUseCases.resetPassword,
+    authUseCases.refreshToken
+  )
 
   return {
-    signIn: new SignInController(authUseCases.signIn),
-    refreshToken: new RefreshTokenController(authUseCases.refreshToken),
-    forgotPassword: new ForgotPasswordController(authUseCases.forgotPassword),
-    resetPassword: new ResetPasswordController(authUseCases.resetPassword)
+    signIn: authController.login,
+    signUp: authController.register,
+    forgotPassword: authController.forgotPassword,
+    resetPassword: authController.resetPassword,
+    refreshToken: authController.refreshToken
   }
 }

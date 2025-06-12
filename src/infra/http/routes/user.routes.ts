@@ -6,7 +6,7 @@ const userControllers = createUserControllers()
 const middlewares = createMiddlewares()
 
 export async function userRoutes (app: FastifyInstance) {
-  app.post('/', userControllers.create.handle)
+  app.post('/', userControllers.create)
 
   app.get(
     '/:id',
@@ -15,7 +15,7 @@ export async function userRoutes (app: FastifyInstance) {
         middlewares.ensureSelfOrAdminMiddleware.handle
       ]
     },
-    userControllers.get.handle
+    userControllers.read
   )
 
   app.put(
@@ -25,7 +25,7 @@ export async function userRoutes (app: FastifyInstance) {
         middlewares.ensureSelfOrAdminMiddleware.handle
       ]
     },
-    userControllers.edit.handle
+    userControllers.update
   )
 
   app.delete(
@@ -35,6 +35,6 @@ export async function userRoutes (app: FastifyInstance) {
         middlewares.ensureSelfOrAdminMiddleware.handle
       ]
     },
-    userControllers.delete.handle
+    userControllers.delete
   )
 }

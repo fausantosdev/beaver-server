@@ -1,16 +1,19 @@
 import { createTaskUseCases } from '@infra/di/use-cases/task'
-import { CreateTaskController } from '@infra/http/controllers/task/create-task-controller'
-import { DeleteTasksController } from '@infra/http/controllers/task/delete-tasks-controller'
-import { EditTaskController } from '@infra/http/controllers/task/edit-task-controller'
-import { GetTasksController } from '@infra/http/controllers/task/get-tasks-controller'
+import { TaskController } from '@infra/http/controllers/task-controller'
 
 export function createTaskControllers() {
   const taskUseCases = createTaskUseCases()
+  const taskController = new TaskController(
+    taskUseCases.create,
+    taskUseCases.get,
+    taskUseCases.edit,
+    taskUseCases.delete
+  )
 
   return {
-    create: new CreateTaskController(taskUseCases.create),
-    get: new GetTasksController(taskUseCases.get),
-    edit: new EditTaskController(taskUseCases.edit),
-    delete: new DeleteTasksController(taskUseCases.delete)
+    create: taskController.create,
+    read: taskController.read,
+    update: taskController.update,
+    delete: taskController.delete
   }
 }
