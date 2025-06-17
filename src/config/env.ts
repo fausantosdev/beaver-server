@@ -14,6 +14,7 @@ const envSchema = z.object({
   MAIL_SECURE: z.string(),
   MAIL_USER: z.string(),
   MAIL_PASS: z.string(),
+  REDIS_CONECTION_STRING: z.string()
   })
 
 const _env = envSchema.safeParse(process.env)
