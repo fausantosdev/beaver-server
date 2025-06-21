@@ -1,7 +1,7 @@
 import { env } from '@config/env'
 import { prisma } from '@infra/data/prisma/prisma-helper'
 import { redis } from '@infra/data/redis/redis-helper'
-import { QueueManager } from '@infra/services/queue-manager'
+import { QueueManager } from '@infra/queue/queue-manager'
 
 import { server } from './server'
 

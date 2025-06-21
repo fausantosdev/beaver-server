@@ -1,5 +1,5 @@
-import { Job } from '@app/interfaces/job'
-import { ForgotPasswordMail } from '@app/jobs/forgot-password-mail'
+import { Job } from '@app/interfaces/queue/job'
+import { ForgotPasswordMail } from '@infra/queue/jobs/forgot-password-mail'
 import { EmailService } from '@infra/services/email-service'
 
 const forgotPasswordEmailJob = new ForgotPasswordMail(

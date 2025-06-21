@@ -1,4 +1,4 @@
-import { Job } from '@app/interfaces/job'
+import { Job } from '@app/interfaces/queue/job'
 import { Email } from '@app/interfaces/services/email'
 
 class ForgotPasswordMail implements Job {

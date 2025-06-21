@@ -3,9 +3,9 @@ import { RefreshTokenUseCase } from '@app/use-cases/auth/refresh-token-use-case'
 import { ResetPasswordUseCase } from '@app/use-cases/auth/reset-password-use-case'
 import { SignInUseCase } from '@app/use-cases/auth/sign-in-use-case'
 import { UserRepository } from '@infra/data/prisma/repositories/user-repository'
+import { QueueManager } from '@infra/queue/queue-manager'
 import { EncryptionService } from '@infra/services/encryption-service'
 import { JwtService } from '@infra/services/jwt-service'
-import { QueueManager } from '@infra/services/queue-manager'
 
 export function createAuthUseCases() {
   const userRepository = new UserRepository()

@@ -1,6 +1,6 @@
 import cripto from 'node:crypto'
 
-import { QueueManager } from '@app/interfaces/queue-manager'
+import { QueueManager } from '@app/interfaces/queue/queue-manager'
 import { ForgotPassword } from '@app/interfaces/use-cases/auth/forgot-password'
 import { User } from '@domain/entities/user'
 import { IUserRepository } from '@domain/repositories/i-user-repository'

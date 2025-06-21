@@ -1,4 +1,4 @@
-import { QueueManager as IQueueManager } from '@app/interfaces/queue-manager'
+import { QueueManager as IQueueManager } from '@app/interfaces/queue/queue-manager'
 import { env } from '@config/env'
 import { jobs } from '@infra/di/jobs'
 import Queue, { Job, Queue as BullQueue } from 'bull'
