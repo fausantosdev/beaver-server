@@ -1,10 +1,9 @@
 import cripto from 'node:crypto'
 
-import { Email } from '@app/interfaces/services/email'
+import { QueueManager } from '@app/interfaces/queue-manager'
 import { ForgotPassword } from '@app/interfaces/use-cases/auth/forgot-password'
 import { User } from '@domain/entities/user'
 import { IUserRepository } from '@domain/repositories/i-user-repository'
-import { AppError } from '@shared/errors/app-error'
 import { NotAuthorized } from '@shared/errors/not-authorized'
 import { isCustomErrorHelper } from '@shared/utils/is-cuscom-error-helper'
 import { response } from '@shared/utils/response-helper'
@@ -12,7 +11,7 @@ import { response } from '@shared/utils/response-helper'
 class ForgotPasswordUseCase implements ForgotPassword {
   constructor(
     private userRepository: IUserRepository,
-    private emailService: Email
+    private queueManager: QueueManager
   ) {}
 
   public execute = async (email: string) => {
@@ -32,16 +31,7 @@ class ForgotPasswordUseCase implements ForgotPassword {
       ) as User
 
       if (updated) {
-        const { status, message } = await this.emailService.sendMail({
-          from: 'noreply@beaversaas.com',
-          to: updated.email!,
-          subject: '[Beaver SaaS] - Password recovery',
-          text: `Use this token to recover your password: ${token}\nIf you didn't request this recovery, just disregard this email, your data is safe.`
-        })
-
-        if (!status) {
-          throw new AppError(message!)
-        }
+        await this.queueManager.add('ForgotPasswordEmail', { email, token })
 
         return response({
           message: 'If the provided email is registered, a password recovery token has been sent. Please check your inbox and spam folder.'
