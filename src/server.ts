@@ -1,5 +1,6 @@
 import cors from '@fastify/cors'
 import { routes } from '@infra/http/routes'
+import { SocketServer } from '@infra/socket-io/socket-server'
 import { AppError } from '@shared/errors/app-error'
 import Fastify, { FastifyInstance, FastifyListenOptions } from 'fastify'
 
@@ -35,6 +36,8 @@ class Server {
   }
 
   public init(options: FastifyListenOptions) {
+    new SocketServer(this.app.server)
+
     this.app.listen(options).then(() => {
       console.log(`~ server running ${env.NODE_ENV === 'development' ? `on port ${options.port}` : ''}`)
     })
