@@ -9,10 +9,10 @@ export async function userRoutes (app: FastifyInstance) {
   app.post('/', userControllers.create)
 
   app.get(
-    '/:id',
+    '/:id?',
     {
       preHandler: [
-        middlewares.ensureSelfOrAdminMiddleware.handle
+        middlewares.isAuthenticateMiddleware.handle
       ]
     },
     userControllers.read
