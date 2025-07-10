@@ -21,7 +21,8 @@ const envSchema = z.object({
 const _env = envSchema.safeParse(process.env)
 
 if (_env.success === false) {
-  throw new Error(`x invalid environment variables. ${_env.error.format()}`)
+  console.error('x invalid environment variables.\n', _env.error.format())
+  process.exit(1)
 }
 
 export const env = _env.data
