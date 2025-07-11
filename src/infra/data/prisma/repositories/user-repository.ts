@@ -15,7 +15,14 @@ class UserRepository implements IUserRepository {
   }
 
   public read = async (where: Prisma.UserWhereInput): Promise<User[]> => {
-    return await prisma.instance.user.findMany({ where })
+    return await prisma.instance.user.findMany({
+      select: {
+        id: true,
+        name: true,
+        email: true
+      },
+      where
+    })
   }
 
   public findOne = async (where: Prisma.UserWhereUniqueInput): Promise<User | null> => {
