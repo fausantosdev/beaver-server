@@ -30,7 +30,7 @@ class UserRepository implements IUserRepository {
   }
 
   public update = async (where: Prisma.UserWhereUniqueInput, data: object): Promise<User | null> => {
-    return prisma.instance.user.update({
+    return await prisma.instance.user.update({
       where, data
     })
   }
