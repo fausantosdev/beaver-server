@@ -4,7 +4,7 @@ import { prisma } from '@infra/data/prisma/prisma-helper'
 import { Prisma } from '@prisma/client'
 
 class UserRepository implements IUserRepository {
-  public create = async ({ name, email, password_hash }: Prisma.UserCreateInput): Promise<User> => {
+  public create = async ({ name, email, password_hash }: Prisma.UserCreateInput) => {
     return await prisma.instance.user.create({
       data: {
         name,
@@ -14,7 +14,7 @@ class UserRepository implements IUserRepository {
     })
   }
 
-  public read = async (where: Prisma.UserWhereInput): Promise<User[]> => {
+  public read = async (where: Prisma.UserWhereInput) => {
     return await prisma.instance.user.findMany({
       select: {
         id: true,
@@ -25,17 +25,17 @@ class UserRepository implements IUserRepository {
     })
   }
 
-  public findOne = async (where: Prisma.UserWhereUniqueInput): Promise<User | null> => {
+  public findOne = async (where: Prisma.UserWhereUniqueInput) => {
     return await prisma.instance.user.findUnique({ where })
   }
 
-  public update = async (where: Prisma.UserWhereUniqueInput, data: object): Promise<User | null> => {
+  public update = async (where: Prisma.UserWhereUniqueInput, data: object) => {
     return await prisma.instance.user.update({
       where, data
     })
   }
 
-  public delete = async (where: Prisma.UserWhereUniqueInput): Promise<User | null> => {
+  public delete = async (where: Prisma.UserWhereUniqueInput) => {
     return await prisma.instance.user.delete({ where })
   }
 }

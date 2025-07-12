@@ -4,7 +4,7 @@ import { prisma } from '@infra/data/prisma/prisma-helper'
 import { Prisma } from '@prisma/client'
 
 class TaskRepository implements ITaskRepository {
-  public create = async ({ user_id, description, parent_id }: Prisma.TaskUncheckedCreateInput): Promise<Task> => {
+  public create = async ({ user_id, description, parent_id }: Prisma.TaskUncheckedCreateInput) => {
     return await prisma.instance.task.create({
       data: {
         user_id,
@@ -14,7 +14,7 @@ class TaskRepository implements ITaskRepository {
     })
   }
 
-  public read = async (where: Prisma.TaskWhereInput): Promise<Task[]> => {
+  public read = async (where: Prisma.TaskWhereInput) => {
     return await prisma.instance.task.findMany({
       where,
       include: {
@@ -27,7 +27,7 @@ class TaskRepository implements ITaskRepository {
     })
   }
 
-  public findOne = async (where: Prisma.TaskWhereUniqueInput): Promise<Task | null> => {
+  public findOne = async (where: Prisma.TaskWhereUniqueInput) => {
     return await prisma.instance.task.findUnique({
       where,
       include: {
@@ -36,13 +36,13 @@ class TaskRepository implements ITaskRepository {
     })
   }
 
-  public update = async (where: Prisma.TaskWhereUniqueInput, data: object): Promise<Task> => {
+  public update = async (where: Prisma.TaskWhereUniqueInput, data: object) => {
     return await prisma.instance.task.update({
       where, data
     })
   }
 
-  public delete = async (where: Prisma.TaskWhereInput): Promise<{ count: number }> => {
+  public delete = async (where: Prisma.TaskWhereInput) => {
     return await prisma.instance.task.deleteMany({ where })
   }
 }
