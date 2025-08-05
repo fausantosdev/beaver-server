@@ -1,4 +1,4 @@
-import { createUserUseCases } from '@infra/di/use-cases/user'
+import { createUserUseCases } from '@infra/factories/use-cases/user'
 import { UserController } from '@infra/http/controllers/user-controller'
 
 export function createUserControllers() {

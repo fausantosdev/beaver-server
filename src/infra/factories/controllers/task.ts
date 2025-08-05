@@ -1,4 +1,4 @@
-import { createTaskUseCases } from '@infra/di/use-cases/task'
+import { createTaskUseCases } from '@infra/factories/use-cases/task'
 import { TaskController } from '@infra/http/controllers/task-controller'
 
 export function createTaskControllers() {

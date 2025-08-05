@@ -1,5 +1,5 @@
-import { createUserControllers } from '@infra/di/controllers/user'
-import { createMiddlewares } from '@infra/di/middlewares/auth'
+import { createUserControllers } from '@infra/factories/controllers/user'
+import { createMiddlewares } from '@infra/factories/middlewares/auth'
 import { FastifyInstance } from 'fastify'
 
 const userControllers = createUserControllers()

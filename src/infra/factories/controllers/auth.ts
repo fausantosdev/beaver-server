@@ -1,4 +1,4 @@
-import { createAuthUseCases } from '@infra/di/use-cases/auth'
+import { createAuthUseCases } from '@infra/factories/use-cases/auth'
 import { AuthController } from '@infra/http/controllers/autn-controller'
 
 import { createUserUseCases } from '../use-cases/user'

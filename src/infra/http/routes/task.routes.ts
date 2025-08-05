@@ -1,5 +1,5 @@
-import { createTaskControllers } from '@infra/di/controllers/task'
-import { createMiddlewares } from '@infra/di/middlewares/auth'
+import { createTaskControllers } from '@infra/factories/controllers/task'
+import { createMiddlewares } from '@infra/factories/middlewares/auth'
 import { FastifyInstance } from 'fastify'
 
 const tasksControllers = createTaskControllers()

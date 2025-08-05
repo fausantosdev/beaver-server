@@ -1,6 +1,6 @@
 import { QueueManager as IQueueManager } from '@app/interfaces/queue/queue-manager'
 import { env } from '@config/env'
-import { jobs } from '@infra/di/jobs'
+import { jobs } from '@infra/factories/jobs'
 import Queue, { Job, Queue as BullQueue } from 'bull'
 
 type QueueItem = {
