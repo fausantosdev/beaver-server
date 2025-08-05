@@ -1,7 +1,7 @@
 import { Encryption } from '@app/interfaces/services/encryption'
 import { EditUser } from '@app/interfaces/use-cases/user/edit-user'
 import { User } from '@domain/entities/user'
-import { IUserRepository } from '@domain/repositories/i-user-repository'
+import { UserRepository } from '@domain/repositories/user-repository'
 import { UpdateUserDto } from '@shared/dtos/user-dtos'
 import { AppError } from '@shared/errors/app-error'
 import { ResourceNotFound } from '@shared/errors/resource-not-found'
@@ -10,7 +10,7 @@ import { response } from '@shared/utils/response-helper'
 
 class EditUserUseCase implements EditUser {
   constructor(
-    private userRepository: IUserRepository,
+    private userRepository: UserRepository,
     private encryptionService: Encryption
   ) {}
 

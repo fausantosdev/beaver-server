@@ -1,12 +1,12 @@
 import { GetTasks } from '@app/interfaces/use-cases/task/get-tasks'
 import { Task } from '@domain/entities/task'
-import { ITaskRepository } from '@domain/repositories/i-task-repository'
+import { TaskRepository } from '@domain/repositories/task-repository'
 import { isCustomErrorHelper } from '@shared/utils/is-cuscom-error-helper'
 import { response } from '@shared/utils/response-helper'
 
 class GetTasksUseCase implements GetTasks {
   constructor(
-    private taskRepository: ITaskRepository
+    private taskRepository: TaskRepository
   ) {}
 
   public execute = async (where?: object) => {

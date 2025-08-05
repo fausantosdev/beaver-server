@@ -1,6 +1,6 @@
 import { Task } from '@domain/entities/task'
 
-export interface ITaskRepository {
+export interface TaskRepository {
   create(data: object): Promise<Task>
   read(where: object): Promise<Task[]>
   findOne(where: object): Promise<Task | null>

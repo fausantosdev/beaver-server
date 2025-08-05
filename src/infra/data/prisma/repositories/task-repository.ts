@@ -1,9 +1,8 @@
-import { Task } from '@domain/entities/task'
-import { ITaskRepository } from '@domain/repositories/i-task-repository'
+import { TaskRepository as Repository } from '@domain/repositories/task-repository'
 import { prisma } from '@infra/data/prisma/prisma-helper'
 import { Prisma } from '@prisma/client'
 
-class TaskRepository implements ITaskRepository {
+class TaskRepository implements Repository {
   public create = async ({ user_id, description, parent_id }: Prisma.TaskUncheckedCreateInput) => {
     return await prisma.instance.task.create({
       data: {

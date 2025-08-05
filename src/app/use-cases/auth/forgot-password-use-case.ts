@@ -3,14 +3,14 @@ import cripto from 'node:crypto'
 import { QueueManager } from '@app/interfaces/queue/queue-manager'
 import { ForgotPassword } from '@app/interfaces/use-cases/auth/forgot-password'
 import { User } from '@domain/entities/user'
-import { IUserRepository } from '@domain/repositories/i-user-repository'
+import { UserRepository } from '@domain/repositories/user-repository'
 import { NotAuthorized } from '@shared/errors/not-authorized'
 import { isCustomErrorHelper } from '@shared/utils/is-cuscom-error-helper'
 import { response } from '@shared/utils/response-helper'
 
 class ForgotPasswordUseCase implements ForgotPassword {
   constructor(
-    private userRepository: IUserRepository,
+    private userRepository: UserRepository,
     private queueManager: QueueManager
   ) {}
 

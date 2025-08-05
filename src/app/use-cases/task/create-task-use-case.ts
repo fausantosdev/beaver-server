@@ -1,7 +1,7 @@
 import { CreateTask } from '@app/interfaces/use-cases/task/create-task'
 import { Task } from '@domain/entities/task'
-import { ITaskRepository } from '@domain/repositories/i-task-repository'
-import { IUserRepository } from '@domain/repositories/i-user-repository'
+import { TaskRepository } from '@domain/repositories/task-repository'
+import { UserRepository } from '@domain/repositories/user-repository'
 import { CreateTaskDto } from '@shared/dtos/task-dtos'
 import { ResourceNotFound } from '@shared/errors/resource-not-found'
 import { isCustomErrorHelper } from '@shared/utils/is-cuscom-error-helper'
@@ -9,8 +9,8 @@ import { response } from '@shared/utils/response-helper'
 
 class CreateTaskUseCase implements CreateTask {
   constructor(
-    private taskRepository: ITaskRepository,
-    private userRepository: IUserRepository
+    private taskRepository: TaskRepository,
+    private userRepository: UserRepository
   ) {}
 
   public execute = async ({ user_id, description, parent_id = null }: CreateTaskDto) => {

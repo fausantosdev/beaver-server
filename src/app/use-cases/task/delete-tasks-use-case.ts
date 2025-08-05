@@ -1,5 +1,5 @@
 import { DeleteTasks } from '@app/interfaces/use-cases/task/delete-tasks'
-import { ITaskRepository } from '@domain/repositories/i-task-repository'
+import { TaskRepository } from '@domain/repositories/task-repository'
 import { DeleteTaskDto } from '@shared/dtos/task-dtos'
 import { ResourceNotFound } from '@shared/errors/resource-not-found'
 import { isCustomErrorHelper } from '@shared/utils/is-cuscom-error-helper'
@@ -7,7 +7,7 @@ import { Response, response } from '@shared/utils/response-helper'
 
 class DeleteTasksUseCase implements DeleteTasks {
   constructor(
-    private taskRepository: ITaskRepository
+    private taskRepository: TaskRepository
   ) {}
 
   public execute = async ({ user_id, tasksIds }: DeleteTaskDto) => {

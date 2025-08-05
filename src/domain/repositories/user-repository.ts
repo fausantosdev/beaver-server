@@ -1,6 +1,6 @@
 import { User } from '@domain/entities/user'
 
-export interface IUserRepository {
+export interface UserRepository {
   create(data: object): Promise<User>
   read(where: object): Promise<User[]>
   findOne(where: object): Promise<User | null>
