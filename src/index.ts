@@ -17,4 +17,4 @@ prisma.connect()
 
     new QueueManager().processQueues()
   })
-  .catch((error) => console.error(`Oops! An error occurred:\n${error}`))
+  .catch((error) => console.error(error))
