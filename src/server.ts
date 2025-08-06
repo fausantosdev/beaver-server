@@ -2,6 +2,7 @@ import cors from '@fastify/cors'
 import { routes } from '@infra/http/routes'
 import { SocketServer } from '@infra/socket-io/socket-server'
 import { AppError } from '@shared/errors/app-error'
+import { isCustomErrorHelper } from '@shared/utils/is-cuscom-error-helper'
 import Fastify, { FastifyInstance, FastifyListenOptions } from 'fastify'
 
 import { env } from './config/env'
@@ -19,9 +20,9 @@ class Server {
   private config() {
     this.app.setErrorHandler((error, request, reply) => {
 
-      const statusCode = error instanceof AppError ? error.statusCode : 500
+      const statusCode = isCustomErrorHelper(error) ? error.message : 'Internal server error'
 
-      return reply.status(statusCode).send({
+      return reply.status(Number(statusCode)).send({
         status: false,
         data: null,
         message: error.message
