@@ -1,33 +1,42 @@
-import { Email, SendEmailTypes } from '@app/interfaces/services/email'
+import { QueueManager } from '@app/interfaces/queue/queue-manager'
 import { ForgotPasswordUseCase } from '@app/use-cases/auth/forgot-password-use-case'
 import { InMemoryUserRepository } from '@infra/data/_test/repositories/in-memory-user-repository'
 import { Response, response } from '@shared/utils/response-helper'
 
-const makeEmailService = () => {
-  class EmailServiceStub implements Email {
-    sendMail({ to, subject, text }: SendEmailTypes): Promise<Response> {
-      return Promise.resolve(response({
-        message: 'Email sent successfully'
-      }))
+const makeQueueManager = () => {
+  class QueueManagerStub implements QueueManager {
+    init(): void {}
+
+    async add(queueKey: string, data: object): Promise<Response> {
+      return response({
+        status: true,
+        message: 'Job added to queue successfully',
+      })
     }
+
+    processQueues(): void {}
+
+    handleFailure(queueKey: string, job: any, error: Error): void {}
+
+    handleSuccess(queueKey: string, job: any): void {}
   }
 
-  return new EmailServiceStub()
+  return new QueueManagerStub()
 }
 
 const makeSut = () => {
-  const EmailServiceStub = makeEmailService()
+  const QueueManagerStub = makeQueueManager()
   const inMemoryUserRepositoryStub = new InMemoryUserRepository()
 
   const forgotPasswordSUT = new ForgotPasswordUseCase(
     inMemoryUserRepositoryStub,
-    EmailServiceStub
+    QueueManagerStub
   )
 
   return {
     forgotPasswordSUT,
     inMemoryUserRepositoryStub,
-    EmailServiceStub
+    QueueManagerStub
   }
 }
 
@@ -54,27 +63,25 @@ describe('Forgot password use case', () => {
       }))
   })
 
-  it('Should return an error response if email sending fails', async () => {
-    const { forgotPasswordSUT, EmailServiceStub } = makeSut()
+  it('Should return an error response if the queue manager fails to add the job', async () => {
+    const { forgotPasswordSUT, QueueManagerStub } = makeSut()
 
-    jest.spyOn(EmailServiceStub, 'sendMail').mockResolvedValueOnce(response({
+    jest.spyOn(QueueManagerStub, 'add').mockResolvedValueOnce(response({
       status: false,
-      message: 'An error occurred while sending the email, please try again',
+      message: 'Failed to add job to queue'
     }))
 
     await expect(forgotPasswordSUT.execute('johndoe@mail.com'))
       .resolves.toEqual(response({
         status: false,
-        message: 'An error occurred while sending the email, please try again',
+        message: 'Failed to add job to queue'
       }))
   })
 
   it('Should return an error response with "Internal server error" message if the error is unidentified', async () => {
-    const { forgotPasswordSUT, EmailServiceStub } = makeSut()
+    const { forgotPasswordSUT, inMemoryUserRepositoryStub } = makeSut()
 
-    jest.spyOn(EmailServiceStub, 'sendMail').mockImplementation(() => {
-      throw new Error()
-    })
+    jest.spyOn(inMemoryUserRepositoryStub, 'findOne').mockRejectedValueOnce(new Error())
 
     await expect(forgotPasswordSUT.execute('johndoe@mail.com'))
       .resolves.toEqual(response({

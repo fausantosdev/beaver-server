@@ -1,10 +1,10 @@
 import { randomUUID } from 'node:crypto'
 
 import { User } from '@domain/entities/user'
-import { IUserRepository } from '@domain/repositories/user-repository'
+import { UserRepository } from '@domain/repositories/user-repository'
 import { CreateUserDto } from '@shared/dtos/user-dtos'
 
-class InMemoryUserRepository implements IUserRepository {
+class InMemoryUserRepository implements UserRepository {
   private users: User[] = [
     {
       id: 'some-id',

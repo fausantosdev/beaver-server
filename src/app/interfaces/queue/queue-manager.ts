@@ -1,10 +1,11 @@
+import { Response } from '@shared/utils/response-helper'
 type QueueKeys =
   'ForgotPasswordEmail' |
   'AnyQueueKey'
 
 interface QueueManager {
   init(): void
-  add(queueKey: QueueKeys, data: object): Promise<any>
+  add(queueKey: QueueKeys, data: object): Promise<Response>
   processQueues(): void
   handleFailure(queueKey: string, job: any, error: Error): void
   handleSuccess(queueKey: string, job: any): void

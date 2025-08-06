@@ -1,6 +1,7 @@
 import { QueueManager as IQueueManager } from '@app/interfaces/queue/queue-manager'
 import { env } from '@config/env'
 import { jobs } from '@infra/factories/jobs'
+import { response } from '@shared/utils/response-helper'
 import Queue, { Job, Queue as BullQueue } from 'bull'
 
 type QueueItem = {
@@ -35,21 +36,33 @@ class QueueManager implements IQueueManager {
    * Adiciona um job na fila
    */
   public async add(queueKey: string, data: object) {
-    const queue = this.queues[queueKey]
+    try {
+      const queue = this.queues[queueKey]
 
-    if (!queue) {
-      throw new Error(`Queue ${queueKey} not found.`)
+      if (!queue) {
+        throw new Error(`Queue ${queueKey} not found.`)
+      }
+
+      queue.item.add(data, {
+        attempts: 3,
+        backoff: {
+          type: 'exponential',
+          delay: 5000,
+        },
+        removeOnComplete: true,
+        removeOnFail: false,
+      })
+
+      return response({
+        status: true,
+        message: 'Job added to queue successfully',
+      })
+    } catch (error: any) {
+      return response({
+        status: false,
+        message: `Failed to add job to queue: ${error.message}`,
+      })
     }
-
-    return queue.item.add(data, {
-      attempts: 3,
-      backoff: {
-        type: 'exponential',
-        delay: 5000,
-      },
-      removeOnComplete: true,
-      removeOnFail: false,
-    })
   }
 
   /**
